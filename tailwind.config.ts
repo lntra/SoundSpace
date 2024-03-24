@@ -8,14 +8,24 @@ export default {
       colors: {
         'sp-greyish' : '#DFE0F1',
         'sp-purple' : '#53337B',
-        'sp-purpleBright' : '#96429A',
+        'sp-purpleBright' : '#A21C80',
+        'sp-purpleBright2' : '#96429A',
+        'sp-purpleHover' : '#D05FD6',
+        'sp-bannerWhite' : '#E9EAF9',
+        'sp-tp-page' : '#E9EAF9',
+        'sp-bt-page' : '#DFE0F1',
       },
-      backgroundImage:{
-        'placeholder' : "url(/src/app/_components/assets/placeholder.png)"
+      minHeight: {
+        '1/2': '50%',
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      gridTemplateColumns: {
+        'sp': '56px repeat(auto-fit, minmax(0px, 1fr))',
+        'nm': 'repeat(auto-fit, minmax(0px, 1fr))',
+        'pr': '90px repeat(11, minmax(0px, 1fr))',
+      }
     },
   },
   plugins: [],

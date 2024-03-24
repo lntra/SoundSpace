@@ -1,7 +1,14 @@
+import Button from "../atoms/button"
+import Barlist from "../atoms/barlist"
+import CommunityBackground from "../atoms/communitybackground"
+
 const PlaceholderComunidade = () =>{
     return <>
-        <div className=" h-[510px] bg-violet-100 rounded-[20px] border border-fuchsia-700">
-        </div>
+        <CommunityBackground>
+            <div className="text-gray-900 text-xl font-bold font-['Lato']">Destaques da Semana</div>
+            <Barlist></Barlist>
+            <Button></Button>
+        </CommunityBackground>
     </>
 }
 

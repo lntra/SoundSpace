@@ -1,0 +1,16 @@
+import Radiohead from "../assets/bandhd.png"
+
+const ContentNews = () => {
+    return <>
+        <div className="grid grid-cols-10 grid-rows-12 gap-x-5 justify-items-center pt-[17px]">
+            <span className="col-span-2"></span>
+            <img className="col-span-6 w-[100%]" src={Radiohead.src} alt="Banda" />
+            <span className="col-span-2"></span>
+            <div className="col-span-2 row-start-2 row-end-2 col-start-3 justify-self-start">
+                <p className="text-gray-900 text-base font-normal">Radiohead - Foto: Brett Sayles</p>
+            </div>
+        </div>
+    </>
+}
+ 
+export default ContentNews

@@ -1,8 +1,11 @@
 import BarComponents from "../molecules/barIcons";
 
+//use client
 const NavigationBar = () => {
     return <>
-        <span className = "w-screen h-24"><BarComponents ></BarComponents></span>
+        <span className = "w-[100%] h-24 ">
+            <BarComponents></BarComponents>
+        </span>
     </>
 }
 

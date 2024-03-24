@@ -1,18 +1,23 @@
 import Link from "next/link";
 
-import NavigationBar from "./_components/organisms/navigationBar";
-import MainBanner from "./_components/organisms/mainbanner";
-
 import { CreatePost } from "~/app/_components/create-post";
 import { api } from "~/trpc/server";
+
+import HomePage from "./pages/home/page";
+import NewsPage from "./pages/news/page";
+import CommunityPage from "./pages/community/page";
+import PostPage from "./pages/post/page";
+import LoginPage from "./pages/login/page";
+
 
 export default async function Home() {
   const hello = await api.post.hello.query({ text: "from tRPC" });
 
   return (
-    <main className="h-screen flex flex-col items-center bg-sp-greyish text-white">
-            <NavigationBar></NavigationBar>
-            <MainBanner></MainBanner>
+    <main className="bg-sp-greyish text-white">
+           <div className=" bg-indigo-50 font-['Lato']">
+              
+           </div>
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
           Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
