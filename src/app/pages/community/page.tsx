@@ -1,4 +1,3 @@
-import Base from "~/app/_components/organisms/base"
 import CommunityBanner from "../../_components/atoms/banner"
 import Footer from "../../_components/atoms/footer"
 import CommunityPostsSection from "../../_components/organisms/communityPosts"

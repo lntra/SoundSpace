@@ -1,4 +1,3 @@
-import Base from "~/app/_components/organisms/base"
 import Footer from "../../_components/atoms/footer"
 import NavigationBar from "../../_components/organisms/navigationBar"
 import NewsReadContent from "../../_components/organisms/news"
