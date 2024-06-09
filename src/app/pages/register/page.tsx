@@ -13,7 +13,7 @@ const RegisterPage = () => {
                     <div className="flex flex-wrap flex-col w-[75%] h-[100%] py-[76px] items-center">
                         <div className="h-2.5 w-[60%] rounded-[20px]" style={{background: `linear-gradient(270deg, #53337B -107.14%, #96429A 100%)`}}></div>
                         <div className=" mt-2 text-black text-4xl font-bold w-[100%] text-center">Criar Conta</div>
-                        <div className="text-black text-center mt-2 text-3xl font-light">Preencha o formulário abaixo e clique em "Registrar" para criar sua conta. Estamos ansiosos para tê-lo conosco!</div>
+                        <div className="text-black text-center mt-2 text-3xl font-light">Preencha o formulário abaixo e clique em &quot;Registrar&quot; para criar sua conta. Estamos ansiosos para tê-lo conosco!</div>
                     
                         <form className="w-[100%]" action="#" method="">
                             <div className="w-[100%] p-[1px] mt-16 rounded-[20px]" style={{background: `linear-gradient(270deg, #53337B 0%, #96429A 100%)`}}>
