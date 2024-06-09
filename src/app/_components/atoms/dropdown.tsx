@@ -26,7 +26,7 @@ const DropdownBar = () => {
                     <path d="M20.8332 4.1665L19.7915 4.17692L12.4998 11.4582L5.20817 4.17692L4.1665 4.1665V5.20817L11.4582 12.4998L4.1665 19.7915V20.8332H5.20817L12.4998 13.5415L19.7915 20.8332H20.8332V19.7915L13.5415 12.4998L20.8332 5.20817V4.1665Z" fill="white"/>
                 </svg>
             </button>
-            <div className="flex flex-col px-6 pt-3 justify-start">
+            <div className="flex flex-col px-6 pt-3 justify-start h-[100vh]">
                 <div className="flex flex-row pb-3 border-solid border-b-[1px] border-sp-purpleBright2">
                     <img className="object-cover w-16 h-16 rounded-full" src={User.src} alt="Usuário Homem" />
                     <div className="flex flex-col justify-center pl-2">
@@ -59,7 +59,7 @@ const DropdownBar = () => {
                         <p className="pl-1">Página Inicial</p>
                     </div>
                 </Link>
-                <Link href="/pages/home" prefetch={false}>
+                <Link href="/pages/profile" prefetch={false}>
                     <div className="flex flex-wrap py-5 border-solid border-b-[1px] border-sp-purpleBright2">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.9 4C6.3 4 9 11.3 9 11.3C9.6 12.3 10.4 12.1 10.4 12.8C10.4 13.4 9.7 13.6 9 13.7C7.9 13.7 6.9 13.5 5.9 15.3C5.3 16.4 5 20 5 20H18.7C18.7 20 18.4 16.4 17.9 15.3C16.9 13.4 15.9 13.7 14.8 13.6C14.1 13.5 13.4 13.3 13.4 12.7C13.4 12.1 14.2 12.3 14.8 11.2C14.8 11.3 17.5 4 11.9 4V4Z" fill="white"/>
@@ -75,10 +75,10 @@ const DropdownBar = () => {
                         <p className="pl-1">Suporte</p>
                     </div>
                 </Link>
-                <Link className="justify-self-end self-end fixed bottom-1 left- w-[100%]" href="/login" prefetch={false}>
-                    <div className="flex flex-wrap items-center justify-center py-5 border-solid border-b-[1px] border-sp-purpleBright2">
-                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M27 15H24.45C24.15 15 23.85 14.85 23.55 14.7L21.6 12.75C21.3 12.3 20.7 12 19.95 12H19.5C21.15 12 22.5 10.65 22.5 9C22.5 7.35 21.15 6 19.5 6C17.85 6 16.5 7.35 16.5 9C16.5 10.05 17.1 11.1 18 11.55L17.7 12H14.7C13.05 12 11.25 12.75 10.2 14.25L9.3 15.45C8.7 16.05 9 16.95 9.6 17.4C10.2 17.7 10.95 17.55 11.4 16.95L12.15 15.9C12.6 15.3 13.2 15 13.95 15H15.15L14.1 17.4C13.65 18.3 13.5 19.2 13.5 20.25V23.25C13.5 23.7 13.2 24 12.75 24H9C8.1 24 7.5 24.6 7.5 25.5C7.5 26.4 8.1 27 9 27H14.25C15.45 27 16.5 25.95 16.5 24.75V21L22.2 27.75C23.1 29.1 24.75 30 26.4 30H27.75L19.65 19.95C19.2 19.35 19.35 18.75 19.65 18L20.55 15.75L21.6 16.95C22.2 17.55 23.1 18 24 18H27C27.9 18 28.5 17.4 28.5 16.5C28.5 15.6 27.9 15 27 15Z" fill="#FF6666"/>
+                <Link className="mt-auto" href="/pages/login" prefetch={false}>
+                    <div className="flex flex-wrap items-center justify-center py-5 border-solid border-t-[1px] border-sp-purpleBright2">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 4C7.6 4 4 7.6 4 12C4 16.4 7.6 20 12 20C16.4 20 20 16.4 20 12C20 7.6 16.4 4 12 4ZM13 17H11V10H13V17ZM13 9H11V7H13V9Z" fill="white"/>
                         </svg>
                         <p className="pl-1">Desconectar</p>
                     </div>

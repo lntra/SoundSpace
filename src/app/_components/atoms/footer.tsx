@@ -1,6 +1,6 @@
 const Footer = () =>{
     return <>
-        <div className="w-[100%] h-40 p-20 bg-sp-purple mt-6 text-xl font-bold flex justify-center items-center">
+        <div className="w-[100%] h-40 p-20 bg-sp-purple mt-6 text-xl font-['Lato'] font-bold flex justify-center items-center">
             <h1 className=" text-white">Projeto criado por lntra &zwnj; </h1>
             <a href="https://github.com/lntra"> 
                 <svg xmlns="http://www.w3.org/2000/svg" className=" transition duration-150 ease-out fill-white hover:fill-violet-400 hover:ease-in" width="24" height="24" viewBox="0 0 24 24">

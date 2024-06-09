@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SymbolLogo from "../../_components/atoms/symbol";
 
 const LoginPage = () => {
@@ -7,7 +8,7 @@ const LoginPage = () => {
     };
 
     return <>
-        <div className="grid grid-cols-12 h-[100vh]">
+        <div className="grid grid-cols-12 h-[100vh] font-['Lato']">
             <div className="absolute left-[5%] top-[5%]">
                     <p className="text-pink-200 text-opacity-30 text-[40px] font-black">Soundspace</p>
             </div>
@@ -29,20 +30,22 @@ const LoginPage = () => {
                         <div className="w-[100%] p-[1px] mt-8 rounded-[20px]" style={{background: `linear-gradient(270deg, #53337B 0%, #96429A 100%)`}}>
                             <input placeholder="Senha" type="text" className="pl-[40px] w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-indigo-50"></input>
                         </div>
-                        <div className="w-[100%] p-[1px] mt-12 rounded-[20px]" style={{background: `linear-gradient(270deg, #53337B 0%, #96429A 100%)`}}>
-                            <button placeholder="Senha" type="submit" className="w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-indigo-50">
-                                <p className="text-purple-900 text-2xl font-bold">Continuar</p>
-                            </button>
-                        </div>
+                        <Link prefetch={false} href="/pages/home">
+                            <div className="w-[100%] p-[1px] mt-12 rounded-[20px]" style={{background: `linear-gradient(270deg, #53337B 0%, #96429A 100%)`}}>
+                                <button placeholder="Senha" type="submit" className="w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-indigo-50">
+                                    <p className="text-purple-900 text-2xl font-bold">Continuar</p>
+                                </button>
+                            </div>
+                        </Link>
                     </form>
                    
                     <div className="text-center mt-16">
                         <div className="text-black text-2xl font-light">Não possui conta?</div>
-                        <a href="#" className="text-purple-900 text-2xl font-bold">Registre-se</a>
+                        <Link prefetch={false} href="/pages/register" className="text-purple-900 text-2xl font-bold">Registre-se</Link>
                     </div>
                     <div className="text-center mt-8">
                         <div className="text-black text-2xl font-light">Esqueceu a senha?</div>
-                        <a href="#" className="text-purple-900 text-2xl font-bold">Clique Aqui</a>
+                        <Link prefetch={false} href="#" className="text-purple-900 text-2xl font-bold">Clique Aqui</Link>
                     </div>
                 </div>
             </div>

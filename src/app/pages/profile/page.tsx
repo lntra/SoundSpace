@@ -5,7 +5,7 @@ import NewsReadContent from "../../_components/organisms/news"
 
 const NewsPage = () => {
     return <>
-        <span className="bg-violet-900">
+        <span className="bg-violet-900 font-['Lato']">
             <PageLayout></PageLayout>
         </span>
     </>

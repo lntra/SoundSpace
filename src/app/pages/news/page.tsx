@@ -4,9 +4,11 @@ import NewsReadContent from "../../_components/organisms/news"
 
 const NewsPage = () => {
     return <>
+        <div className="font-['Lato']">
             <NavigationBar></NavigationBar>
             <NewsReadContent></NewsReadContent>
             <Footer></Footer>
+        </div>
     </>
 }
 

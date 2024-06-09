@@ -10,7 +10,7 @@ import ComentariosPost from "../../_components/organisms/comentariosPost"
 const PostPage = () => {
     return <>
         <NavigationBar></NavigationBar>
-        <div className=" text-black bg-gradient-to-b from-sp-tp-page to-bg-indigo-50 pt-5 grid grid-cols-12 grid-rows-auto">
+        <div className=" text-black bg-gradient-to-b from-sp-tp-page to-bg-indigo-50 pt-5 grid grid-cols-12 grid-rows-auto font-['Lato']">
             <div className="pb-5 col-start-3 col-end-11 row-start-1 row-end-1 bg-indigo-50 border border-fuchsia-700 rounded-[20px]"></div>
             <div className="col-start-4 col-end-10 row-start-1 row-end-1">
                 <div className="mt-4 flex items-center justify-between">
