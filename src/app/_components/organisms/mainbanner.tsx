@@ -4,7 +4,6 @@ import Saturday from "../assets/saturday.png"
 
 import Headers from "../molecules/headers"
 import Headers2 from "../molecules/headers2"
-import Headers3 from "../molecules/headers3"
 import PlaceholderComunidade from "../molecules/placeholder"
 
 const MainBanner = () => {
@@ -16,7 +15,7 @@ const MainBanner = () => {
                 background: `
                 linear-gradient(0deg, rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.10)), 
                 url(${Onebigtime.src}) lightgray 50% / cover no-repeat`,
-                border: `1px solid #96429A`,
+                border: `2px solid #96429A`,
                 borderRadius: `20px`,
                 }}>
                 <span className="self-end">
@@ -29,7 +28,7 @@ const MainBanner = () => {
                         background: `
                         linear-gradient(0deg, rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.10)), 
                         url(${Mantequilla.src}) lightgray 50% / cover no-repeat`,
-                        border: `1px solid #96429A`,
+                        border: `2px solid #96429A`,
                         borderRadius: `20px`
                     }}
                     ><Headers2></Headers2>
@@ -39,10 +38,10 @@ const MainBanner = () => {
                         background: `
                         linear-gradient(0deg, rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.10)), 
                         url(${Saturday.src}) lightgray 50% / cover no-repeat`,
-                        border: `1px solid #96429A`,
+                        border: `2px solid #96429A`,
                         borderRadius: `20px`
                     }}
-                    ><Headers3></Headers3>
+                    ><Headers2></Headers2>
                 </span>
             </div>
             <div className="col-span-3 row-span-2">
