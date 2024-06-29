@@ -7,7 +7,7 @@ import {
 export async function fetchAllNews(current: number = 0) {
     const limit = 20;
     const offset = current * limit;
-
+    
     try {
         const data = await sql<News>
         `SELECT * FROM news ORDER BY created_at ASC 

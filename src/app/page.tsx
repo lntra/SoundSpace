@@ -2,10 +2,8 @@ import { CreatePost } from "~/app/_components/create-post";
 import { api } from "~/trpc/server";
 
 import LoginPage from "./pages/login/page";
-import Link from "next/link";
 
 export default async function Home() {
-  const hello = await api.post.hello.query({ text: "from tRPC" });
   return (
     <main className="bg-sp-greyish text-white">
            <div className=" bg-indigo-50 font-['Lato']">
@@ -14,6 +12,7 @@ export default async function Home() {
     </main>
   );
 }
+
 
 /*
 <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
