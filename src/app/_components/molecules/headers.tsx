@@ -1,19 +1,16 @@
-"use client"
+import {News} from '../../../../lib/definitions';
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+interface NewsAsProps {
+    news : News[];
+}
 
-import { api } from "~/trpc/react";
-
-export function Headers() {
-
-    
-
+const Headers: React.FC<NewsAsProps> = ( {news} ) => {
     return (
         <div brightness-100 className="h-[100%] px-4 pb-2 flex flex-wrap justify-center content-end items-end drop-shadow-2xl font-['Lato']">
-            <h1 className="text-[32px] font-bold" >São Paulo para por 1 hora no show de On the Big time, com o maior número de espectadores simultâneos</h1>
-            <p className="text-base">A banda de 2002 é febre entre a população mais jovem até nos dias de hoje, uma entrevista revela seus segredos.</p>
+            <h1 className="text-[32px] font-bold" >{news[0]?.title}</h1>
+            <p className="text-base">{news[0]?.content}</p>
         </div>
     );
 }
 
+export default Headers

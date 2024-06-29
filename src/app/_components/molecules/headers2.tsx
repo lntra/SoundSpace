@@ -1,9 +1,22 @@
-const Headers2 = () =>{
+import { News } from '../../../../lib/definitions';
+
+interface NewsAsProps {
+    news: News[];
+}
+
+const Headers2: React.FC<NewsAsProps> = ({ news }) => {
+    if (!news.length) {
+        return null;
+    }
+
+    const title = news[0]?.title;
+
+    console.log(title)
+    
     return <>
         <div className=" drop-shadow-2xl px-4 pb-2 self-end font-['Lato'] bg-placeholder">
             <h1 className="text-[24px] font-bold" >
-                Banda Mantequilla é alvo de denúncias de fãs sobre o 
-                tratamento inapropriado dos membros
+                {title}
             </h1>
         </div>
     </>
