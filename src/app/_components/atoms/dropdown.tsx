@@ -2,10 +2,29 @@
 
 import Link from "next/link";
 import User from "../assets/alex.jpg"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const DropdownBar = () => {
     const [nav, setNav] = useState(false); 
+    const dropdownState = useRef<HTMLDivElement>(null);
+
+    const handleClickOutside = (e: MouseEvent) => {
+        if (nav && dropdownState.current && !dropdownState.current.contains(e.target as Node)) {
+            setNav(false);
+        }
+    }
+
+    useEffect(() => {
+        if (nav) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+    }, [nav]);
 
     return <>
         <button onClick={() => setNav(!nav)} className="cursor-pointer">
@@ -16,11 +35,13 @@ const DropdownBar = () => {
                     <path d="M8 36C8 34.8954 8.89543 34 10 34H38C39.1046 34 40 34.8954 40 36C40 37.1046 39.1046 38 38 38H10C8.89543 38 8 37.1046 8 36Z" fill="#53337B"/>
             </svg>
         </button>
-        <div className={
-            nav 
-            ? "fixed top-0 left-0 w-[300px] h-screen bg-sp-purple z-10 duration-300"
-            : "fixed top-0 left-[-100%] w-[300px] h-screen bg-sp-purple z-10 duration-300"
-        }>
+        <div 
+                ref={dropdownState}
+                className={
+                    nav
+                        ? "fixed top-0 left-0 w-[300px] h-screen bg-sp-purple z-10 duration-300"
+                        : "fixed top-0 left-[-100%] w-[300px] h-screen bg-sp-purple z-10 duration-300"
+                }>
             <button onClick={() => setNav(!nav)} className="absolute right-4 top-4 cursor-pointer">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.8332 4.1665L19.7915 4.17692L12.4998 11.4582L5.20817 4.17692L4.1665 4.1665V5.20817L11.4582 12.4998L4.1665 19.7915V20.8332H5.20817L12.4998 13.5415L19.7915 20.8332H20.8332V19.7915L13.5415 12.4998L20.8332 5.20817V4.1665Z" fill="white"/>

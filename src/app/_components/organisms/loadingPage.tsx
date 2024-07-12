@@ -1,7 +1,6 @@
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
 
 const LoadingPage = () => {
 

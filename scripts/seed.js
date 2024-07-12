@@ -246,6 +246,9 @@ const bcrypt = require('bcrypt');
           title VARCHAR(255) NOT NULL,
           tag TEXT NOT NULL,
           content TEXT NOT NULL,
+          pagecontent TEXT NOT NULL,
+          url TEXT NOT NULL,
+          description TEXT NOT NULL,
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (user_id) REFERENCES users(id)
         );
@@ -255,8 +258,8 @@ const bcrypt = require('bcrypt');
   
       const insertedNews = await Promise.all(
         news.map((newsItem) => client.sql`
-          INSERT INTO news (user_id, title, tag, content)
-          VALUES (${newsItem.user_id}, ${newsItem.title}, ${newsItem.tag}, ${newsItem.content})
+          INSERT INTO news (user_id, title, tag, content, pagecontent, url, description)
+          VALUES (${newsItem.user_id}, ${newsItem.title}, ${newsItem.tag}, ${newsItem.content}, ${newsItem.pagecontent}, ${newsItem.url}, ${newsItem.description})
           ON CONFLICT (id) DO NOTHING;
         `)
       );

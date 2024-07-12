@@ -3,6 +3,7 @@ import { sql } from '@vercel/postgres'
 import {
     News
 } from './definitions';
+import { UUID } from 'crypto';
 
 export async function fetchAllNews(current: number = 0) {
     const limit = 20;
@@ -16,6 +17,24 @@ export async function fetchAllNews(current: number = 0) {
     } catch (error) {
         console.log('Database Error:',error);
         throw new Error('Failed to fetch news data');
+    }
+
+}
+
+export async function fetchNewsbyID(newsId: string){
+    
+    try {
+        const data = await sql<News>
+        `SELECT * FROM news WHERE id = ${newsId}`
+
+        if (data.rowCount === 0) {
+            return null;
+        }
+
+        return data.rows;
+    } catch (error) {
+        console.log('Database Error:',error);
+        throw new Error('Failed to fetch single news data');
     }
 
 }

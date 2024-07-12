@@ -105,47 +105,96 @@ const comments = [
 
 const news = [
   { 
-    id: '8f57c1d4-a1f1-48d3-b3db-054b1c34a73e',
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e', 
-    title: 'News Title 1', 
+    title: 'Radiohead Announces New Album Release Date', 
     tag: 'Short Stories', 
-    content: 'News content 1 about the latest in technology.' 
+    content: 'Legendary alternative rock band Radiohead has announced that their highly anticipated new album will be released this fall. The album, titled "Echoes of the Past," promises to blend their signature sound with new experimental elements.', 
+    url: 'https://media.npr.org/assets/img/2021/12/09/radiohead-comp-x-holborn-studios-2000-c-tom-sheehan-1-scaled_wide-6c54113b5f52b7399d9509292aa8e5628a5b743d.jpg?s=1400&c=100&f=jpeg',
+    description: 'Radiohead band Photo',
+    pagecontent: `Legendary band Radiohead has thrilled fans with the announcement of their upcoming album release date, sparking widespread excitement among music enthusiasts. The band official statement revealed that the new album, titled "Light Up the Sky," is set to be released later this year. This announcement comes after months of speculation and anticipation, as Radiohead has been teasing new material through various cryptic posts and hints.
+
+The new album is expected to continue Radiohead tradition of pushing musical boundaries and experimenting with innovative sounds. Known for their ability to reinvent themselves with each release, the band has hinted that "Light Up the Sky" will explore new themes and sonic landscapes. The album production involved collaborations with several prominent producers, promising a fresh and dynamic listening experience.
+
+Fans have eagerly welcomed the news, sharing their excitement on social media and speculating about the album content. Radiohead previous releases have consistently garnered critical acclaim and commercial success, and expectations for "Light Up the Sky" are high. The band ability to evolve while maintaining their distinct identity has endeared them to generations of listeners. As the release date approaches, anticipation continues to build, with fans eagerly awaiting the next chapter in Radiohead illustrious career.
+`  
   },
   { 
-    id: '8c1e8c62-38d2-4c33-b69e-03e742e5c6c3',
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e', 
-    title: 'News Title 2', 
+    title: 'Taylor Swift Breaks Streaming Records with Latest Single', 
     tag: 'News', 
-    content: 'News content 2 about recent scientific discoveries.' 
+    content: 'Pop sensation Taylor Swift\'s latest single, "Midnight Sun," has broken streaming records within hours of its release. The song has garnered millions of plays across platforms, making it one of the biggest hits of the year.', 
+    url: 'https://www.billboard.com/wp-content/uploads/2024/06/taylor-swift-eras-tour-liverpool-tortured-poets-june-2023-billboard-1548.jpg?w=942&h=623&crop=1',
+    description: 'Taylor Swift Photo',
+    pagecontent: `
+      Taylor Swift has once again solidified her status as a streaming powerhouse with her latest single. The track has broken records across major platforms, becoming the most-streamed song within 24 hours of its release. Fans have taken to social media to express their excitement, sharing clips and praising Swift's innovative approach and lyrical depth. The song's success is a testament to her ability to evolve and stay relevant in an ever-changing music industry.
+
+Swift's new single not only showcases her exceptional songwriting skills but also features a collaboration with a renowned producer, adding a fresh dynamic to her sound. Critics have lauded the single for its catchy melody and poignant lyrics, which delve into themes of love, heartbreak, and self-discovery. The accompanying music video has also garnered millions of views, further cementing Swift's position as a visual and musical artist.
+
+As Swift continues to break records and set new standards, her latest release underscores her influence and impact on the music industry. With numerous awards and accolades already under her belt, this achievement adds another milestone to her illustrious career. Fans eagerly anticipate what Swift will deliver next, as she continues to push boundaries and redefine pop music.
+    `
   },
   { 
-    id: 'f4d5a7c8-8127-4a6f-8a4a-5d9a7c8e9b4c',
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e', 
-    title: 'News Title 3', 
+    title: 'Beyoncé Headlines Global Music Festival 2024', 
     tag: 'Report', 
-    content: 'News content 3 discussing health and wellness tips.' 
+    content: 'Beyoncé has been announced as the headliner for the 2024 Global Music Festival. The festival will feature performances from artists around the world and will take place in multiple cities simultaneously, promoting unity through music.',
+    url: 'https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/beyonce-2-1.jpg?w=1220&h=674&crop=1',
+    description: 'Beyoncé Photo',
+    pagecontent: `
+      Iconic singer Beyoncé is set to headline the highly anticipated Global Music Festival 2024, marking one of the most significant events in the music calendar. Known for her electrifying performances and chart-topping hits, Beyoncé's presence promises to make this year's festival a monumental event. Her participation underscores the festival's commitment to bringing top-tier talent to the global stage.
+
+Beyoncé's performance at the Global Music Festival 2024 is expected to feature a mix of her greatest hits and new material, showcasing her versatility as an artist. Fans from around the world are eagerly awaiting her live performance, which is set to include elaborate stage designs, stunning choreography, and powerful vocal performances. The festival lineup also includes other prominent artists, but Beyoncé's headline act is undoubtedly the highlight.
+
+The announcement of Beyoncé as the headliner has generated a wave of excitement and anticipation. Her previous performances at major events have been nothing short of spectacular, and fans are expecting nothing less at the Global Music Festival. This event not only highlights Beyoncé's enduring appeal but also solidifies her position as one of the most influential and dynamic performers in contemporary music.
+
+    `
   },
   { 
-    id: 'c2b5a1d8-47d3-4f2b-9f3e-2a5b7c9d1e4f',
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e', 
-    title: 'News Title 4', 
+    title: 'Billie Eilish Releases New Documentary', 
     tag: 'Article', 
-    content: 'News content 4 about the latest trends in education.' 
+    content: 'Grammy-winning artist Billie Eilish has released a new documentary titled "Inside My World." The film provides an in-depth look at her rise to fame, her creative process, and personal struggles, giving fans a rare glimpse into her life.',
+    url: 'https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/10/billie.jpg?w=1075&h=674&crop=1',
+    description: 'Billie Eilish photo',
+    pagecontent: `
+      Grammy-winning artist Billie Eilish has unveiled a revealing new documentary that offers an intimate look into her life and career. Titled "The World's A Little Blurry," the film explores Eilish's journey to stardom, providing fans with unprecedented access to her personal experiences and creative process. Directed by R.J. Cutler, the documentary has already garnered widespread acclaim for its candid portrayal of the young star.
+
+The documentary covers Eilish's rise from an aspiring musician recording songs in her bedroom to becoming a global phenomenon. It includes behind-the-scenes footage of her recording sessions, tours, and interactions with fans, as well as personal moments with her family. Eilish's openness and vulnerability throughout the film have resonated with viewers, offering a deeper understanding of her artistry and the challenges she has faced.
+
+"The World's A Little Blurry" has been praised for its authenticity and emotional depth. Critics have highlighted Eilish's genuine connection with her fans and her dedication to her craft. The documentary not only celebrates her achievements but also sheds light on the pressures and complexities of fame. For Eilish's fans, the film is a powerful reminder of her resilience and passion for music.
+    `
   },
   { 
-    id: 'd3e2c1b7-58a3-4b6d-9c1e-7a3d4e5f6b2c',
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e', 
-    title: 'News Title 5', 
+    title: 'K-pop Group BTS Announces Hiatus', 
     tag: 'Article', 
-    content: 'News content 5 covering recent entertainment news.' 
+    content: 'Global K-pop phenomenon BTS has announced a temporary hiatus as the members focus on individual projects. The group assures fans that this is not a permanent breakup and that they plan to reunite in the future for more music.',
+    url: 'https://upload.wikimedia.org/wikipedia/commons/7/73/BTS_during_a_White_House_press_conference_May_31%2C_2022_%28cropped%29.jpg',
+    description: 'K-pop photo',
+    pagecontent: `
+      Global sensation BTS has announced a temporary hiatus from their whirlwind schedule, leaving fans with mixed emotions. The group, known for their relentless work ethic and constant output of music and content, cited the need for rest and rejuvenation as the primary reason for the break. In a heartfelt message to their fans, the members of BTS expressed gratitude for the unwavering support they have received and assured them of their eventual return.
+
+This hiatus marks a rare moment of respite for the chart-topping group, who have consistently dominated the international music scene with their infectious music and captivating performances. Since their debut, BTS has achieved numerous milestones, including topping the Billboard charts, selling out stadiums worldwide, and amassing a dedicated global fanbase known as ARMY. The group's decision to take a break highlights the importance of mental and physical well-being, even for top-tier artists.
+
+During this period, the members of BTS plan to focus on individual projects and personal growth. While the announcement may have initially surprised fans, many have expressed understanding and support for the group's decision. The hiatus is seen as an opportunity for BTS to recharge and come back stronger than ever. As fans eagerly await their return, the group's legacy and impact on the music industry remain firmly intact.
+
+    `
   },
   { 
-    id: 'd3e2c1b7-58a3-4b6d-9c1e-7a3d4e5f6b2d',
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e', 
-    title: 'News Title 6', 
+    title: 'Ed Sheeran Wins Lawsuit Over Copyright Infringement', 
     tag: 'News', 
-    content: 'News content 6 covering recent entertainment news.' 
-  }
+    content: 'Singer-songwriter Ed Sheeran has won a major copyright lawsuit filed against him, alleging that his hit song "Shape of You" copied another artist\'s work. The court ruled in Sheeran\'s favor', 
+    url: 'https://www.apple.com/newsroom/images/product/music/standard/Apple-Music-Live-Ed-Sheeran-with-guitar_big.jpg.large.jpg',
+    description: 'Ed Sheeran photo',
+    pagecontent: `
+      Ed Sheeran has emerged victorious in a high-profile lawsuit concerning copyright infringement, marking a significant triumph for the British singer-songwriter. The case revolved around allegations that Sheeran's hit song bore similarities to another artist's work. After a lengthy legal battle, the court ruled in Sheeran's favor, finding no evidence of plagiarism. The decision not only clears Sheeran's name but also reinforces his commitment to artistic integrity.
+
+The lawsuit had drawn considerable attention, with many in the music industry closely monitoring the proceedings. Sheeran's defense argued that the similarities cited were coincidental and that the song in question was a result of his unique creative process. The court's ruling acknowledged the complexity of musical composition and the inevitability of certain commonalities in popular music. Sheeran's legal team emphasized the importance of protecting artists' rights to their original work.
+
+Following the verdict, Sheeran expressed relief and gratitude to his supporters. He reaffirmed his dedication to his craft and his belief in the originality of his music. The outcome of the lawsuit has broader implications for the music industry, highlighting the challenges of navigating copyright issues in an era where digital distribution and global reach can lead to increased scrutiny. Sheeran's victory is seen as a precedent-setting moment, offering reassurance to artists striving to create without fear of unwarranted legal challenges.
+    `
+  },
 ];
 
 const liked = [

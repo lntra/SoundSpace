@@ -8,7 +8,15 @@ import Tabs from "../molecules/tabs"
 
 const PageLayout = () => {
     return <>
-        <span className = "grid grid-cols-pr h-[100%] w-[100%]  bg-gradient-to-br from-sp-purple from-10%  via-sp-purple via-50% to-sp-purpleBright2 to-100%">
+        <span className = "grid grid-cols-pr h-[100%] w-[100%]"
+            style={{
+                background: 'hsla(267, 41%, 34%, 1)',
+                backgroundImage: `
+                    linear-gradient(135deg, hsla(267, 41%, 34%, 1) 41%, hsla(297, 40%, 43%, 1) 100%)
+                    `,
+                filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#53337B', endColorstr='#96429A', GradientType=1)",
+              }}
+        >
             <div className="col-span-1 h-[100%] pr-[1px] border-r-[2px] border-solid border-sp-purpleBright2 w-[100%] bg-sp-purple min-w-[90px] max-w-[90px] fixed left-0">
                 <DropdownMin></DropdownMin>
             </div>

@@ -1,12 +1,17 @@
+import { News } from "lib/definitions";
 import Footer from "../atoms/footer"
 import Trending from "../atoms/trending"
-import News from "../molecules/news"
+import BottomNews from "../molecules/bottomNews"
 
-const BottomPage = () => {
+interface NewsAsProps {
+    news : News[];
+}
+
+const BottomPage : React.FC<NewsAsProps> = ( { news } ) => {
     return <>
         <div className="bg-indigo-50">
             <Trending></Trending>
-            <News></News>
+            <BottomNews news={news}></BottomNews>
         </div>
         <Footer></Footer>
     </>

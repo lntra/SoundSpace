@@ -19,11 +19,10 @@ export function NewsArea() {
 
     const downNews = data?.newsArticles.slice(3);
 
-
     return <>
         <div className="bg-gradient-to-b from-sp-tp-page to-bg-indigo-50">
             {headerNews && <MainBanner news={headerNews}></MainBanner>}
-            <BottomPage></BottomPage>
+            {downNews && <BottomPage news={downNews}></BottomPage>}
         </div>
     </>
 }

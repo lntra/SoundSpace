@@ -1,7 +1,7 @@
 const Button = () => {
     return <>
-        <div className="w-[168px] h-[34px] self-center m-3 px-5 py-2.5 bg-fuchsia-700 rounded-3xl justify-center items-center gap-2.5 inline-flex">
-                <button className="text-white text-xs font-bold font-['Lato']">Encontrar Comunidades</button>
+        <div className="min-w-fit  buttonAdjust:py-2.5 lg:px-1 xl:px-3  min-h-fit self-center m-3 bg-fuchsia-700 rounded-3xl justify-center items-center gap-2.5 inline-flex">
+                <button className="text-white text-[16px] p-1 font-bold font-['Lato']">Encontrar Comunidades</button>
         </div>  
     </>
 }

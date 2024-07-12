@@ -5,6 +5,9 @@ export default {
   content: ["./src/**/*.tsx"],
   theme: {
     extend: {
+      screens: {
+        'buttonAdjust' : '988px'
+      },
       colors: {
         'sp-greyish' : '#DFE0F1',
         'sp-purple' : '#53337B',
