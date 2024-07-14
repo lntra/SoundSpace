@@ -3,9 +3,8 @@ import { sql } from '@vercel/postgres'
 import {
     News
 } from './definitions';
-import { UUID } from 'crypto';
 
-export async function fetchAllNews(current: number = 0) {
+export async function fetchAllNews(current : number) {
     const limit = 20;
     const offset = current * limit;
     

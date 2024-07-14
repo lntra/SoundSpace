@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from "react"
 import BarHeart from "../atoms/barheart"
 import Button from "../atoms/button"
@@ -8,13 +10,13 @@ interface ResponsiveTextProps {
   }
 
 const ResponsiveText: React.FC<ResponsiveTextProps> = ({ text }) => {
-    const [size, setSize] = useState('');
+    const [size, setSize] = useState('overflow-hidden text-wrap line-clamp-3');
 
     useEffect(() => {
         const updateSize = () => {
             if(window.innerWidth < 640) // sm
             {
-                setSize('	text-wrap	line-clamp-1');
+                setSize('text-wrap	line-clamp-1');
             }
             else if(window.innerWidth < 768) // md
             {
@@ -33,7 +35,7 @@ const ResponsiveText: React.FC<ResponsiveTextProps> = ({ text }) => {
                 setSize('overflow-hidden text-wrap	line-clamp-2');
             }
             else{
-                setSize('overflow-hidden text-wrap	line-clamp-3');
+                setSize('overflow-hidden text-wrap line-clamp-3');
             }
         };
 
@@ -55,7 +57,7 @@ const PlaceholderComunidade = () =>{
     const staticUUID = '123e4567-e89b-12d3-a456-426614174000';
 
     return <>
-        <div className=" min-h-full	p-3 bg-indigo-50 rounded-[20px] border-[1px] border-sp-purpleBright flex flex-col items-start justify-between">
+        <div className=" min-h-full p-3 bg-indigo-50 rounded-[20px] border-[1px] border-sp-purpleBright flex flex-col items-start justify-between">
             <div className="flex-col justify-around align-middle text-gray-900 text-[24px] w-[100%] font-bold font-['Lato'] border-solid border-b-[1px] border-sp-purpleBright">Destaques da Semana</div>
                 
             <div className="flex-col justify-center align-middle items-center w-full">

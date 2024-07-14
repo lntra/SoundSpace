@@ -26,13 +26,15 @@ const MainBanner: React.FC<NewsAsProps> = ( { news } ) => {
               }}
         >
             <span className="col-span-1 row-span-2"></span>
-            <Link href={`home/news/${mainNews[0]?.id || ""}`} className="col-span-4 row-span-2 drop-shadow-lg flex flex-wrap justify-center" 
+            <Link prefetch={true} href={`home/news/${mainNews[0]?.id ?? ""}`} className="col-span-4 row-span-2 drop-shadow-lg flex flex-wrap justify-center" 
                 style={{
                 background: `
                 linear-gradient(0deg, rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.10)), 
                 url(${mainNews[0]?.url}) lightgray 50% / cover no-repeat`,
                 border: `2px solid #96429A`,
                 borderRadius: `20px`,
+                 width: '100%',
+                 height: '100%'
                 }}>
                 <span className="self-end">
                     <Headers news={mainNews}></Headers>
@@ -41,6 +43,7 @@ const MainBanner: React.FC<NewsAsProps> = ( { news } ) => {
             <div className="col-span-3 row-span-2 flex-wrap flex gap-4">
                 {secondaryNews.map((newsItem, index) => (
                         <Link
+                            prefetch={true}
                             href={`home/news/${newsItem.id}`}
                             key={`home/news/${newsItem.id}`}
                             className="flex min-h-[48.48%] drop-shadow-lg justify-end items-end"

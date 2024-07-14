@@ -1,7 +1,7 @@
 import LoginPage from "./pages/login/page";
 import RootLayout from "./layout";
 
-export default async function Home() {
+export default function Home() {
   return (
     <RootLayout>
       <main className="bg-sp-greyish text-white">

@@ -10,7 +10,7 @@ import Footer from "~/app/_components/atoms/footer";
 import LoadingPage from "~/app/_components/organisms/loadingPage";
 import RejectedPage from "~/app/_components/organisms/rejectedPage";
 
-const newsPage:NextPage<{username : string}> = ({ username }) => {
+const NewsPage: NextPage = () => {
     const pathname = usePathname();
     const id = pathname.split("/").pop();
 
@@ -43,4 +43,4 @@ const newsPage:NextPage<{username : string}> = ({ username }) => {
     </>
 }
 
-export default newsPage
+export default NewsPage
