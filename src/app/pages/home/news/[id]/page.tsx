@@ -30,7 +30,7 @@ const NewsPage: NextPage = () => {
         </div>
     }
 
-    console.log(data.newsPage);
+    console.log(data!.newsPage);
 
     return <>
         <main className="bg-sp-greyish text-white">
