@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 interface PlaceholderPropsProps {
     title?: string;
-    children?: ReactNode;
+    children?: React.ReactNode;
 }
 
 const PlaceholderProps = ({ title, children, ...props }: PlaceholderPropsProps) => {
