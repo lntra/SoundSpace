@@ -12,10 +12,10 @@ import RejectedPage from "~/app/_components/organisms/rejectedPage";
 
 const NewsPage: NextPage = () => {
     const pathname = usePathname();
-    const id = pathname.split("/").pop();
+    const id = pathname.split("/").pop() as string;
 
     const { data, isLoading, error } = api.home.getNewsByID.useQuery({
-        newsId : id || "",
+        newsId : id ?? "",
     })
 
     if(isLoading){
