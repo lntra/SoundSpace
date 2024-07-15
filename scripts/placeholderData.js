@@ -1,21 +1,21 @@
 const users = [
   {
     id: '410544b2-4001-4271-9855-fec4b6a6442a',
-    name: 'João',
-    email: 'user1@nextmail.com',
-    password: 'joao123',
+    name: 'John',
+    email: 'john123@nextmail.com',
+    password: 'john123',
   },
   {
     id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b',
-    name: 'User 2',
-    email: 'user2@nextmail.com',
-    password: 'vivavida',
+    name: 'David',
+    email: 'David@nextmail.com',
+    password: 'lifeisgreat',
   },
   {
     id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04b',
-    name: 'User 3',
-    email: 'user3@nextmail.com',
-    password: 'senha123',
+    name: 'Marie',
+    email: 'marie@nextmail.com',
+    password: 'pass123',
   },
   {
     id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e',
@@ -56,20 +56,39 @@ const followers = [
 ]
 
 const communities = [
-  { id: '97f4d418-eb4a-425d-97d0-83f6acbc435a', name: 'Community 1', description: 'Description for community 1' },
-  { id: '3edb55a2-a037-48a7-81af-d19c99b00dc1', name: 'Community 2', description: 'Description for community 2' },
+  { id: '97f4d418-eb4a-425d-97d0-83f6acbc435a', name: 'RealTime', description: 'Description for community 1' },
+  { id: '3edb55a2-a037-48a7-81af-d19c99b00dc1', name: 'SunDown', description: 'Description for community 2' },
 ];
 
 const posts = [
-  { id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338', 
+  { 
+    id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338', 
     user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b', 
     community_id: '97f4d418-eb4a-425d-97d0-83f6acbc435a', 
-    content: 'Post content 1' },
-
-  { id: 'b33d8d23-25fe-4446-98f3-3418551495c1', 
+    title: 'Favorite Rock Bands?',
+    content: 'What are some of your all-time favorite rock bands? I can’t get enough of Led Zeppelin and Queen!'
+  },
+  { 
+    id: 'b33d8d23-25fe-4446-98f3-3418551495c1', 
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04b', 
     community_id: '3edb55a2-a037-48a7-81af-d19c99b00dc1', 
-    content: 'Post content 2' },
+    title: 'Classical Music for Studying',
+    content: 'Does anyone have recommendations for classical music that helps you focus while studying? I’m looking for something calming.'
+  },
+  { 
+    id: 'c12d23a7-e2c5-4e6a-8b8c-6d5f456c8b9e', 
+    user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b', 
+    community_id: '97f4d418-eb4a-425d-97d0-83f6acbc435a', 
+    title: 'Best Hip Hop Albums of All Time',
+    content: 'What do you guys think are the best hip hop albums of all time? My top pick is Nas’s "Illmatic".'
+  },
+  { 
+    id: 'e27b8f5a-1d3a-4b97-8c3b-7c4f8b2d5a9e', 
+    user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04b', 
+    community_id: '3edb55a2-a037-48a7-81af-d19c99b00dc1', 
+    title: 'Jazz Improvisation Tips',
+    content: 'Any tips for improving my jazz improvisation skills? I’m struggling to make my solos sound natural.'
+  }
 ];
 
 const comments = [

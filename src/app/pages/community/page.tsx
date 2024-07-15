@@ -5,12 +5,14 @@ import NavigationBar from "../../_components/organisms/navigationBar"
 
 const CommunityPage = () => {
     return <>
-        <main className="bg-sp-greyish text-white">
-            <div className=" bg-indigo-50 font-['Lato']">
+        <main className="text-white">
+            <div className="font-['Lato']">
                 <NavigationBar></NavigationBar>
-                <CommunityBanner></CommunityBanner>
-                <CommunityPostsSection></CommunityPostsSection>
-                <Footer></Footer>
+                <div className="bg-gradient-to-b from-sp-tp-page to-indigo-50">
+                    <CommunityBanner></CommunityBanner>
+                    <CommunityPostsSection></CommunityPostsSection>
+                    <Footer></Footer>
+                </div>
             </div>
         </main>
     </>

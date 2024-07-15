@@ -57,11 +57,11 @@ const PlaceholderComunidade = () =>{
     const staticUUID = '123e4567-e89b-12d3-a456-426614174000';
 
     return <>
-        <div className=" min-h-full p-3 bg-indigo-50 rounded-[20px] border-[1px] border-sp-purpleBright flex flex-col items-start justify-between">
-            <div className="flex-col justify-around align-middle text-gray-900 text-[24px] w-[100%] font-bold font-['Lato'] border-solid border-b-[1px] border-sp-purpleBright">Destaques da Semana</div>
+        <div className=" min-h-full p-3 bg-indigo-50 rounded-[20px] border-[1px] border-sp-purpleBright2 flex flex-col items-start justify-between">
+            <div className="flex-col justify-around align-middle text-gray-900 text-[24px] w-[100%] font-bold font-['Lato'] border-solid border-b-[1px] border-sp-purpleBright2">Destaques da Semana</div>
                 
             <div className="flex-col justify-center align-middle items-center w-full">
-                <div className="flex text-gray-950 gap-1 pt-2 pb-2 border-solid border-b-[1px] w-full border-sp-purpleBright overflow-hidden">
+                <div className="flex text-gray-950 gap-1 pt-2 pb-2 border-solid border-b-[1px] w-full border-sp-purpleBright2 overflow-hidden">
                     <div className="flex flex-col w-full">
                         <div className="flex text-wrap items-center whitespace-nowrap w-full">
                             <UserPost time={staticDate} userId={staticUUID}></UserPost>
@@ -77,7 +77,7 @@ const PlaceholderComunidade = () =>{
             </div>
 
             <div className="flex-col justify-center align-middle items-center w-full">
-                <div className="flex text-gray-950 gap-1 pt-2 pb-2 border-solid border-b-[1px] w-full border-sp-purpleBright overflow-hidden">
+                <div className="flex text-gray-950 gap-1 pt-2 pb-2 border-solid border-b-[1px] w-full border-sp-purpleBright2 overflow-hidden">
                     <div className="flex flex-col w-full">
                         <div className="flex text-wrap items-center whitespace-nowrap w-full">
                             <UserPost time={staticDate} userId={staticUUID}></UserPost>
@@ -93,7 +93,7 @@ const PlaceholderComunidade = () =>{
             </div>
 
             <div className="flex-col justify-center align-middle items-center w-full">
-                <div className="flex text-gray-950 gap-1 pt-2 pb-2 border-solid border-b-[1px] w-full border-sp-purpleBright overflow-hidden">
+                <div className="flex text-gray-950 gap-1 pt-2 pb-2 border-solid border-b-[1px] w-full border-sp-purpleBright2 overflow-hidden">
                     <div className="flex flex-col w-full">
                         <div className="flex text-wrap items-center whitespace-nowrap w-full">
                             <UserPost time={staticDate} userId={staticUUID}></UserPost>
@@ -109,7 +109,7 @@ const PlaceholderComunidade = () =>{
             </div>
 
             <div className="flex-col justify-center align-middle items-center w-full">
-                <div className="flex text-gray-950 gap-1 pt-2 pb-2 border-solid border-b-[1px] w-full border-sp-purpleBright overflow-hidden">
+                <div className="flex text-gray-950 gap-1 pt-2 pb-2 border-solid border-b-[1px] w-full border-sp-purpleBright2 overflow-hidden">
                     <div className="flex flex-col w-full">
                         <div className="flex text-wrap items-center whitespace-nowrap w-full">
                             <UserPost time={staticDate} userId={staticUUID}></UserPost>

@@ -6,7 +6,7 @@ import Posts from "./posts"
 
 const CommunityPostsSection = () => {
     return <>
-        <div className="grid grid-rows-auto grid-cols-10">
+        <div className="grid grid-rows-auto grid-cols-10 w-[99vw] ">
             <div className="row-start-1 row-end-1 col-start-3">
                 <DestaquesCommunity></DestaquesCommunity>
             </div>

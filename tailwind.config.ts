@@ -15,7 +15,7 @@ export default {
         'sp-purpleBright2' : '#96429A',
         'sp-purpleHover' : '#D05FD6',
         'sp-bannerWhite' : '#E9EAF9',
-        'sp-tp-page' : '#E9EAF9',
+        'sp-tp-page' : '#f5f7ff',
         'sp-bt-page' : '#DFE0F1',
       },
       minHeight: {

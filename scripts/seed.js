@@ -13,6 +13,43 @@ const {
 } = require('./placeholderData.js');
 const bcrypt = require('bcrypt');
 
+  async function dropTables(client) {
+    try {
+      await client.sql`DROP TABLE IF EXISTS savedMedia CASCADE;`;
+      console.log('Dropped table: savedMedia');
+      
+      await client.sql`DROP TABLE IF EXISTS liked_comments CASCADE;`;
+      console.log('Dropped table: liked_comments');
+      
+      await client.sql`DROP TABLE IF EXISTS liked CASCADE;`;
+      console.log('Dropped table: liked');
+      
+      await client.sql`DROP TABLE IF EXISTS news CASCADE;`;
+      console.log('Dropped table: news');
+      
+      await client.sql`DROP TABLE IF EXISTS comments CASCADE;`;
+      console.log('Dropped table: comments');
+      
+      await client.sql`DROP TABLE IF EXISTS posts CASCADE;`;
+      console.log('Dropped table: posts');
+      
+      await client.sql`DROP TABLE IF EXISTS communities CASCADE;`;
+      console.log('Dropped table: communities');
+      
+      await client.sql`DROP TABLE IF EXISTS followers CASCADE;`;
+      console.log('Dropped table: followers');
+      
+      await client.sql`DROP TABLE IF EXISTS following CASCADE;`;
+      console.log('Dropped table: following');
+      
+      await client.sql`DROP TABLE IF EXISTS users CASCADE;`;
+      console.log('Dropped table: users');
+    } catch (error) {
+      console.error('Error dropping tables:', error);
+      throw error;
+    }
+  }
+
   async function seedUsers(client, users) {
     try {
       await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -388,6 +425,8 @@ const bcrypt = require('bcrypt');
 
 async function main() {
     const client = await db.connect();
+
+    await dropTables(client);
 
     await seedUsers(client, users);
     await seedFollowing(client, followings);
