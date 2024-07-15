@@ -15,7 +15,7 @@ const NewsPage: NextPage = () => {
     const id = pathname.split("/").pop();
 
     const { data, isLoading, error } = api.home.getNewsByID.useQuery({
-        newsId : id!,
+        newsId : id || "",
     })
 
     if(isLoading){
