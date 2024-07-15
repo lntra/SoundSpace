@@ -12,7 +12,7 @@ import RejectedPage from "~/app/_components/organisms/rejectedPage";
 
 const NewsPage: NextPage = () => {
     const pathname = usePathname();
-    const id = pathname.split("/").pop() as string;
+    const id = pathname.split("/").pop();
 
     const { data, isLoading, error } = api.home.getNewsByID.useQuery({
         newsId : id ?? "",
@@ -29,8 +29,6 @@ const NewsPage: NextPage = () => {
                 <RejectedPage></RejectedPage>
         </div>
     }
-
-    console.log(data!.newsPage);
 
     return <>
         <main className="bg-sp-greyish text-white">
