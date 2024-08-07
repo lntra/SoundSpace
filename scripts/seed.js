@@ -1,6 +1,7 @@
 const { db } = require('@vercel/postgres');
 const {
   users,
+  configs,
   followings,
   followers,
   communities,
@@ -44,13 +45,16 @@ const bcrypt = require('bcrypt');
       
       await client.sql`DROP TABLE IF EXISTS users CASCADE;`;
       console.log('Dropped table: users');
+
+      await client.sql`DROP TABLE IF EXISTS users_configs CASCADE;`;
+      console.log('Dropped table: users_configs');
     } catch (error) {
       console.error('Error dropping tables:', error);
       throw error;
     }
   }
 
-  async function seedUsers(client, users) {
+  async function seedUsers(client, users, configs) {
     try {
       await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
@@ -60,19 +64,32 @@ const bcrypt = require('bcrypt');
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           name VARCHAR(255) NOT NULL,
           email TEXT NOT NULL UNIQUE,
-          password TEXT NOT NULL
+          password TEXT NOT NULL,
+          url_icon TEXT,
+          url_banner TEXT
         );
       `;
 
       console.log(`Created "users" table`);
+
+      const createUserConfigsTable = await client.sql`
+      CREATE TABLE IF NOT EXISTS user_configs (
+        id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+        user_id UUID REFERENCES users(id),
+        config_name VARCHAR(255) NOT NULL,
+        config_value VARCHAR(255) NOT NULL
+      );
+    `;
+
+    console.log(`Created "user_configs" table`);
 
       // Insert data into the "users" table
       const insertedUsers = await Promise.all(
         users.map(async (user) => {
           const hashedPassword = await bcrypt.hash(user.password, 10);
           return client.sql`
-            INSERT INTO users (id, name, email, password)
-            VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
+            INSERT INTO users (id, name, email, password, url_icon, url_banner)
+            VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.url_icon}, ${user.url_banner})
             ON CONFLICT (id) DO NOTHING;
           `;
         }),
@@ -80,9 +97,23 @@ const bcrypt = require('bcrypt');
 
       console.log(`Seeded ${insertedUsers.length} users`);
 
+      const insertedConfigs = await Promise.all(
+        users.flatMap((user) =>
+          configs.map((config) => client.sql`
+            INSERT INTO user_configs (id, user_id, config_name, config_value)
+            VALUES (uuid_generate_v4(), ${user.id}, ${config.config_name}, ${config.config_value})
+            ON CONFLICT (id) DO NOTHING;
+          `)
+        )
+      );
+  
+      console.log(`Seeded user configs`);
+
       return {
         createTable,
         users: insertedUsers,
+        createUserConfigsTable,
+        confgis: insertedConfigs,
       };
     } catch (error) {
       console.error('Error seeding users:', error);
@@ -167,10 +198,18 @@ const bcrypt = require('bcrypt');
       await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
       const createTable = await client.sql`
-        CREATE TABLE IF NOT EXISTS communities (
+          CREATE TABLE IF NOT EXISTS communities (
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           name VARCHAR(255) NOT NULL,
-          description TEXT
+          rules TEXT[] NOT NULL,
+          description TEXT NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          creator_id UUID NOT NULL,
+          tags TEXT[],
+          links TEXT[],
+          url_icon TEXT,
+          url_banner TEXT,
+          FOREIGN KEY (creator_id) REFERENCES users(id)
         );
       `;
 
@@ -178,8 +217,14 @@ const bcrypt = require('bcrypt');
 
       const insertedCommunities = await Promise.all(
         communities.map((community) => client.sql`
-          INSERT INTO communities (id, name, description)
-          VALUES (${community.id}, ${community.name}, ${community.description})
+          INSERT INTO communities (
+            id, name, rules, description, creator_id, tags, links, url_icon, url_banner
+          )
+          VALUES (
+            ${community.id}, ${community.name}, ${community.rules}, ${community.description},
+            ${community.creator_id}, ${community.tags}, ${community.links},
+            ${community.url_icon}, ${community.url_banner}
+          )
           ON CONFLICT (id) DO NOTHING;
         `)
       );
@@ -206,6 +251,7 @@ const bcrypt = require('bcrypt');
           user_id UUID NOT NULL,
           community_id UUID,
           content TEXT NOT NULL,
+          content_post TEXT, 
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (user_id) REFERENCES users(id),
           FOREIGN KEY (community_id) REFERENCES communities(id)
@@ -216,8 +262,8 @@ const bcrypt = require('bcrypt');
 
       const insertedPosts = await Promise.all(
         posts.map((post) => client.sql`
-          INSERT INTO posts (id, user_id, community_id, content)
-          VALUES (${post.id}, ${post.user_id}, ${post.community_id}, ${post.content})
+          INSERT INTO posts (id, user_id, community_id, content, content_post)
+          VALUES (${post.id}, ${post.user_id}, ${post.community_id}, ${post.content}, ${post.content_post})
           ON CONFLICT (id) DO NOTHING;
         `)
       );
@@ -428,7 +474,7 @@ async function main() {
 
     await dropTables(client);
 
-    await seedUsers(client, users);
+    await seedUsers(client, users, configs);
     await seedFollowing(client, followings);
     await seedFollowers(client, followers);
     await seedCommunities(client, communities);

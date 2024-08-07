@@ -3,8 +3,11 @@ import Link from "next/link"
 const DropdownMin = () => {
     return <>
             <span className="grid grid-rows-12 h-[100vh]">
-                    <span className="row-start-1 row-end-2"></span>
-                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-2 row-end-3">
+                    <span className="row-start-1 row-end-2 border-r-[3px] border-solid border-sp-purpleBright2"></span>
+                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-2 row-end-3 
+                    border-r-[3px] border-solid border-sp-purpleBright2
+                    hover:border-r-[3px] hover:border-sp-accent
+                    ">
                         <Link className="w-[100%]" href="/pages/community" prefetch={false}>
                             <div className="flex flex-wrap justify-center ">
                                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +17,10 @@ const DropdownMin = () => {
                             </div>
                         </Link>
                     </span>
-                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-3 row-end-4">
+                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-3 row-end-4
+                    border-r-[3px] border-solid border-sp-purpleBright2
+                    hover:border-r-[3px] hover:border-sp-accent
+                    ">
                         <div className="w-[100%] flex flex-wrap justify-center ">
                                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9.99978 18H13.9998C13.9998 18 14.0998 20 11.9998 20C9.89978 20 9.99978 18 9.99978 18Z" fill="white"/>
@@ -22,7 +28,10 @@ const DropdownMin = () => {
                                 </svg>
                         </div>
                     </span>
-                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-4 row-end-5">
+                    <span className="
+                    border-r-[3px] border-solid border-sp-purpleBright2
+                    hover:border-r-[3px] hover:border-sp-accent
+                    w-[100%] flex flex-wrap items-center justify-center row-start-4 row-end-5">
                         <Link className="w-[100%]" href="/pages/home" prefetch={false}>
                             <div className="flex flex-wrap justify-center ">
                                 <svg width="36" height="36" viewBox="0 0 14 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +41,10 @@ const DropdownMin = () => {
                             </div>
                         </Link>
                     </span>
-                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-5 row-end-6">
+                    <span className="
+                    border-r-[3px] border-solid border-sp-purpleBright2
+                    hover:border-r-[3px] hover:border-sp-accent
+                    w-[100%] flex flex-wrap items-center justify-center row-start-5 row-end-6">
                         <Link className="w-[100%]" href="/pages/home" prefetch={false}>
                             <div className="flex flex-wrap justify-center ">
                                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +53,10 @@ const DropdownMin = () => {
                             </div>
                         </Link>
                     </span>
-                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-6 row-end-7">
+                    <span className="
+                    border-r-[3px] border-solid border-sp-purpleBright2
+                    hover:border-r-[3px] hover:border-sp-accent
+                    w-[100%] flex flex-wrap items-center justify-center row-start-6 row-end-7">
                         <Link className="w-[100%]" href="/pages/home" prefetch={false}>
                             <div className="flex flex-wrap justify-center ">
                                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,8 +65,10 @@ const DropdownMin = () => {
                             </div>
                         </Link>
                     </span>
-                    <span className="row-start-7 row-end-11"></span>
-                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-8 row-end-10">
+                    <span className="row-start-7 row-end-12 border-r-[3px] border-solid border-sp-purpleBright2"></span>
+                    <span className="
+                    border-r-[3px] border-solid border-sp-purpleBright2
+                    w-[100%] flex flex-wrap items-center justify-center">
                         <Link className="justify-self-end self-end w-[100%]" href="/pages/login" prefetch={false}>
                             <div className="flex flex-wrap items-center justify-center py-5">
                                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">

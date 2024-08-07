@@ -1,7 +1,11 @@
-const Button = () => {
+interface ButtonProps {
+    text?: string;
+}
+
+const Button = ({text , ...props}: ButtonProps) => {
     return <>
-        <div className="min-w-fit  buttonAdjust:py-2.5 lg:px-1 xl:px-3  min-h-fit self-center m-3 bg-fuchsia-700 rounded-3xl justify-center items-center gap-2.5 inline-flex">
-                <button className="text-white text-[16px] p-1 font-bold font-['Lato']">Encontrar Comunidades</button>
+        <div className="h-min w-[100%] buttonAdjust:py-2.5 lg:px-1 xl:px-3  min-h-fit self-center bg-sp-purpleBright2 rounded-3xl justify-center items-center inline-flex">
+                <button className="text-white text-[16px] p-1 font-bold font-['Lato']">{text}</button>
         </div>  
     </>
 }

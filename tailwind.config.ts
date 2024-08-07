@@ -6,17 +6,20 @@ export default {
   theme: {
     extend: {
       screens: {
-        'buttonAdjust' : '988px'
+        'buttonAdjust' : '988px',
+        '3xl' : '1920px',
       },
       colors: {
         'sp-greyish' : '#DFE0F1',
         'sp-purple' : '#53337B',
         'sp-purpleBright' : '#A21C80',
-        'sp-purpleBright2' : '#96429A',
-        'sp-purpleHover' : '#D05FD6',
+        'sp-purpleBright2' : '#6232DA',
+        'sp-accent' : '#A9FB1A',
+        'sp-purpleHover' : '#E86FEE',
         'sp-bannerWhite' : '#E9EAF9',
         'sp-tp-page' : '#f5f7ff',
         'sp-bt-page' : '#DFE0F1',
+        'textNav' : '#555777'
       },
       minHeight: {
         '1/2': '50%',

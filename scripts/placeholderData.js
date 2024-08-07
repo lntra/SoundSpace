@@ -3,19 +3,25 @@ const users = [
     id: '410544b2-4001-4271-9855-fec4b6a6442a',
     name: 'John',
     email: 'john123@nextmail.com',
-    password: 'john123',
+    password: 'pass123',
+    url_icon: 'https://fastly.picsum.photos/id/659/2731/1536.jpg?hmac=jwFueQ8WaCS2sR6LVKFGQ3-emm0_HqHEOhQDt8AzHyQ',
+    url_banner: 'https://fastly.picsum.photos/id/565/3000/2000.jpg?hmac=Fnxr-MIA5jGXl3nZYRwfqckc0UepeqawFuaoA_U9u1k'
   },
   {
     id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b',
     name: 'David',
     email: 'David@nextmail.com',
-    password: 'lifeisgreat',
+    password: 'pass123',
+    url_icon: 'https://fastly.picsum.photos/id/669/4869/3456.jpg?hmac=g-4rQWsPdHoLi5g6ahHlvjKubSQzR-D9m7-WtblbmyM',
+    url_banner: 'https://fastly.picsum.photos/id/569/2509/1673.jpg?hmac=ZXpC4eOmQpHuu7kQaX5wkzrU2ydqr4UIWrMs72hO0H0'
   },
   {
     id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04b',
     name: 'Marie',
     email: 'marie@nextmail.com',
     password: 'pass123',
+    url_icon: 'https://fastly.picsum.photos/id/646/2509/1673.jpg?hmac=HXykqhktw0TF08mbS0F3J4bxJJvJRQXG74xA4zPYW7Y',
+    url_banner: 'https://fastly.picsum.photos/id/635/2509/1673.jpg?hmac=O3P1jEnFp0FqGswH9gRKIuKI-inphuJBkZZ1-enTKEw'
   },
   {
     id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e',
@@ -24,6 +30,21 @@ const users = [
     password: 'ADMIN',
   }
 ];
+
+const configs = [
+  {
+    config_name: 'theme',
+    config_value: 'light',
+  },
+  {
+    config_name: 'notifications',
+    config_value: 'enabled'
+  },
+  {
+    config_name: 'blocked',
+    config_value: ''
+  }
+]
 
 const followings = [
   {
@@ -56,8 +77,129 @@ const followers = [
 ]
 
 const communities = [
-  { id: '97f4d418-eb4a-425d-97d0-83f6acbc435a', name: 'RealTime', description: 'Description for community 1' },
-  { id: '3edb55a2-a037-48a7-81af-d19c99b00dc1', name: 'SunDown', description: 'Description for community 2' },
+  { 
+    id: '97f4d418-eb4a-425d-97d0-83f6acbc435a', 
+    name: 'The Band, from Outer Space', 
+    description: 'Welcome to the "The Band from Outer Space" community! Here, we explore the cosmic musical frontiers together. Connect, share your space passion, and embark on this intergalactic sound journey with us! 🚀🎶', 
+    rules: [
+      'Mutual Respect: Be courteous and respectful to all members.',
+      'Keep Discussions on Theme: Ensure all posts and discussions are related to cosmic music, space exploration, or related topics. Off-topic posts should be kept to a minimum.',
+      'Share Your Space Passion Constructively: When sharing music or content, provide context and engage thoughtfully with others. Avoid spamming or repetitive posts.',
+      'No Unauthorized Promotions: Do not promote products, services, or external links without permission. Self-promotion should be relevant and approved by community moderators.'
+    ],
+    tags: [
+      'Rock',
+      'Guitar',
+      'Experimental',
+      'Dreamy'
+    ],
+    links: [
+      'Discord: insertherealinktothedesiredpage',
+      'Website: insertherealinktothedesiredpage',
+      'Merch: insertherealinktothedesiredpage',
+      'Instagram: insertherealinktothedesiredpage'
+    ],
+    url_icon: 'https://fastly.picsum.photos/id/446/3072/1728.jpg?hmac=62VykY0FNeXxvrUhPIGiucHvYI1qd_VzMTmk98U-D5Y',
+    url_banner: 'https://fastly.picsum.photos/id/377/4884/3256.jpg?hmac=OLVw864UkoqYrrRmC1Xh5-5DtczeP7iEZKMlv1YLwac',
+    creator_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e'
+  },
+  { 
+    id: '3edb55a2-a037-48a7-81af-d19c99b00dc1', 
+    name: 'SunDown', 
+    description: 'It\'s our time to go out while we watch the sun down',
+    rules: [
+      'Mutual Respect: Be courteous and respectful to all members.',
+      'Keep Discussions on Theme: Ensure all posts and discussions are related to cosmic music, space exploration, or related topics. Off-topic posts should be kept to a minimum.',
+    ],
+    tags: [
+      'Rap',
+      'Synthesizer',
+      'Experimental',
+      'Sad'
+    ],
+    links: [
+      'Merch: insertherealinktothedesiredpage',
+    ],
+    url_icon: 'https://fastly.picsum.photos/id/548/5000/3333.jpg?hmac=BdycqoDMwkZoSovCL9E2F8MAyqdhkHVj8yYkHvkkkVM',
+    url_banner: 'https://fastly.picsum.photos/id/459/2310/1534.jpg?hmac=3GuIBHCecDx0ymJJzLe_lGSQDAlbf-PiXYnCc7iM2MI',
+    creator_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e'
+  },
+  { 
+    id: '0a8d5e32-1e4f-4a9a-9f5d-1c1234567890', 
+    name: 'Indie Harmony', 
+    description: 'Welcome to "Indie Harmony," a community for fans of indie music. Discover new artists, share your favorite tracks, and connect with fellow indie enthusiasts! 🎸🎤', 
+    rules: [
+      'Respect Everyone: Treat all members with kindness and respect.',
+      'Stay On Topic: Keep discussions focused on indie music and related topics.',
+      'No Spam: Avoid repetitive posts or unsolicited promotions.',
+      'Engage Thoughtfully: Share music and content with meaningful context and engage in constructive discussions.'
+    ],
+    tags: [
+      'Indie',
+      'Acoustic',
+      'Alternative',
+      'Folk'
+    ],
+    links: [
+      'Facebook: insertherealinktothedesiredpage',
+      'Twitter: insertherealinktothedesiredpage',
+      'Bandcamp: insertherealinktothedesiredpage'
+    ],
+    url_icon: 'https://fastly.picsum.photos/id/672/5000/3333.jpg?hmac=u6anJjrup8TAGrJxZSY3u-9OmftJ1Dn4P_6vPqF7a7U',
+    url_banner: 'https://fastly.picsum.photos/id/686/4462/2975.jpg?hmac=0zEvyDYF4spIPxLjZ8icrcelNZLNmiGEEIeJGCACufo',
+    creator_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e'
+  },
+  { 
+    id: '1b9e3c45-2d5a-4e6b-bc5a-2d1234567890', 
+    name: 'Pop Vibes', 
+    description: 'Join "Pop Vibes" to celebrate the best of pop music. From chart-toppers to hidden gems, share your favorite pop tunes and discuss the latest trends with fellow fans! 🎶🌟', 
+    rules: [
+      'Be Kind: Show respect and kindness to all members.',
+      'Relevant Content: Ensure all posts and discussions are related to pop music and its subgenres.',
+      'No Advertising: Avoid promoting products or services without permission.',
+      'Constructive Feedback: When sharing music or opinions, do so constructively and respectfully.'
+    ],
+    tags: [
+      'Pop',
+      'Dance',
+      'Electropop',
+      'Top 40'
+    ],
+    links: [
+      'Instagram: insertherealinktothedesiredpage',
+      'Spotify: insertherealinktothedesiredpage',
+      'YouTube: insertherealinktothedesiredpage'
+    ],
+    url_icon: 'https://fastly.picsum.photos/id/815/2074/1383.jpg?hmac=z5kVymrNUTKCDBhKG3oays-sesL-_APZSoaWQJInU4s',
+    url_banner: 'https://fastly.picsum.photos/id/820/4592/3448.jpg?hmac=_rSeK9tbzkwqjB3OVLyNewUr5r8uSFInGjOEfMQ6cBw',
+    creator_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e'
+  },
+  { 
+    id: '2c0f4e56-3e7b-4f8b-cd6a-3e1234567890', 
+    name: 'Jazz Lounge', 
+    description: 'Welcome to "Jazz Lounge," a community for jazz lovers. Share your favorite tracks, discover new artists, and enjoy the smooth sounds of jazz with fellow enthusiasts. 🎷🎵', 
+    rules: [
+      'Respect and Courtesy: Be polite and respectful in all interactions.',
+      'Stay Jazz-Focused: Keep discussions centered on jazz music and its various styles.',
+      'No Self-Promotion: Do not promote your own content or services without prior approval.',
+      'Quality Contributions: Share music and opinions thoughtfully and engage in meaningful discussions.'
+    ],
+    tags: [
+      'Jazz',
+      'Smooth Jazz',
+      'Blues',
+      'Swing'
+    ],
+    links: [
+      'Twitter: insertherealinktothedesiredpage',
+      'SoundCloud: insertherealinktothedesiredpage',
+      'Patreon: insertherealinktothedesiredpage'
+    ],
+    url_icon: 'https://fastly.picsum.photos/id/755/5000/3800.jpg?hmac=kHxjzz3TQ4ZQLtUF3fNgIiBMwHc04Kf9xg9jfYsabxM',
+    url_banner: 'https://fastly.picsum.photos/id/742/3333/5000.jpg?hmac=1h4142hspZLLliCUiOdb_KSEynj9f4mxi2fFk1spyG4',
+    creator_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e'
+  }
+  
 ];
 
 const posts = [
@@ -65,29 +207,57 @@ const posts = [
     id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338', 
     user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b', 
     community_id: '97f4d418-eb4a-425d-97d0-83f6acbc435a', 
-    title: 'Favorite Rock Bands?',
-    content: 'What are some of your all-time favorite rock bands? I can’t get enough of Led Zeppelin and Queen!'
+    content: 'Favorite Rock Bands?',
+    content_post: 'What are some of your all-time favorite rock bands? I can’t get enough of Led Zeppelin and Queen!'
   },
   { 
     id: 'b33d8d23-25fe-4446-98f3-3418551495c1', 
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04b', 
     community_id: '3edb55a2-a037-48a7-81af-d19c99b00dc1', 
-    title: 'Classical Music for Studying',
-    content: 'Does anyone have recommendations for classical music that helps you focus while studying? I’m looking for something calming.'
+    content: 'Classical Music for Studying',
+    content_post: 'Does anyone have recommendations for classical music that helps you focus while studying? I’m looking for something calming.'
   },
   { 
     id: 'c12d23a7-e2c5-4e6a-8b8c-6d5f456c8b9e', 
     user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b', 
     community_id: '97f4d418-eb4a-425d-97d0-83f6acbc435a', 
-    title: 'Best Hip Hop Albums of All Time',
-    content: 'What do you guys think are the best hip hop albums of all time? My top pick is Nas’s "Illmatic".'
+    content: 'Best Hip Hop Albums of All Time',
+    content_post: 'What do you guys think are the best hip hop albums of all time? My top pick is Nas’s "Illmatic".'
   },
   { 
     id: 'e27b8f5a-1d3a-4b97-8c3b-7c4f8b2d5a9e', 
     user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04b', 
     community_id: '3edb55a2-a037-48a7-81af-d19c99b00dc1', 
-    title: 'Jazz Improvisation Tips',
-    content: 'Any tips for improving my jazz improvisation skills? I’m struggling to make my solos sound natural.'
+    content: 'Jazz Improvisation Tips',
+    content_post: 'Any tips for improving my jazz improvisation skills? I’m struggling to make my solos sound natural.'
+  },
+  { 
+    id: 'e4c6f8d1-9452-4bb1-9a57-9b746d512f5b', 
+    user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b', 
+    community_id: '0a8d5e32-1e4f-4a9a-9f5d-1c1234567890', 
+    content: 'Best Indie Albums of the Year',
+    content_post: 'What are your top indie albums of the year so far? I’m loving Phoebe Bridgers’ latest release!'
+  },
+  { 
+    id: 'f5a26b76-1edb-4c2e-bf93-f7a5f1a7d43a', 
+    user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e', 
+    community_id: '1b9e3c45-2d5a-4e6b-bc5a-2d1234567890', 
+    content: 'Top Pop Songs for a Party',
+    content_post: 'What are some must-have pop songs for a party playlist? I need some new tracks to get everyone dancing!'
+  },
+  { 
+    id: '2b9cfe34-78a6-44d3-92b2-1c9a6e4a1234', 
+    user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b', 
+    community_id: '2c0f4e56-3e7b-4f8b-cd6a-3e1234567890', 
+    content: 'Jazz Fusion Essentials',
+    content_post: 'What are some essential jazz fusion albums or artists that every fan should know about? Looking to dive deeper into the genre.'
+  },
+  { 
+    id: 'c3e9d51b-7b47-4f21-a8fc-5d7e5f1b2345', 
+    user_id: '71d03b1a-d4fb-4b10-9fa9-2763271ff04e', 
+    community_id: '0a8d5e32-1e4f-4a9a-9f5d-1c1234567890', 
+    content: 'Favorite Acoustic Tracks',
+    content_post: 'What are your go-to acoustic tracks for a relaxing evening? I’m always looking for new recommendations!'
   }
 ];
 
@@ -104,6 +274,41 @@ const comments = [
     post_id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338',
     user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b',
     content: 'This is a reply to the top-level comment',
+    parent_comment_id: '11111111-1111-1111-1111-111111111111',
+  },
+  {
+    id: '22222222-2222-2222-2222-222222222220',
+    post_id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338',
+    user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b',
+    content: 'This is a reply to the reply to the top level comment',
+    parent_comment_id: '22222222-2222-2222-2222-222222222222',
+  },
+  {
+    id: '22222222-2222-2222-2222-222222222200',
+    post_id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338',
+    user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b',
+    content: 'This is a reply to the reply to the top level comment',
+    parent_comment_id: '22222222-2222-2222-2222-222222222220',
+  },
+  {
+    id: '22222222-2222-2222-2222-222222222210',
+    post_id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338',
+    user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b',
+    content: 'This is a reply to the reply to the top level comment',
+    parent_comment_id: '22222222-2222-2222-2222-222222222200',
+  },
+  {
+    id: '22222222-2222-2222-2222-222222222000',
+    post_id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338',
+    user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b',
+    content: 'This is a reply to the reply to the top level comment',
+    parent_comment_id: '22222222-2222-2222-2222-222222222210',
+  },
+  {
+    id: '22222222-2222-2222-2222-222222222221',
+    post_id: 'd1adf5ec-c0af-4608-8aa2-72c0f9228338',
+    user_id: 'f8c2b5cb-6d24-4c6d-bb1d-9f19f6f6d44b',
+    content: 'This is a reply to the top level comment2',
     parent_comment_id: '11111111-1111-1111-1111-111111111111',
   },
   {
@@ -242,6 +447,7 @@ const savedMedia = [
 
 module.exports = {
     users,
+    configs,
     followings,
     followers,
     communities,

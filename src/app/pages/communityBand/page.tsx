@@ -9,7 +9,8 @@ const CommunityPage = () => {
             <div className="font-['Lato']">
                 <NavigationBar></NavigationBar>
                 <div className="bg-gradient-to-b from-sp-tp-page to-indigo-50">
-                    <CommunityPostsSection type="home"></CommunityPostsSection>
+                    <CommunityBanner></CommunityBanner>
+                    <CommunityPostsSection type="community"></CommunityPostsSection>
                     <Footer></Footer>
                 </div>
             </div>
