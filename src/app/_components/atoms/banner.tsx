@@ -8,7 +8,7 @@ interface CommunityBannerProps{
 
 const CommunityBanner: React.FC<CommunityBannerProps> = ( {background, icon, name} ) => {
     return <>
-        <div className="grid grid-rows-7 grid-cols-12 gap-1 h-64 mb-1 bg-indigo-50">
+        <div className="grid grid-rows-7 grid-cols-12 gap-1 h-64 mb-1 bg-white">
             <div className="row-start-1 row-end-5 col-start-1 col-end-13 h-40">
                 <div className="w-[100%] h-[100%] max-h-[160px] bg-sp-purple">
                     <img className=" opacity-25 w-full max-h-[160px] object-cover" src={background} alt={name} />

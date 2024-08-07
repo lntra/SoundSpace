@@ -1,7 +1,7 @@
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 import { z } from "zod";
-import { fetchCommunitybyID } from "lib/data";
+import { fetchCommunitybyID } from "~/lib/data";
 import { TRPCClientError } from "@trpc/client";
 
 export const communityRouter = createTRPCRouter({

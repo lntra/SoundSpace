@@ -1,4 +1,4 @@
-import { CommentsWithReplies } from "lib/definitions";
+import { CommentsWithReplies } from "~/lib/definitions";
 import CommentsView from "../atoms/comments";
 import { useState } from "react";
 
@@ -25,8 +25,7 @@ const CommentsItems : React.FC<CommentsItemsProps> = ( {  comment, iteration = 0
                 createdAt={comment.created_at}
                 hidden={hidden}
                 onHide={handleInvisible}
-            >  
-            </CommentsView>
+            />  
             {comment.replies.length > 0 && (
                 <div className="w-full flex-col flex items-end justify-end">
                     { comment.replies.map((comment, index)=> (

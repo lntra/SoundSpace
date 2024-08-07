@@ -52,7 +52,7 @@ const PostPage : NextPage  = () => {
 
     return <>
         <NavigationBar></NavigationBar>
-        <div className=" text-black bg-gradient-to-b from-sp-tp-page to-bg-indigo-50 pt-5 grid grid-cols-12 grid-rows-auto font-['Lato']">
+        <div className=" text-black bg-gradient-to-b from-sp-tp-page to-bg-white pt-5 grid grid-cols-12 grid-rows-auto font-['Lato']">
             <div className="flex justify-around pb-5 row-start-1 row-end-2 col-start-3 col-span-8">
                 <Link href={`/pages/community`} className="flex items-center py-2">
                     <svg
@@ -87,7 +87,7 @@ const PostPage : NextPage  = () => {
                     </svg>
                 </Link>
             </div>
-            <div className="pb-5 col-start-3 col-end-11 row-start-2 row-end-3 bg-indigo-50 border border-sp-purpleBright2 rounded-[20px]"></div>
+            <div className="pb-5 col-start-3 col-end-11 row-start-2 row-end-3 bg-white border border-sp-purpleBright2 rounded-[20px]"></div>
             { data.postData && data.postData[0] &&
                 <div className="col-start-4 col-end-10 row-start-2 row-end-3">
                     <div className="mt-4 flex items-center justify-between">

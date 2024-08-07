@@ -6,7 +6,7 @@ export default function HomePage() {
 
     return <>
         <main className="bg-sp-greyish text-white">
-            <div className=" bg-indigo-50 font-['Lato']">
+            <div className=" bg-white font-['Lato']">
                 <NavigationBar></NavigationBar>
                 <NewsArea></NewsArea>
             </div>

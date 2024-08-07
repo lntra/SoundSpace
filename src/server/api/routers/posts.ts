@@ -1,7 +1,7 @@
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 import { z } from "zod";
-import { fetchAllNews, fetchAllPosts, fetchCommentsbyID, fetchNewsbyID, fetchPostsbyID, fetchPostsByIDInfinite } from "lib/data";
+import { fetchAllNews, fetchAllPosts, fetchCommentsbyID, fetchNewsbyID, fetchPostsbyID, fetchPostsByIDInfinite } from "~/lib/data";
 import { TRPCClientError } from "@trpc/client";
 import { TRPCError } from "@trpc/server";
 

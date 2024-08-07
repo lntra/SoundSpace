@@ -17,13 +17,13 @@ const RegisterPage = () => {
                     
                         <form className="w-[100%]" action="#" method="">
                             <div className="w-[100%] p-[1px] mt-16 rounded-[20px]" style={{background: `linear-gradient(270deg, #53337B 0%, #96429A 100%)`}}>
-                                <input placeholder="Email ou Usuário" type="text" className="pl-[40px] w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-indigo-50"></input>
+                                <input placeholder="Email ou Usuário" type="text" className="pl-[40px] w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-white"></input>
                             </div>
                             <div className="w-[100%] p-[1px] mt-8 rounded-[20px]" style={{background: `linear-gradient(270deg, #53337B 0%, #96429A 100%)`}}>
-                                <input placeholder="Senha" type="text" className="pl-[40px] w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-indigo-50"></input>
+                                <input placeholder="Senha" type="text" className="pl-[40px] w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-white"></input>
                             </div>
                             <div className="w-[100%] p-[1px] mt-12 rounded-[20px]" style={{background: `linear-gradient(270deg, #53337B 0%, #96429A 100%)`}}>
-                                <button placeholder="Senha" type="submit" className="w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-indigo-50">
+                                <button placeholder="Senha" type="submit" className="w-[100%] h-20 rounded-[20px] text-2xl font-light text-black bg-white">
                                     <p className="text-purple-900 text-2xl font-bold">Prosseguir</p>
                                 </button>
                             </div>

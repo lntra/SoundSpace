@@ -40,7 +40,7 @@ const CommunityPost: React.FC<CommunityPostProps> = ( {title, content, date, use
                         </div>
                     </div>
                 </div>
-                <div className="col-start-2 col-end-4 row-span-2 grid grid-cols-auto grid-rows-6 rounded-tr-[20px] rounded-br-[20px] gap-4 border border-sp-purpleBright2 bg-indigo-50 w-[100%]">
+                <div className="col-start-2 col-end-4 row-span-2 grid grid-cols-auto grid-rows-6 rounded-tr-[20px] rounded-br-[20px] gap-4 border border-sp-purpleBright2 bg-white w-[100%]">
                     <div className="col-start-1 col-end-1 row-start-2 row-end-6 self-center">
                         <a href="#">
                             <img className="ml-5 w-52 rounded-[20px]" src={Bandfoto.src} />

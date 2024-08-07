@@ -1,4 +1,4 @@
-import { News } from "lib/definitions";
+import { News } from "~/lib/definitions";
 import TextArticle from "../atoms/textArticle"
 import ContentNews from "../molecules/contentnews"
 import HeaderNews from "../molecules/headernews"
@@ -10,7 +10,7 @@ interface NewsAsProps {
 const NewsReadContent: React.FC<NewsAsProps> = ( { news } ) => {
         
     return <>
-        <div className="bg-gradient-to-b from-sp-tp-page to-bg-indigo-50">
+        <div className="bg-gradient-to-b from-sp-tp-page to-bg-white">
             {news && <HeaderNews news={news}></HeaderNews>}
             {news && <ContentNews news={news}></ContentNews>}
             {news && <TextArticle news={news}></TextArticle>}

@@ -39,7 +39,7 @@ const TextAreaComentario = () => {
                     value={text}
                     onChange={handleChange}
                     style={{ height: '48px' }}
-                    className="w-full outline-none resize-none bg-indigo-50 min-h-[48px] h-auto max-h-full p-3 focus:text-black focus:font-normal rounded-[20px] text-slate-600 text-opacity-75 text-base font-bold font-['Lato']"
+                    className="w-full outline-none resize-none bg-white min-h-[48px] h-auto max-h-full p-3 focus:text-black focus:font-normal rounded-[20px] text-slate-600 text-opacity-75 text-base font-bold font-['Lato']"
                 >
                     <div className="text-slate-600 text-opacity-75 text-base font-bold font-['Lato']"></div>
                 </textarea>

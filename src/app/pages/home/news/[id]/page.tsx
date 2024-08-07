@@ -32,7 +32,7 @@ const NewsPage: NextPage = () => {
 
     return <>
         <main className="bg-sp-greyish text-white">
-            <div className=" bg-indigo-50 font-['Lato']">
+            <div className=" bg-white font-['Lato']">
                 <NavigationBar></NavigationBar>
                     {data && <NewsReadContent news={data.newsPage}></NewsReadContent>}
                 <Footer></Footer>

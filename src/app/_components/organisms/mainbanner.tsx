@@ -6,7 +6,7 @@ import Headers from "../molecules/headers"
 import Headers2 from "../molecules/headers2"
 import PlaceholderComunidade from "../molecules/placeholder"
 
-import {News} from '../../../../lib/definitions';
+import {News} from '../../../lib/definitions';
 import Link from "next/link"
 import PlaceholderProps from "../molecules/placeholderProps"
 import ResponsiveText from "../atoms/responsiveText"

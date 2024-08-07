@@ -1,4 +1,4 @@
-import { News } from "lib/definitions";
+import { News } from "~/lib/definitions";
 import React from "react";
 
 interface NewsAsProps {

@@ -3,7 +3,7 @@ import TextNews from "../atoms/textnews"
 import Radiohead from "../assets/band.png"
 import PlaceholderComunidade from "./placeholder"
 
-import {News} from '../../../../lib/definitions';
+import {News} from '../../../lib/definitions';
 import React from "react";
 import Link from "next/link";
 import PlaceholderProps from "./placeholderProps";

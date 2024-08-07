@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <RootLayout>
       <main className="bg-sp-greyish text-white">
-            <div className=" bg-indigo-50 font-['Lato']">
+            <div className=" bg-white font-['Lato']">
                 <LoginPage></LoginPage>
             </div>
       </main>

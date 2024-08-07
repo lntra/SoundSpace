@@ -3,7 +3,7 @@ import CommentsView from "../atoms/comments"
 import { api } from "~/trpc/react";
 import LoadingPage from "./loadingPage";
 
-import { Comments ,CommentsWithReplies } from "lib/definitions";
+import { Comments ,CommentsWithReplies } from "~/lib/definitions";
 import CommentsItems from "../molecules/commentsItems";
 
 interface ComentariosPostProps {

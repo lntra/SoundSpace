@@ -1,7 +1,7 @@
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 import { z } from "zod";
-import { fetchAllNews, fetchNewsbyID } from "lib/data";
+import { fetchAllNews, fetchNewsbyID } from "~/lib/data";
 import { TRPCClientError } from "@trpc/client";
 
 export const homeRouter = createTRPCRouter({
