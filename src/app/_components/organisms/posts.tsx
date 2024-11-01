@@ -73,21 +73,29 @@ const Posts : React.FC<PostsProps> = ( {forYouRoute, search, setSearch, id, tags
 
     const { data : UserData } = useSessionData();
     
-    const fetchPosts = id != undefined
+    const fetchPosts = id !== undefined
     ? api.posts.getPostsByIDInfinite.useInfiniteQuery(
-        { communityId: id as string, tags: tags !== "" ? tags : undefined , cursor: undefined, route: search },
+        { 
+            communityId: id as string, 
+            tags: tags !== "" ? tags : undefined, 
+            route: search 
+        },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
-            queryKey: ['postsByIDInfinite', id, tags, search]
+            queryKey: ['posts.getPostsByIDInfinite', { route: search, tags: tags !== "" ? tags : undefined, communityId: id as string, }] 
         }
     )
     : api.posts.getAllPosts.useInfiniteQuery(
-        { cursor: undefined, tags: tags !== "" ? tags : undefined, route: search } ,
+        { 
+            tags: tags !== "" ? tags : undefined, 
+            route: search 
+        },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
-            queryKey: ['postsByIDInfinite', id, tags, search]
+            queryKey: ['posts.getAllPosts', { route: search, tags: tags !== "" ? tags : undefined }]
         }
     );
+
 
     const { data, isLoading, error, fetchNextPage, hasNextPage, isFetchingNextPage } = fetchPosts;
 
