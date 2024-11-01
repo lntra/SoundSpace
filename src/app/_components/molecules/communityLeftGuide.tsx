@@ -34,6 +34,8 @@ const CommunityLeftGuide = ( {userId, forYouRoute, setForYou, dark} : CommunityL
         userId : userId
     })
 
+    const [reload, setReload] = useState(false)
+
     const [localFollowing, setLocalFollowing] = useState<Communities[]>(() => getFollowedCommunities());
 
     useEffect(() => {
@@ -45,10 +47,10 @@ const CommunityLeftGuide = ( {userId, forYouRoute, setForYou, dark} : CommunityL
         if(localFollowing.length > 0) {
             setLocalRoute(true);
         } else {
-            setLocalFollowing(false)
+            setReload(!reload)
         }
 
-    },[data, localFollowing])
+    },[data, localFollowing, reload])
 
     useEffect(() => {
         const storedFollowedCommunities = localStorage.getItem('followedCommunities');
