@@ -24,7 +24,7 @@
   background: #a9fb1a;
 }
 
-html,p,h1 {
+html,p,h1,button {
   margin: 0;
   font-family: 'Lato', sans-serif !important; 
 }
