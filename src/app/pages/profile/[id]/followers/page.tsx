@@ -25,7 +25,7 @@ const Follows = () => {
     const name = pathname.split("/")[3] || "";
 
     const { data , isLoading, error } = api.user.getUserFollowed.useInfiniteQuery(
-        { userId: name as string, cursor: undefined },
+        { userId: name as string },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
             enabled: name !== ""

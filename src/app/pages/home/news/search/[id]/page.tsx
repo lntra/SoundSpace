@@ -53,7 +53,7 @@ const CommunityDisplayQuery : NextPage  = () => {
         hasNextPage,
         isFetchingNextPage,
     } = api.home.getAllNewsbyQuery.useInfiniteQuery(
-        { cursor: undefined, search: name } ,
+        { search: name } ,
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
         }
