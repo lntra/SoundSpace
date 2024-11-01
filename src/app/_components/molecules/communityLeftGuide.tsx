@@ -66,7 +66,7 @@ const CommunityLeftGuide = ( {userId, forYouRoute, setForYou, dark} : CommunityL
                     <p className={`mt-2 text-[14px] ${dark ? "text-white " : "text-textNav"} font-bold`}>FOLLOWING</p>
                     {!localRoute && (
                         <>
-                            {(localFollowing.length === 0)  ?  (
+                            {(localFollowing.length > 0)  ?  (
                                 <>
                                     <div className="flex-col text-textNav font-bold gap-4 w-full min-h-max">         
                                         {data?.pages.map((page, index) => (
