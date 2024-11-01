@@ -72,7 +72,7 @@ const DisplaySections  = ( {topics , current, dark} : DisplaySectionsProps ) => 
     return <>
         <div className={`grid grid-cols-12 gap-3 grid-rows-auto w-full pb-4`}>
             {communities.map((community, index) => (
-                <CardsDisplay key={index} dark={dark} handleFollow={handleFollow} handleUnfollow={handleUnfollow} followedCommunities={followedCommunities} key={community.id} data={community}></CardsDisplay>
+                <CardsDisplay dark={dark} handleFollow={handleFollow} handleUnfollow={handleUnfollow} followedCommunities={followedCommunities} key={community.id} data={community}></CardsDisplay>
             ))}
         </div>
         {isLoading && (
