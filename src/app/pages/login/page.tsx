@@ -8,6 +8,14 @@ import { api } from "~/trpc/react";
 import { TRPCError } from "@trpc/server";
 import useDarkMode from "~/app/hooks/useDarkMode";
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 const LoginPage = () => {
   const mutation = api.user.login.useMutation();
 
@@ -74,7 +82,7 @@ const LoginPage = () => {
 
   return (
     <div
-      className={`grid h-[100vh] grid-cols-12 overflow-y-hidden font-['Lato'] ${
+      className={`grid h-[100vh] grid-cols-12 overflow-y-hidden ${lato.className} ${
         dark ? "bg-gray-900 text-white" : "bg-white text-black"
       }`}
     >
