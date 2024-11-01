@@ -24,17 +24,17 @@
   background: #a9fb1a;
 }
 
-html {
+html,p,h1 {
   margin: 0;
-  font-family: 'Lato', sans-serif; 
+  font-family: 'Lato', sans-serif !important; 
 }
 
 body {
-    font-family: 'Lato', sans-serif; 
+    font-family: 'Lato', sans-serif !important; 
 }
 
 .lato-font {
-  font-family: 'Lato', sans-serif; 
+  font-family: 'Lato', sans-serif !important; 
 }
 
 .header-background {
