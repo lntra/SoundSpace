@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
-import { Box } from '@mui/material';
+import * as React from "react";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import { Box } from "@mui/material";
 
 const RejectedPage = () => {
   return (
-    <Box 
+    <Box
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -17,13 +17,17 @@ const RejectedPage = () => {
       left={0}
       zIndex={9999}
     >
-      <Stack sx={{ color: 'grey.100', width: 'auto'}} spacing={2} direction="row">
+      <Stack
+        sx={{ color: "grey.100", width: "auto" }}
+        spacing={2}
+        direction="row"
+      >
         <Alert variant="outlined" severity="error">
-          <p className='text-red-400'>Error: unvalid URL</p>
+          <p className="text-red-400">Error: unvalid URL</p>
         </Alert>
       </Stack>
     </Box>
   );
-}
+};
 
 export default RejectedPage;

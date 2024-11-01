@@ -1,13 +1,17 @@
 interface ButtonProps {
-    text?: string;
+  text?: string;
 }
 
-const Button = ({text , ...props}: ButtonProps) => {
-    return <>
-        <div className="h-min w-[100%] hover:bg-sp-accent buttonAdjust:py-2.5 lg:px-1 xl:px-3  min-h-fit self-center bg-sp-purpleBright2 rounded-3xl justify-center items-center inline-flex">
-                <button className="text-white hover:text-black transition-colors duration-200 text-[16px] p-1 font-bold font-['Lato']">{text}</button>
-        </div>  
+const Button = ({ text, ...props }: ButtonProps) => {
+  return (
+    <>
+      <div className="inline-flex h-min min-h-fit w-[100%] items-center justify-center  self-center rounded-3xl bg-sp-purpleBright2 hover:bg-sp-accent buttonAdjust:py-2.5 lg:px-1 xl:px-3">
+        <button className="p-1 font-['Lato'] text-[16px] font-bold text-white transition-colors duration-200 hover:text-black">
+          {text}
+        </button>
+      </div>
     </>
-}
+  );
+};
 
-export default Button
+export default Button;

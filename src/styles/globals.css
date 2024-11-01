@@ -4,109 +4,134 @@
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #DFE0F1;
-    border-radius: 5px;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #6232DA;
-    border-radius: 5px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #A9FB1A;
-  }
-  
-  html{
-    margin: 0;
-  }
-  
-  .header-background {
-    background: hsla(267, 41%, 34%, 1);
+  width: 10px;
+}
 
-    background: linear-gradient(45deg, hsla(267, 41%, 34%, 1) 0%, hsla(260, 56%, 40%, 1) 80%, hsla(257, 63%, 48%, 1) 100%);
+/* Track */
+::-webkit-scrollbar-track {
+  background: #dfe0f1;
+  border-radius: 5px;
+}
 
-    background: -moz-linear-gradient(45deg, hsla(267, 41%, 34%, 1) 0%, hsla(260, 56%, 40%, 1) 80%, hsla(257, 63%, 48%, 1) 100%);
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6232da;
+  border-radius: 5px;
+}
 
-    background: -webkit-linear-gradient(45deg, hsla(267, 41%, 34%, 1) 0%, hsla(260, 56%, 40%, 1) 80%, hsla(257, 63%, 48%, 1) 100%);
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a9fb1a;
+}
 
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#53337a", endColorstr="#542DA1", GradientType=1 );
-  }
-  
-  .card{
-    background-color: #5c228b;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
+html {
+  margin: 0;
+}
 
-  .group svg path {
-    transition: fill 0.2s ease-in-out;
-  }
+.header-background {
+  background: hsla(267, 41%, 34%, 1);
 
-  .group:hover svg path {
-    transition: fill 0.2s ease-in-out;
-    --path-fill-color: #A9FB1A; 
-    --path-fill-colorDisconnect: #ef4444;
-  }
+  background: linear-gradient(
+    45deg,
+    hsla(267, 41%, 34%, 1) 0%,
+    hsla(260, 56%, 40%, 1) 80%,
+    hsla(257, 63%, 48%, 1) 100%
+  );
 
+  background: -moz-linear-gradient(
+    45deg,
+    hsla(267, 41%, 34%, 1) 0%,
+    hsla(260, 56%, 40%, 1) 80%,
+    hsla(257, 63%, 48%, 1) 100%
+  );
+
+  background: -webkit-linear-gradient(
+    45deg,
+    hsla(267, 41%, 34%, 1) 0%,
+    hsla(260, 56%, 40%, 1) 80%,
+    hsla(257, 63%, 48%, 1) 100%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#53337a", endColorstr="#542DA1", GradientType=1 );
+}
+
+.card {
+  background-color: #5c228b;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.group svg path {
+  transition: fill 0.2s ease-in-out;
+}
+
+.group:hover svg path {
+  transition: fill 0.2s ease-in-out;
+  --path-fill-color: #a9fb1a;
+  --path-fill-colorDisconnect: #ef4444;
+}
+
+.dropdown {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform: translateY(-10px);
+  opacity: 0;
+  position: absolute;
+  top: 63%;
+  z-index: 10;
+}
+
+@media (max-width: 1599px) {
   .dropdown {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: translateY(-10px); 
-    opacity: 0;
-    position: absolute;
-    top: 63%; 
-    z-index: 10; 
+    top: 60%;
   }
+}
 
-  @media (max-width: 1599px) {
-    .dropdown {
-        top: 60%; 
-    }
-  }
+.dropdown-enter {
+  transform: translateY(0);
+  opacity: 1;
+}
 
-  .dropdown-enter {
-      transform: translateY(0); 
-      opacity: 1;
-  }
+.dropdown-exit {
+  transform: translateY(-10px);
+  opacity: 0;
+}
 
-  .dropdown-exit {
-      transform: translateY(-10px);
-      opacity: 0; 
-  }
-
-  .ring-container {
-    position: relative;
+.ring-container {
+  position: relative;
 }
 
 .circle {
-    width: 15px;
-    height: 15px;
-    background-color: #A9FB1A;
-    border-radius: 50%;
-    position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #a9fb1a;
+  border-radius: 50%;
+  position: absolute;
 }
 
 .ringring {
-    border: 3px solid #A9FB1A;
-    border-radius: 30px;
-    height: 25px;
-    width: 25px;
-    position: relative;
-    animation: pulsate 1s ease-out;
-    animation-iteration-count: infinite; 
-    opacity: 0.0
+  border: 3px solid #a9fb1a;
+  border-radius: 30px;
+  height: 25px;
+  width: 25px;
+  position: relative;
+  animation: pulsate 1s ease-out;
+  animation-iteration-count: infinite;
+  opacity: 0;
 }
 
 @keyframes pulsate {
-    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
-    50% {opacity: 1.0;}
-    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+  0% {
+    -webkit-transform: scale(0.1, 0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
 }

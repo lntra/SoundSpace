@@ -20,16 +20,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  const cookieHeader = cookies().get('auth_token')?.value || '';
+  const cookieHeader = cookies().get("auth_token")?.value ?? "";
 
   return (
-      <html lang="en">
-          <body className={`font-sans ${inter.variable}`}>
-            <TRPCReactProvider cookies={cookieHeader}>
-              {children}
-            </TRPCReactProvider>
-          </body>
-      </html>
+    <html lang="en">
+      <body className={`font-sans ${inter.variable}`}>
+        <TRPCReactProvider cookies={cookieHeader}>{children}</TRPCReactProvider>
+      </body>
+    </html>
   );
 }

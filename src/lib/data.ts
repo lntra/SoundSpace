@@ -1,42 +1,40 @@
-import { sql } from '@vercel/postgres'
+import { sql } from "@vercel/postgres";
 
 import {
-    News,
-    Posts,
-    Comments,
-    Communities,
-    User,
-    Followers,
-    Following,
-    Following_commmunity
-} from './definitions';
-const bcrypt = require('bcrypt');
+  type News,
+  type Posts,
+  type Comments,
+  type Communities,
+  type User,
+  type Followers,
+  type Following,
+  type Following_commmunity,
+} from "./definitions";
+const bcrypt = require("bcrypt");
 
 export async function fetchAllNewsDefault() {
-    const limit = 3;
+  const limit = 3;
 
-    try {
-        const data = await sql<News>
-        `SELECT 
+  try {
+    const data = await sql<News>`SELECT 
             * 
         FROM news 
         ORDER BY clicks DESC
-        LIMIT ${limit}`
-        return data.rows;
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch news data');
-    }
-
+        LIMIT ${limit}`;
+    return data.rows;
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch news data");
+  }
 }
 
-export async function fetchAllNewsTrending(cursor : any | null, limit : number) {
-    try {
-        let query : any
-        const limits = limit + 1;
+export async function fetchAllNewsTrending(cursor: any | null, limit: number) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if (cursor) {
-            query = sql<News>`
+    if (cursor) {
+      query = sql<News>`
                 SELECT 
                     news.*,
                     users.name AS user_name 
@@ -45,9 +43,9 @@ export async function fetchAllNewsTrending(cursor : any | null, limit : number) 
                 WHERE (news.clicks, news.id) < (${cursor.clicks}, ${cursor.id})
                 ORDER BY clicks DESC 
                 LIMIT ${limits}
-            `
-        } else {
-            query = sql<News>`
+            `;
+    } else {
+      query = sql<News>`
                 SELECT 
                     news.*,
                     users.name AS user_name 
@@ -55,45 +53,41 @@ export async function fetchAllNewsTrending(cursor : any | null, limit : number) 
                 JOIN users ON news.user_id = users.id
                 ORDER BY clicks DESC 
                 LIMIT ${limits}
-            `
-        }
-        
-        
-        const data = await query;
-
-        const news = data.rows;
-
-        const hasNextPage = news.length === limits;
-
-        const nextCursor = hasNextPage
-            ? { clicks: news[news.length - 1].clicks, id: news[news.length - 1].id }
-            : null;
-
-        console.log(nextCursor, "prox");
-
-        const finalResults = hasNextPage ? news.slice(0, limits) : news;
-
-        return {
-            allNews: finalResults || [],
-            nextCursor,
-            hasNextPage,
-        };
-
-    
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch news data');
+            `;
     }
 
+    const data = await query;
+
+    const news = data.rows;
+
+    const hasNextPage = news.length === limits;
+
+    const nextCursor = hasNextPage
+      ? { clicks: news[news.length - 1].clicks, id: news[news.length - 1].id }
+      : null;
+
+    console.log(nextCursor, "prox");
+
+    const finalResults = hasNextPage ? news.slice(0, limits) : news;
+
+    return {
+      allNews: finalResults || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch news data");
+  }
 }
 
-export async function fetchAllNewsRecent(cursor : any | null, limit : number) {
-    try {
-        let query : any
-        const limits = limit + 1;
+export async function fetchAllNewsRecent(cursor: any | null, limit: number) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<News>`
+    if (cursor) {
+      query = sql<News>`
             SELECT 
                 news.*,
                 users.name AS user_name 
@@ -102,9 +96,9 @@ export async function fetchAllNewsRecent(cursor : any | null, limit : number) {
             WHERE (news.created_at, news.id) > (${cursor.createdAt} , ${cursor.id})
             ORDER BY created_at ASC 
             LIMIT ${limits}
-            `
-        } else {
-        query = sql<News>`
+            `;
+    } else {
+      query = sql<News>`
             SELECT 
                 news.*,
                 users.name AS user_name 
@@ -112,41 +106,44 @@ export async function fetchAllNewsRecent(cursor : any | null, limit : number) {
             JOIN users ON news.user_id = users.id
             ORDER BY created_at ASC 
             LIMIT ${limits}
-            `
-        }
-        
-        const data = await query;
-
-        const news = data.rows;
-        
-        const hasNextPage = news.length === limits; 
-
-        const nextCursor = hasNextPage ? { createdAt: news[news.length - 1].created_at, id: news[news.length - 1].id } : null;
-
-        console.log(nextCursor + "prox")
-
-        const finalResults = hasNextPage ? news.slice(0, limit) : news;
-
-        return {
-            allNews: finalResults || [],
-            nextCursor,
-            hasNextPage,
-        };
-    
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch news data');
+            `;
     }
 
+    const data = await query;
+
+    const news = data.rows;
+
+    const hasNextPage = news.length === limits;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: news[news.length - 1].created_at,
+          id: news[news.length - 1].id,
+        }
+      : null;
+
+    console.log(nextCursor + "prox");
+
+    const finalResults = hasNextPage ? news.slice(0, limit) : news;
+
+    return {
+      allNews: finalResults || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch news data");
+  }
 }
 
-export async function fetchAllNewsArticles(cursor : any | null, limit : number) {
-    try {
-        let query : any
-        const limits = limit + 1;
+export async function fetchAllNewsArticles(cursor: any | null, limit: number) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<News>`
+    if (cursor) {
+      query = sql<News>`
             SELECT 
                 news.*,
                 users.name AS user_name 
@@ -156,9 +153,9 @@ export async function fetchAllNewsArticles(cursor : any | null, limit : number) 
                 AND (news.created_at, news.id) > (${cursor.createdAt} , ${cursor.id})
             ORDER BY created_at ASC
             LIMIT ${limits}
-            `
-        } else {
-        query = sql<News>`
+            `;
+    } else {
+      query = sql<News>`
             SELECT 
                 news.*,
                 users.name AS user_name 
@@ -167,41 +164,44 @@ export async function fetchAllNewsArticles(cursor : any | null, limit : number) 
             WHERE tag = 'Article' 
             ORDER BY created_at ASC
             LIMIT ${limits}
-            `
-        }
-        
-        const data = await query;
-
-        const news = data.rows;
-        
-        const hasNextPage = news.length === limits; 
-
-        const nextCursor = hasNextPage ? { createdAt: news[news.length - 1].created_at, id: news[news.length - 1].id } : null;
-
-        console.log(nextCursor + "prox")
-
-        const finalResults = hasNextPage ? news.slice(0, limit) : news;
-
-        return {
-            allNews: finalResults || [],
-            nextCursor,
-            hasNextPage,
-        };
-    
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch news data');
+            `;
     }
 
+    const data = await query;
+
+    const news = data.rows;
+
+    const hasNextPage = news.length === limits;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: news[news.length - 1].created_at,
+          id: news[news.length - 1].id,
+        }
+      : null;
+
+    console.log(nextCursor + "prox");
+
+    const finalResults = hasNextPage ? news.slice(0, limit) : news;
+
+    return {
+      allNews: finalResults || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch news data");
+  }
 }
 
-export async function fetchAllNewsNews(cursor : any | null, limit : number) {
-    try {
-        let query : any
-        const limits = limit + 1;
+export async function fetchAllNewsNews(cursor: any | null, limit: number) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<News>`
+    if (cursor) {
+      query = sql<News>`
             SELECT 
                 news.*,
                 users.name AS user_name 
@@ -211,9 +211,9 @@ export async function fetchAllNewsNews(cursor : any | null, limit : number) {
                 AND (news.created_at, news.id) > (${cursor.createdAt} , ${cursor.id})
             ORDER BY created_at ASC 
             LIMIT ${limits}
-            `
-        } else {
-        query = sql<News>`
+            `;
+    } else {
+      query = sql<News>`
             SELECT 
                 news.*,
                 users.name AS user_name 
@@ -222,43 +222,50 @@ export async function fetchAllNewsNews(cursor : any | null, limit : number) {
             WHERE tag = 'News' 
             ORDER BY created_at ASC
             LIMIT ${limits}
-            `
-        }
-        
-        const data = await query;
-
-        const news = data.rows;
-        
-        const hasNextPage = news.length === limits; 
-
-        const nextCursor = hasNextPage ? { createdAt: news[news.length - 1].created_at, id: news[news.length - 1].id } : null;
-
-        console.log(nextCursor + "prox")
-
-        const finalResults = hasNextPage ? news.slice(0, limit) : news;
-
-        return {
-            allNews: finalResults || [],
-            nextCursor,
-            hasNextPage,
-        };
-    
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch news data');
+            `;
     }
 
+    const data = await query;
+
+    const news = data.rows;
+
+    const hasNextPage = news.length === limits;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: news[news.length - 1].created_at,
+          id: news[news.length - 1].id,
+        }
+      : null;
+
+    console.log(nextCursor + "prox");
+
+    const finalResults = hasNextPage ? news.slice(0, limit) : news;
+
+    return {
+      allNews: finalResults || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch news data");
+  }
 }
 
-export async function fetchNewsByQueryInfinite(cursor : any | null , limit : number, search : string ) {
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchNewsByQueryInfinite(
+  cursor: any | null,
+  limit: number,
+  search: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        const searchDecoded = decodeURIComponent(search);
+    const searchDecoded = decodeURIComponent(search);
 
-        if(cursor){
-            query = sql<News>`
+    if (cursor) {
+      query = sql<News>`
                 SELECT 
                 news.*, 
                 users.name AS user_name,
@@ -273,8 +280,8 @@ export async function fetchNewsByQueryInfinite(cursor : any | null , limit : num
                 ORDER BY rank DESC
                 LIMIT ${limits};
             `;
-        } else {
-            query = sql<News>`
+    } else {
+      query = sql<News>`
                 SELECT 
                 news.*, 
                 ts_rank_cd(
@@ -286,95 +293,94 @@ export async function fetchNewsByQueryInfinite(cursor : any | null , limit : num
                 ORDER BY rank DESC
                 LIMIT ${limit};
             `;
-        }
-
-        const data = await query;
-
-        const news = data.rows;
-        
-        const hasNextPage = news.length === limits; 
-
-        const nextCursor = hasNextPage ? { createdAt: news[news.length - 1].created_at, id: news[news.length - 1].id } : null;
-
-        console.log(nextCursor + "prox")
-
-        const finalResults = hasNextPage ? news.slice(0, limit) : news;
-
-        return {
-            allNews: finalResults || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch communities data');
     }
+
+    const data = await query;
+
+    const news = data.rows;
+
+    const hasNextPage = news.length === limits;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: news[news.length - 1].created_at,
+          id: news[news.length - 1].id,
+        }
+      : null;
+
+    console.log(nextCursor + "prox");
+
+    const finalResults = hasNextPage ? news.slice(0, limit) : news;
+
+    return {
+      allNews: finalResults || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch communities data");
+  }
 }
 
-
-export async function fetchNewsbyID(newsId: string){
-    
-    try {
-        const data = await sql<News>
-        `SELECT 
+export async function fetchNewsbyID(newsId: string) {
+  try {
+    const data = await sql<News>`SELECT 
             news.*,
             users.name AS user_name 
         FROM news 
         JOIN users ON news.user_id = users.id
         WHERE news.id = ${newsId}
-        `
+        `;
 
-        if (data.rowCount === 0) {
-            return null;
-        }
-
-        return data.rows;
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch single news data');
+    if (data.rowCount === 0) {
+      return null;
     }
 
+    return data.rows;
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch single news data");
+  }
 }
 
-export async function fetchAllCommunities(current : number  , tag : string | undefined) {
-    
-    let limit = 6;
+export async function fetchAllCommunities(
+  current: number,
+  tag: string | undefined,
+) {
+  let limit = 6;
 
-    if(current > 0){
-        limit = limit * current;
-    }
+  if (current > 0) {
+    limit = limit * current;
+  }
 
-    if(tag !== "undefined"){
-        try {
-            const data = await sql<Communities>
-            `SELECT * FROM communities 
+  if (tag !== "undefined") {
+    try {
+      const data = await sql<Communities>`SELECT * FROM communities 
             WHERE ${tag} = ANY(communities.tags)
             ORDER BY created_at ASC 
-            LIMIT ${limit}`
-            return data.rows;
-        } catch (error) {
-            console.log('Database Error:',error);
-            throw new Error('Failed to fetch news communities');
-        }
-    } else {
-        try {
-            const data = await sql<Communities>
-            `SELECT * FROM communities 
-            ORDER BY created_at ASC 
-            LIMIT ${limit}`
-            return data.rows;
-        } catch (error) {
-            console.log('Database Error:',error);
-            throw new Error('Failed to fetch news communities');
-        }
+            LIMIT ${limit}`;
+      return data.rows;
+    } catch (error) {
+      console.log("Database Error:", error);
+      throw new Error("Failed to fetch news communities");
     }
-
+  } else {
+    try {
+      const data = await sql<Communities>`SELECT * FROM communities 
+            ORDER BY created_at ASC 
+            LIMIT ${limit}`;
+      return data.rows;
+    } catch (error) {
+      console.log("Database Error:", error);
+      throw new Error("Failed to fetch news communities");
+    }
+  }
 }
 
-export async function fetchCommunitybyID(communityId: string){
-    
-    try {
-        const data = await sql<Communities>`
+export async function fetchCommunitybyID(communityId: string) {
+  try {
+    const data = await sql<Communities>`
         SELECT 
             communities.*,
             COUNT(following_commmunity.id) AS followings
@@ -382,29 +388,32 @@ export async function fetchCommunitybyID(communityId: string){
         LEFT JOIN following_commmunity ON communities.id = following_commmunity.community_id
         WHERE communities.id = ${communityId}
         GROUP BY communities.id
-        `
+        `;
 
-        if (data.rowCount === 0) {
-            return null;
-        }
-
-        return data.rows;
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch single news data');
+    if (data.rowCount === 0) {
+      return null;
     }
 
+    return data.rows;
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch single news data");
+  }
 }
 
-export async function fetchCommunitiesByQueryInfinite(cursor : any | null , limit : number, search : string ) {
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchCommunitiesByQueryInfinite(
+  cursor: any | null,
+  limit: number,
+  search: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        const searchDecoded = decodeURIComponent(search);
+    const searchDecoded = decodeURIComponent(search);
 
-        if(cursor){
-            query = sql<Communities>`
+    if (cursor) {
+      query = sql<Communities>`
                 SELECT 
                 communities.*, 
                 array_to_tsvector(tags) AS array,
@@ -418,8 +427,8 @@ export async function fetchCommunitiesByQueryInfinite(cursor : any | null , limi
                 ORDER BY rank DESC
                 LIMIT ${limits};
             `;
-        } else {
-            query = sql<Communities>`
+    } else {
+      query = sql<Communities>`
                 SELECT 
                 communities.*, 
                 array_to_tsvector(tags) AS array,
@@ -432,41 +441,59 @@ export async function fetchCommunitiesByQueryInfinite(cursor : any | null , limi
                 ORDER BY rank DESC
                 LIMIT ${limit};
             `;
-        }
-
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { createdAt: posts[posts.length - 1].created_at, id: posts[posts.length - 1].id } : null;
-
-        const finalResults = cursor ? posts.slice(1) : posts;
-
-        return {
-            allCommunities: finalResults || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch communities data');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: posts[posts.length - 1].created_at,
+          id: posts[posts.length - 1].id,
+        }
+      : null;
+
+    const finalResults = cursor ? posts.slice(1) : posts;
+
+    return {
+      allCommunities: finalResults || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch communities data");
+  }
 }
 
-export async function fetchAllPosts(cursor: any | null, limit: number, tags : string | undefined, route: string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllPosts(
+  cursor: any | null,
+  limit: number,
+  tags: string | undefined,
+  route: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(tags === undefined){
-            if(cursor){
-                switch(route){
-                    //NO TAG + CURSOR
-                    case "Trending":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string , likes: number }>`
+    if (tags === undefined) {
+      if (cursor) {
+        switch (route) {
+          //NO TAG + CURSOR
+          case "Trending":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -485,9 +512,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY likes DESC
                             LIMIT ${limits}
                     `;
-                    break;
-                    case "Hot Topics":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string , likes: number }>`
+            break;
+          case "Hot Topics":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -505,9 +539,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                         ORDER BY comments DESC
                         LIMIT ${limits}
                     `;
-                    break;
-                    case "Recent":
-                        query = sql<Posts & { user_name: string; community_name: string; community_icon: string; likes: number }>`
+            break;
+          case "Recent":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -524,10 +565,17 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                         GROUP BY posts.id, users.name, communities.name, communities.url_icon
                         ORDER BY posts.created_at DESC, posts.id DESC 
                         LIMIT ${limits}
-                        `
-                    break;
-                    case "Top Rated":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string , likes: number }>`
+                        `;
+            break;
+          case "Top Rated":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -545,13 +593,20 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                         ORDER BY likes DESC
                         LIMIT ${limits}
                     `;
-                    break;
-                }
-            } else {
-                switch(route){
-                    //NO TAG + NO CURSOR
-                    case "Trending":                      
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string , likes: number  }>`
+            break;
+        }
+      } else {
+        switch (route) {
+          //NO TAG + NO CURSOR
+          case "Trending":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -569,9 +624,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY likes DESC
                             LIMIT ${limits}
                     `;
-                    break;
-                    case "Hot Topics":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string , likes: number  }>`
+            break;
+          case "Hot Topics":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -588,9 +650,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY comments DESC
                             LIMIT ${limits}
                         `;
-                    break;
-                    case "Recent":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string , likes: number  }>`
+            break;
+          case "Recent":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -606,10 +675,17 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             GROUP BY posts.id, users.name, communities.name, communities.url_icon
                             ORDER BY posts.created_at DESC, posts.id DESC 
                             LIMIT ${limits}
-                        `
-                    break;
-                    case "Top Rated":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string , likes: number  }>`
+                        `;
+            break;
+          case "Top Rated":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -626,16 +702,22 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY likes DESC
                             LIMIT ${limits}
                         `;
-                    break;
-                }
-            }
+            break;
         }
-        else{
-            if(cursor){
-                switch(route){
-                    //TAG + CURSOR
-                    case "Trending":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+      }
+    } else {
+      if (cursor) {
+        switch (route) {
+          //TAG + CURSOR
+          case "Trending":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -655,9 +737,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY likes DESC
                             LIMIT ${limits}
                         `;
-                    break;
-                    case "Hot Topics":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+            break;
+          case "Hot Topics":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -676,9 +765,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY comments DESC
                             LIMIT ${limits}
                         `;
-                    break;
-                    case "Recent":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+            break;
+          case "Recent":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -697,9 +793,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY posts.created_at ASC
                             LIMIT ${limits}
                         `;
-                    break;
-                    case "Top Rated":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+            break;
+          case "Top Rated":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -718,13 +821,20 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY likes DESC
                             LIMIT ${limits}
                         `;
-                    break;
-                    }
-            } else {
-                switch(route){
-                    //TAG + NO CURSOR
-                    case "Trending":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+            break;
+        }
+      } else {
+        switch (route) {
+          //TAG + NO CURSOR
+          case "Trending":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         (
                             SELECT 
                                 posts.*, 
@@ -745,9 +855,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             LIMIT ${limits}
                         )
                         `;
-                    break;
-                    case "Hot Topics":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+            break;
+          case "Hot Topics":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -765,9 +882,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY comments DESC
                             LIMIT ${limits}
                         `;
-                    break;
-                    case "Recent":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+            break;
+          case "Recent":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -785,9 +909,16 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY posts.created_at ASC
                             LIMIT ${limits}
                         `;
-                    break;
-                    case "Top Rated":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+            break;
+          case "Top Rated":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -805,46 +936,62 @@ export async function fetchAllPosts(cursor: any | null, limit: number, tags : st
                             ORDER BY likes DESC
                             LIMIT ${limits}
                         `;
-                    break;
-                }
-            }
+            break;
         }
-        
-        const data = await query;
-        
-        const posts = data.rows;
-        
-        const hasNextPage = posts.length === limits;
-        
-        const nextCursor = hasNextPage && posts.length > 0  
-            ? { createdAt: posts[posts.length - 1].created_at, id: posts[posts.length - 1].id } 
-            : null;
-                
-        const finalPosts = hasNextPage ? posts.slice(0, limit) : posts;
-        
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-        
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch posts data');
+      }
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = posts.length === limits;
+
+    const nextCursor =
+      hasNextPage && posts.length > 0
+        ? {
+            createdAt: posts[posts.length - 1].created_at,
+            id: posts[posts.length - 1].id,
+          }
+        : null;
+
+    const finalPosts = hasNextPage ? posts.slice(0, limit) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts data");
+  }
 }
 
-export async function fetchPostsByIDInfinite(cursor : any | null , limit : number, communityId : string, tags : string | undefined, route: string ) {
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchPostsByIDInfinite(
+  cursor: any | null,
+  limit: number,
+  communityId: string,
+  tags: string | undefined,
+  route: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(tags === undefined){
-            if(cursor){
-                switch(route){
-                    //NO TAG + CURSOR
-                    case "Trending":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+    if (tags === undefined) {
+      if (cursor) {
+        switch (route) {
+          //NO TAG + CURSOR
+          case "Trending":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         (
                             SELECT 
                                 posts.*, 
@@ -866,9 +1013,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             LIMIT ${limits}
                         )
                         `;
-                        break;
-                    case "Hot Topics":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+            break;
+          case "Hot Topics":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -887,9 +1041,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             ORDER BY comments DESC
                             LIMIT ${limits}
                         `;
-                        break;
-                    case "Recent":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+            break;
+          case "Recent":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -908,9 +1069,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             ORDER BY posts.created_at ASC
                             LIMIT ${limits}
                         `;
-                        break;
-                    case "Top Rated":
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+            break;
+          case "Top Rated":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -929,13 +1097,20 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             ORDER BY likes DESC
                             LIMIT ${limits}
                         `;
-                        break;
-                }
-            } else {
-                switch(route){
-                    //NO TAG + NO CURSOR
-                    case "Trending":
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number}>`
+            break;
+        }
+      } else {
+        switch (route) {
+          //NO TAG + NO CURSOR
+          case "Trending":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         (
                             SELECT 
                                 posts.*, 
@@ -956,9 +1131,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             LIMIT ${limits}
                         )
                     `;
-                    break;
-                    case "Hot Topics" :
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number}>`
+            break;
+          case "Hot Topics":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -976,9 +1158,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                         ORDER BY comments DESC
                         LIMIT ${limits}
                     `;
-                    break;
-                    case "Recent" :
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number  }>`
+            break;
+          case "Recent":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                             SELECT 
                                 posts.*, 
                                 users.name AS user_name, 
@@ -996,9 +1185,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             ORDER BY posts.created_at DESC
                             LIMIT ${limits}
                         `;
-                    break;
-                    case "Top Rated" :
-                        query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number}>`
+            break;
+          case "Top Rated":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -1016,16 +1212,22 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                         ORDER BY Likes DESC
                         LIMIT ${limits}
                     `;
-                    break;
-                }
-            }
+            break;
         }
-        else {
-            if(cursor){
-                switch(route){
-                    //TAG + CURSOR
-                    case "Trending":
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+      }
+    } else {
+      if (cursor) {
+        switch (route) {
+          //TAG + CURSOR
+          case "Trending":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         (
                             SELECT 
                                 posts.*, 
@@ -1047,10 +1249,17 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             ORDER BY likes DESC
                             LIMIT ${limits}
                         )
-                        `
-                    break;
-                    case "Hot Topics" :
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+                        `;
+            break;
+          case "Hot Topics":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -1068,10 +1277,17 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             AND ${tags} = ANY(posts.tags)
                         GROUP BY  posts.id , users.name , communities.name, communities.url_icon
                         ORDER BY posts.created_at ASC
-                        LIMIT ${limits}`
-                    break;
-                    case "Recent" :
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+                        LIMIT ${limits}`;
+            break;
+          case "Recent":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -1089,10 +1305,17 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             AND ${tags} = ANY(posts.tags)
                         GROUP BY  posts.id , users.name , communities.name, communities.url_icon
                         ORDER BY posts.created_at ASC
-                        LIMIT ${limits}`
-                    break;
-                    case "Top Rated" :
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+                        LIMIT ${limits}`;
+            break;
+          case "Top Rated":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -1110,14 +1333,21 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             AND ${tags} = ANY(posts.tags)
                         GROUP BY  posts.id , users.name , communities.name, communities.url_icon
                         ORDER BY posts.created_at ASC
-                        LIMIT ${limits}`
-                    break;
-                }
-            } else {
-                switch(route){
-                case "Trending" :
-                    //TAG + NO CURSOR
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+                        LIMIT ${limits}`;
+            break;
+        }
+      } else {
+        switch (route) {
+          case "Trending":
+            //TAG + NO CURSOR
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         (
                             SELECT 
                                 posts.*, 
@@ -1139,9 +1369,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                             LIMIT ${limits}
                         )
                     `;
-                break;
-                case "Hot Topics" :
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+            break;
+          case "Hot Topics":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -1160,9 +1397,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                         ORDER BY comments DESC
                         LIMIT ${limits}
                     `;
-                break;
-                case "Recent" :
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+            break;
+          case "Recent":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -1181,9 +1425,16 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                         ORDER BY posts.created_at ASC
                         LIMIT ${limits}
                     `;
-                break;
-                case "Top Rated" :
-                    query = sql<Posts & { user_name: string, community_name: string, community_icon: string, likes: number }>`
+            break;
+          case "Top Rated":
+            query = sql<
+              Posts & {
+                user_name: string;
+                community_name: string;
+                community_icon: string;
+                likes: number;
+              }
+            >`
                         SELECT 
                             posts.*, 
                             users.name AS user_name, 
@@ -1202,42 +1453,54 @@ export async function fetchPostsByIDInfinite(cursor : any | null , limit : numbe
                         ORDER BY Likes DESC
                         LIMIT ${limits}
                     `;
-                break;
-                }
-            }
+            break;
         }
-        
-
-        const data = await query;
-        const posts = data.rows;
-                
-        const hasNextPage = posts.length === limits;
-        
-        const nextCursor = hasNextPage && posts.length > 0  
-            ? { createdAt: posts[posts.length - 1].created_at, id: posts[posts.length - 1].id } 
-            : null;
-        
-        
-        const finalPosts = hasNextPage ? posts.slice(0, limit) : posts;
-        
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch posts data');
+      }
     }
+
+    const data = await query;
+    const posts = data.rows;
+
+    const hasNextPage = posts.length === limits;
+
+    const nextCursor =
+      hasNextPage && posts.length > 0
+        ? {
+            createdAt: posts[posts.length - 1].created_at,
+            id: posts[posts.length - 1].id,
+          }
+        : null;
+
+    const finalPosts = hasNextPage ? posts.slice(0, limit) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts data");
+  }
 }
 
-export async function fetchPostsByQueryInfinite(cursor : any | null , limit : number, search : string ) {
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchPostsByQueryInfinite(
+  cursor: any | null,
+  limit: number,
+  search: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Posts & { user_name: string, community_name: string, community_icon: string }>`
+    if (cursor) {
+      query = sql<
+        Posts & {
+          user_name: string;
+          community_name: string;
+          community_icon: string;
+        }
+      >`
                 SELECT 
                     posts.*, 
                     users.name AS user_name, 
@@ -1258,8 +1521,14 @@ export async function fetchPostsByQueryInfinite(cursor : any | null , limit : nu
                 ORDER BY rank DESC;
                 LIMIT ${limits}
             `;
-        } else {
-            query = sql<Posts & { user_name: string, community_name: string, community_icon: string }>`
+    } else {
+      query = sql<
+        Posts & {
+          user_name: string;
+          community_name: string;
+          community_icon: string;
+        }
+      >`
                 SELECT 
                     posts.*, 
                     users.name AS user_name, 
@@ -1279,34 +1548,41 @@ export async function fetchPostsByQueryInfinite(cursor : any | null , limit : nu
                 ORDER BY rank DESC
                 LIMIT ${limits}
             `;
-        }
-
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { createdAt: posts[posts.length - 1].created_at, id: posts[posts.length - 1].id } : null;
-
-        const finalPosts = cursor ? posts.slice(1) : posts;
-
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch posts data');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: posts[posts.length - 1].created_at,
+          id: posts[posts.length - 1].id,
+        }
+      : null;
+
+    const finalPosts = cursor ? posts.slice(1) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts data");
+  }
 }
 
-export async function fetchPostsbyID(postId: string){
-    
-    try {
-        const data = await sql<Posts & { user_name: string, community_name: string}>
-            `SELECT 
+export async function fetchPostsbyID(postId: string) {
+  try {
+    const data = await sql<
+      Posts & { user_name: string; community_name: string }
+    >`SELECT 
                 posts.*,
                 users.name AS user_name,
                 communities.url_icon AS community_icon,
@@ -1322,28 +1598,26 @@ export async function fetchPostsbyID(postId: string){
             GROUP BY  posts.id,  users.name , communities.name, communities.url_icon
         `;
 
-        if (data.rowCount === 0) {
-            return null;
-        }
-
-        return data.rows;
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch single news data');
+    if (data.rowCount === 0) {
+      return null;
     }
 
+    return data.rows;
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch single news data");
+  }
 }
 
-export async function fetchCommentsbyID(postId: string, type : string){
-    
-    try {
-        
-        let query : any
+export async function fetchCommentsbyID(postId: string, type: string) {
+  try {
+    let query: any;
 
-        switch(type){
-            case "recent": {
-                query = await sql<Comments & { user_name: string, user_icon: string, likes: number }>
-                    `SELECT 
+    switch (type) {
+      case "recent": {
+        query = await sql<
+          Comments & { user_name: string; user_icon: string; likes: number }
+        >`SELECT 
                         comments.*,
                         users.name AS user_name,
                         users.url_icon AS user_icon,
@@ -1354,12 +1628,13 @@ export async function fetchCommentsbyID(postId: string, type : string){
                     WHERE comments.post_id = ${postId}
                     GROUP BY comments.id, users.name, users.url_icon
                     ORDER BY comments.created_at DESC
-                `
-                break;
-            }
-            case "trending": {
-                query = await sql<Comments & { user_name: string, user_icon: string, likes: number }>
-                    `SELECT 
+                `;
+        break;
+      }
+      case "trending": {
+        query = await sql<
+          Comments & { user_name: string; user_icon: string; likes: number }
+        >`SELECT 
                         comments.*,
                         users.name AS user_name,
                         users.url_icon AS user_icon,
@@ -1370,12 +1645,13 @@ export async function fetchCommentsbyID(postId: string, type : string){
                     WHERE comments.post_id = ${postId}
                     GROUP BY comments.id, users.name, users.url_icon
                     ORDER BY likes DESC
-                `
-                break;
-            }
-            case "old": {
-                query = await sql<Comments & { user_name: string, user_icon: string, likes: number }>
-                    `SELECT 
+                `;
+        break;
+      }
+      case "old": {
+        query = await sql<
+          Comments & { user_name: string; user_icon: string; likes: number }
+        >`SELECT 
                         comments.*,
                         users.name AS user_name,
                         users.url_icon AS user_icon,
@@ -1386,12 +1662,18 @@ export async function fetchCommentsbyID(postId: string, type : string){
                     WHERE comments.post_id = ${postId}
                     GROUP BY comments.id, users.name, users.url_icon
                     ORDER BY comments.created_at ASC
-                `
-                break;
-            }
-            case "discussed": {
-                query = await sql<Comments & { user_name: string, user_icon: string, likes: number, replies: number }>
-                    `SELECT 
+                `;
+        break;
+      }
+      case "discussed": {
+        query = await sql<
+          Comments & {
+            user_name: string;
+            user_icon: string;
+            likes: number;
+            replies: number;
+          }
+        >`SELECT 
                         comments.*,
                         users.name AS user_name,
                         users.url_icon AS user_icon,
@@ -1404,105 +1686,105 @@ export async function fetchCommentsbyID(postId: string, type : string){
                     WHERE comments.post_id = ${postId}
                     GROUP BY comments.id, users.name, users.url_icon
                     ORDER BY replies DESC, comments.created_at DESC
-                `
-                break;
-            }
-        }
+                `;
+        break;
+      }
+    }
 
-        const data = await query;
+    const data = await query;
 
-        if (data.rowCount === 0) {
-            return null;
-        }
+    if (data.rowCount === 0) {
+      return null;
+    }
 
-        return data.rows;
+    return data.rows;
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch single news data");
+  }
+}
+
+export async function fetchUserAccount(emailUser: string, username?: string) {
+  if (username === undefined) {
+    try {
+      const data =
+        await sql<User>`SELECT * FROM users WHERE email = ${emailUser} LIMIT 1`;
+      if (data.rowCount === 0) {
+        return null;
+      }
+
+      return data.rows;
     } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to fetch single news data');
+      console.log("Database Error:", error);
+      throw new Error("Failed to fetch user data");
+    }
+  } else {
+    try {
+      const data =
+        await sql<User>`SELECT * FROM users WHERE name = ${username} LIMIT 1`;
+      if (data.rowCount === 0) {
+        return null;
+      }
+
+      return data.rows;
+    } catch (error) {
+      console.log("Database Error:", error);
+      throw new Error("Failed to fetch user data");
+    }
+  }
+}
+
+export async function fetchUserAccountById(id: string) {
+  try {
+    const data = await sql<User>`SELECT * FROM users WHERE id = ${id} LIMIT 1`;
+    if (data.rowCount === 0) {
+      return null;
     }
 
+    return data.rows;
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to fetch user data");
+  }
 }
 
-export async function fetchUserAccount(emailUser: string, username?: string){
-    
-    if(username === undefined){
-        try {
-            const data = await sql<User>
-            `SELECT * FROM users WHERE email = ${emailUser} LIMIT 1`
-            if (data.rowCount === 0) {
-                return null;
-            }
-    
-            return data.rows;
-        } catch (error) {
-            console.log('Database Error:',error);
-            throw new Error('Failed to fetch user data');
-        }
-    } else {
-        try {
-            const data = await sql<User>
-            `SELECT * FROM users WHERE name = ${username} LIMIT 1`
-            if (data.rowCount === 0) {
-                return null;
-            }
-    
-            return data.rows;
-        } catch (error) {
-            console.log('Database Error:',error);
-            throw new Error('Failed to fetch user data');
-        }
-    }
-}
+export async function createUserAccount(
+  emailUser: string,
+  password: string,
+  name: string,
+) {
+  const urlIcon = null;
+  const urlBanner = null;
 
-export async function fetchUserAccountById(id : string){
-    
-        try {
-            const data = await sql<User>
-            `SELECT * FROM users WHERE id = ${id} LIMIT 1`
-            if (data.rowCount === 0) {
-                return null;
-            }
-    
-            return data.rows;
-        } catch (error) {
-            console.log('Database Error:',error);
-            throw new Error('Failed to fetch user data');
-        }
-}
-
-
-export async function createUserAccount(emailUser: string, password: string, name: string){
-    
-    const urlIcon = null; 
-    const urlBanner = null;
-
-    try {        
-        const data = await sql<User>`
+  try {
+    const data = await sql<User>`
             INSERT INTO users (name, email, password, url_icon, url_banner)
             VALUES (${name}, ${emailUser}, ${password}, ${urlIcon}, ${urlBanner})
             RETURNING id, email, name, url_icon, url_banner;
-        `
-        
-        if (data.rowCount === 0) {
-            return null;
-        }
+        `;
 
-        return data.rows[0];
-    } catch (error) {
-        console.log('Database Error:',error);
-        throw new Error('Failed to create user data');
+    if (data.rowCount === 0) {
+      return null;
     }
 
+    return data.rows[0];
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Failed to create user data");
+  }
 }
 
-export async function fetchAllUserFollowed(cursor: any | null, limit: number, userId : string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllUserFollowed(
+  cursor: any | null,
+  limit: number,
+  userId: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Followers>`
+    if (cursor) {
+      query = sql<Followers>`
                 SELECT 
                     followers.*,
                     users.name AS user_name,
@@ -1515,8 +1797,8 @@ export async function fetchAllUserFollowed(cursor: any | null, limit: number, us
                 ORDER BY followers.id DESC
                 LIMIT ${limits}
             `;
-        } else {
-            query = sql<Followers>`
+    } else {
+      query = sql<Followers>`
                 SELECT 
                     followers.*,
                     users.name AS user_name,
@@ -1528,56 +1810,61 @@ export async function fetchAllUserFollowed(cursor: any | null, limit: number, us
                 ORDER BY followers.id DESC
                 LIMIT ${limits}
             `;
-        }
-        
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { id: posts[posts.length - 1].id } : null;
-
-        const finalPosts = cursor ? posts.slice(1) : posts;
-
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.log('Database Error:', error)
-        throw new Error('Error to get followers number');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage ? { id: posts[posts.length - 1].id } : null;
+
+    const finalPosts = cursor ? posts.slice(1) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Error to get followers number");
+  }
 }
 
-export async function fetchAllUserFollowedCount(userId : string) {
-    try {
-        const data = await sql<Followers>`
+export async function fetchAllUserFollowedCount(userId: string) {
+  try {
+    const data = await sql<Followers>`
             SELECT COUNT(*) AS follower_count
             FROM followers
             WHERE followers.user_id = ${userId}
-        `
+        `;
 
-        if (data.rows[0] === undefined) {
-            return null;
-        }
-
-        return data.rows[0].follower_count;
-    } catch (error) {
-        console.log('Database Error:', error)
-        throw new Error('Error to get followers number');
+    if (data.rows[0] === undefined) {
+      return null;
     }
+
+    return data.rows[0].follower_count;
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Error to get followers number");
+  }
 }
 
-export async function fetchAllUserCommunities(cursor: any | null, limit: number, userId : string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllUserCommunities(
+  cursor: any | null,
+  limit: number,
+  userId: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Following_commmunity>`
+    if (cursor) {
+      query = sql<Following_commmunity>`
                 SELECT 
                     following_commmunity.*,
                     communities.name AS community_name,
@@ -1588,8 +1875,8 @@ export async function fetchAllUserCommunities(cursor: any | null, limit: number,
                     AND (following_commmunity.id) > (${cursor.id})
                 ORDER BY communities.name 
             `;
-        } else {
-            query = sql<Following_commmunity>`
+    } else {
+      query = sql<Following_commmunity>`
                 SELECT 
                     following_commmunity.*,
                     communities.name AS community_name,
@@ -1599,38 +1886,42 @@ export async function fetchAllUserCommunities(cursor: any | null, limit: number,
                 WHERE following_commmunity.user_id = ${userId}
                 ORDER BY communities.name 
             `;
-        }
-
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { id: posts[posts.length - 1].id } : null;
-
-        const finalResults = cursor ? posts.slice(1) : posts;
-
-        return {
-            allCommunities: finalResults || [],
-            nextCursor,
-            hasNextPage,
-        };
-
-    } catch (error) {
-        console.log('Database Error:', error)
-        throw new Error('Error to get followers number');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage ? { id: posts[posts.length - 1].id } : null;
+
+    const finalResults = cursor ? posts.slice(1) : posts;
+
+    return {
+      allCommunities: finalResults || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Error to get followers number");
+  }
 }
 
-export async function fetchAllUserFollowing(cursor: any | null, limit: number, userId : string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllUserFollowing(
+  cursor: any | null,
+  limit: number,
+  userId: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Following>`
+    if (cursor) {
+      query = sql<Following>`
                 SELECT 
                     following.*,
                     users.name AS user_name,
@@ -1643,8 +1934,8 @@ export async function fetchAllUserFollowing(cursor: any | null, limit: number, u
                 ORDER BY following.id DESC
                 LIMIT ${limits}
             `;
-        } else {
-            query = sql<Following>`
+    } else {
+      query = sql<Following>`
                 SELECT 
                     following.*,
                     users.name AS user_name,
@@ -1656,56 +1947,67 @@ export async function fetchAllUserFollowing(cursor: any | null, limit: number, u
                 ORDER BY following.id DESC
                 LIMIT ${limits}
             `;
-        }
-        
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { id: posts[posts.length - 1].id } : null;
-
-        const finalPosts = cursor ? posts.slice(1) : posts;
-
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.log('Database Error:', error)
-        throw new Error('Error to get followers number');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage ? { id: posts[posts.length - 1].id } : null;
+
+    const finalPosts = cursor ? posts.slice(1) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Error to get followers number");
+  }
 }
 
-export async function fetchAllUserFollowingCount(userId : string) {
-    try {
-        const data = await sql<Following>`
+export async function fetchAllUserFollowingCount(userId: string) {
+  try {
+    const data = await sql<Following>`
             SELECT COUNT(*) AS following_count
             FROM following
             WHERE following.user_id = ${userId}
-        `
+        `;
 
-        if (data.rows[0] === undefined) {
-            return null;
-        }
-
-        return data.rows[0].following_count;
-    } catch (error) {
-        console.log('Database Error:', error)
-        throw new Error('Error to get followers number');
+    if (data.rows[0] === undefined) {
+      return null;
     }
+
+    return data.rows[0].following_count;
+  } catch (error) {
+    console.log("Database Error:", error);
+    throw new Error("Error to get followers number");
+  }
 }
 
-export async function fetchAllUserSaved(cursor: any | null, limit: number, userId : string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllUserSaved(
+  cursor: any | null,
+  limit: number,
+  userId: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Posts & { user_name: string, community_name: string, community_icon: string }>`
+    if (cursor) {
+      query = sql<
+        Posts & {
+          user_name: string;
+          community_name: string;
+          community_icon: string;
+        }
+      >`
                 SELECT 
                     posts.*, 
                     users.name AS user_name, 
@@ -1725,8 +2027,14 @@ export async function fetchAllUserSaved(cursor: any | null, limit: number, userI
                 GROUP BY  posts.id ,users.name , communities.name, communities.url_icon, savedmedia.created_at, savedmedia.id               
                 ORDER BY savedmedia.created_at ASC, savedmedia.id ASC
             `;
-        } else {
-            query = sql<Posts & { user_name: string, community_name: string, community_icon: string }>`
+    } else {
+      query = sql<
+        Posts & {
+          user_name: string;
+          community_name: string;
+          community_icon: string;
+        }
+      >`
                 SELECT 
                     posts.*, 
                     users.name AS user_name, 
@@ -1745,37 +2053,53 @@ export async function fetchAllUserSaved(cursor: any | null, limit: number, userI
                 GROUP BY  posts.id ,users.name , communities.name, communities.url_icon, savedmedia.created_at, savedmedia.id                
                 ORDER BY savedmedia.created_at ASC, savedmedia.id ASC
             `;
-        }
-        
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { createdAt: posts[posts.length - 1].saved_created_at, id: posts[posts.length - 1].id } : null;
-
-        const finalPosts = cursor ? posts.slice(1) : posts
-        
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch posts data');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: posts[posts.length - 1].saved_created_at,
+          id: posts[posts.length - 1].id,
+        }
+      : null;
+
+    const finalPosts = cursor ? posts.slice(1) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts data");
+  }
 }
 
-export async function fetchAllUserPosts(cursor: any | null, limit: number, userId : string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllUserPosts(
+  cursor: any | null,
+  limit: number,
+  userId: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Posts & { user_name: string, community_name: string, community_icon: string }>`
+    if (cursor) {
+      query = sql<
+        Posts & {
+          user_name: string;
+          community_name: string;
+          community_icon: string;
+        }
+      >`
                 SELECT 
                     posts.*, 
                     users.name AS user_name, 
@@ -1793,8 +2117,14 @@ export async function fetchAllUserPosts(cursor: any | null, limit: number, userI
                 GROUP BY  posts.id ,users.name , communities.name, communities.url_icon      
                 ORDER BY posts.created_at ASC
             `;
-        } else {
-            query = sql<Posts & { user_name: string, community_name: string, community_icon: string }>`
+    } else {
+      query = sql<
+        Posts & {
+          user_name: string;
+          community_name: string;
+          community_icon: string;
+        }
+      >`
                 SELECT 
                     posts.*, 
                     users.name AS user_name, 
@@ -1811,37 +2141,47 @@ export async function fetchAllUserPosts(cursor: any | null, limit: number, userI
                 GROUP BY  posts.id ,users.name , communities.name, communities.url_icon
                 ORDER BY posts.created_at ASC
             `;
-        }
-        
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { createdAt: posts[posts.length - 1].liked_created_at, id: posts[posts.length - 1].id } : null;
-
-        const finalPosts = cursor ? posts.slice(1) : posts;
-
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch posts data');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: posts[posts.length - 1].liked_created_at,
+          id: posts[posts.length - 1].id,
+        }
+      : null;
+
+    const finalPosts = cursor ? posts.slice(1) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts data");
+  }
 }
 
-export async function fetchAllUserComments(cursor: any | null, limit: number, userId : string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllUserComments(
+  cursor: any | null,
+  limit: number,
+  userId: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Comments>`
+    if (cursor) {
+      query = sql<Comments>`
                 SELECT 
                     comments.*, 
                     users.name AS user_name, 
@@ -1855,8 +2195,8 @@ export async function fetchAllUserComments(cursor: any | null, limit: number, us
                 GROUP BY comments.id, users.name, users.url_icon
                 ORDER BY comments.created_at ASC, comments.id ASC
             `;
-        } else {
-            query = sql<Comments>`
+    } else {
+      query = sql<Comments>`
                 SELECT 
                     comments.*, 
                     users.name AS user_name, 
@@ -1869,37 +2209,53 @@ export async function fetchAllUserComments(cursor: any | null, limit: number, us
                 GROUP BY comments.id, users.name, users.url_icon
                 ORDER BY comments.created_at ASC, comments.id ASC
             `;
-        }
-        
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { createdAt: posts[posts.length - 1].liked_created_at, id: posts[posts.length - 1].id } : null;
-
-        const finalPosts = cursor ? posts.slice(1) : posts;
-
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch posts data');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: posts[posts.length - 1].liked_created_at,
+          id: posts[posts.length - 1].id,
+        }
+      : null;
+
+    const finalPosts = cursor ? posts.slice(1) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts data");
+  }
 }
 
-export async function fetchAllUserLikedPosts(cursor: any | null, limit: number, userId : string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllUserLikedPosts(
+  cursor: any | null,
+  limit: number,
+  userId: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Posts & { user_name: string, community_name: string, community_icon: string }>`
+    if (cursor) {
+      query = sql<
+        Posts & {
+          user_name: string;
+          community_name: string;
+          community_icon: string;
+        }
+      >`
                 SELECT 
                     posts.*, 
                     users.name AS user_name, 
@@ -1917,8 +2273,14 @@ export async function fetchAllUserLikedPosts(cursor: any | null, limit: number, 
                     AND (liked.created_at, liked.id) > (${cursor.createdAt}, ${cursor.id})
                 GROUP BY  posts.id ,users.name , communities.name, communities.url_icon, liked.created_at, liked.id                ORDER BY liked.created_at ASC, liked.id ASC
             `;
-        } else {
-            query = sql<Posts & { user_name: string, community_name: string, community_icon: string }>`
+    } else {
+      query = sql<
+        Posts & {
+          user_name: string;
+          community_name: string;
+          community_icon: string;
+        }
+      >`
                 SELECT 
                     posts.*, 
                     users.name AS user_name, 
@@ -1937,37 +2299,47 @@ export async function fetchAllUserLikedPosts(cursor: any | null, limit: number, 
                 GROUP BY posts.id, users.name, communities.name, communities.url_icon, liked_user.created_at
                 ORDER BY liked_user.created_at ASC
             `;
-        }
-        
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { createdAt: posts[posts.length - 1].liked_created_at, id: posts[posts.length - 1].id } : null;
-
-        const finalPosts = cursor ? posts.slice(1) : posts;
-
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch posts data');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: posts[posts.length - 1].liked_created_at,
+          id: posts[posts.length - 1].id,
+        }
+      : null;
+
+    const finalPosts = cursor ? posts.slice(1) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts data");
+  }
 }
 
-export async function fetchAllUserLikedComments(cursor: any | null, limit: number, userId : string) {
-    
-    try {
-        let query : any;
-        const limits = limit + 1;
+export async function fetchAllUserLikedComments(
+  cursor: any | null,
+  limit: number,
+  userId: string,
+) {
+  try {
+    let query: any;
+    const limits = limit + 1;
 
-        if(cursor){
-            query = sql<Comments & { user_name: string, user_icon: string}>`
+    if (cursor) {
+      query = sql<Comments & { user_name: string; user_icon: string }>`
                 SELECT 
                     comments.*, 
                     users.name AS user_name, 
@@ -1981,8 +2353,8 @@ export async function fetchAllUserLikedComments(cursor: any | null, limit: numbe
                 ORDER BY likes.created_at ASC, likes.id ASC
                 LIMIT ${limits}
             `;
-        } else {
-            query = sql<Comments & { user_name: string, user_icon: string}>`
+    } else {
+      query = sql<Comments & { user_name: string; user_icon: string }>`
                 SELECT 
                     comments.*, 
                     users.name AS user_name, 
@@ -1995,25 +2367,32 @@ export async function fetchAllUserLikedComments(cursor: any | null, limit: numbe
                 ORDER BY liked_comments.created_at ASC, liked_comments.id ASC
                 LIMIT ${limits}
             `;
-        }
-        
-        const data = await query;
-
-        const posts = data.rows;
-
-        const hasNextPage = cursor ? posts.length === limits  : posts.length === limit;
-
-        const nextCursor = hasNextPage ? { createdAt: posts[posts.length - 1].liked_comments_created_at, id: posts[posts.length - 1].id } : null;
-
-        const finalPosts = cursor ? posts.slice(1) : posts;
-
-        return {
-            allPosts: finalPosts || [],
-            nextCursor,
-            hasNextPage,
-        };
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch posts data');
     }
+
+    const data = await query;
+
+    const posts = data.rows;
+
+    const hasNextPage = cursor
+      ? posts.length === limits
+      : posts.length === limit;
+
+    const nextCursor = hasNextPage
+      ? {
+          createdAt: posts[posts.length - 1].liked_comments_created_at,
+          id: posts[posts.length - 1].id,
+        }
+      : null;
+
+    const finalPosts = cursor ? posts.slice(1) : posts;
+
+    return {
+      allPosts: finalPosts || [],
+      nextCursor,
+      hasNextPage,
+    };
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch posts data");
+  }
 }

@@ -7,12 +7,11 @@
  * need to use are documented accordingly near the end.
  */
 import { initTRPC } from "@trpc/server";
-import { NextResponse, type NextRequest } from "next/server";
+import { type NextResponse, type NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-import { User } from "~/lib/definitions";
-var jwt = require('jsonwebtoken');
-var cookie = require('cookie')
+const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 
 /**
  * 1. CONTEXT
@@ -42,7 +41,7 @@ interface CreateContextOptions {
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     headers: opts.headers,
-    req: opts.req, 
+    req: opts.req,
     res: opts.res,
   };
 };
@@ -52,8 +51,11 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (opts: { req: NextRequest; res: NextResponse }) => {
-  // Fetch stuff that depends on the request  
+export const createTRPCContext = (opts: {
+  req: NextRequest;
+  res: NextResponse;
+}) => {
+  // Fetch stuff that depends on the request
   return createInnerTRPCContext({
     headers: opts.req.headers,
     req: opts.req,

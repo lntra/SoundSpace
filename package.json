@@ -46,10 +46,12 @@
     "autoprefixer": "^10.4.14",
     "eslint": "^8.47.0",
     "eslint-config-next": "^14.0.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "jsonwebtoken": "^9.0.2",
     "jsonwebtoken-esm": "^2.0.1",
     "postcss": "^8.4.27",
     "prettier": "^3.0.0",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.5.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6"

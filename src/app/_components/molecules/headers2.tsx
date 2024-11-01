@@ -1,23 +1,23 @@
-import { News } from '../../../lib/definitions';
+import { type News } from "../../../lib/definitions";
 
 interface NewsAsProps {
-    news: News[];
+  news: News[];
 }
 
 const Headers2: React.FC<NewsAsProps> = ({ news }) => {
-    if (!news.length) {
-        return null;
-    }
+  if (!news.length) {
+    return null;
+  }
 
-    const title = news[0]?.title;
-    
-    return <>
-        <div className="px-4 pb-2 self-end font-['Lato'] bg-placeholder">
-            <h1 className="text-[28px] drop-shadow-lg font-bold" >
-                {title}
-            </h1>
-        </div>
+  const title = news[0]?.title;
+
+  return (
+    <>
+      <div className="bg-placeholder self-end px-4 pb-2 font-['Lato']">
+        <h1 className="text-[28px] font-bold drop-shadow-lg">{title}</h1>
+      </div>
     </>
-}
+  );
+};
 
-export default Headers2
+export default Headers2;
