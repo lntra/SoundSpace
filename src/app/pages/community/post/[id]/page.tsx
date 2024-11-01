@@ -10,6 +10,14 @@ import ComentariosPost from "~/app/_components/organisms/comentariosPost";
 import Tag from "~/app/_components/atoms/tag";
 import Trending from "~/app/_components/atoms/trending";
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 import { type NextPage } from "next";
 import { usePathname } from "next/navigation";
 import RejectedPage from "~/app/_components/organisms/rejectedPage";
@@ -269,7 +277,7 @@ const PostPage: NextPage = () => {
               dark
                 ? "bg-gray-900 text-white"
                 : "to-bg-white bg-gradient-to-b from-sp-tp-page text-black"
-            }  grid-rows-auto grid grid-cols-12 pt-5 font-['Lato']`}
+            }  grid-rows-auto grid grid-cols-12 pt-5 lato-font`}
           >
             <div className="col-span-8 col-start-3 row-start-1 row-end-2 flex justify-around pb-5">
               <Link
@@ -331,7 +339,7 @@ const PostPage: NextPage = () => {
                       src={data.postData[0].community_icon || LogoHDLIGHT.src}
                     />
                   </Link>
-                  <div className="ml-3 mr-auto flex flex-col font-['Lato'] text-base font-semibold">
+                  <div className="ml-3 mr-auto flex flex-col lato-font text-base font-semibold">
                     <Link
                       href={`/pages/community/${data.postData[0].community_id}`}
                     >
@@ -363,7 +371,7 @@ const PostPage: NextPage = () => {
                 </div>
                 <div className="">
                   <div>
-                    <div className="py-2 font-['Lato'] text-3xl font-bold">
+                    <div className="py-2 lato-font text-3xl font-bold">
                       {data.postData[0]?.content}
                     </div>
                     <div className="flex flex-wrap">
@@ -377,7 +385,7 @@ const PostPage: NextPage = () => {
                         </div>
                       ))}
                     </div>
-                    <div className="w-full py-2 font-['Lato'] text-xl font-medium">
+                    <div className="w-full py-2 lato-font text-xl font-medium">
                       {data.postData[0]?.content_post}
                     </div>
                   </div>
@@ -469,7 +477,7 @@ const PostPage: NextPage = () => {
                       src={IconCommunity.src}
                     />
                   </Link>
-                  <div className="ml-3 mr-auto flex flex-col font-['Lato'] text-base font-semibold">
+                  <div className="ml-3 mr-auto flex flex-col lato-font text-base font-semibold">
                     <Link
                       href={`/pages/community/${userPosts[0].community_id}`}
                     >
@@ -501,7 +509,7 @@ const PostPage: NextPage = () => {
                 </div>
                 <div className="">
                   <div>
-                    <div className="py-2 font-['Lato'] text-3xl font-bold">
+                    <div className="py-2 lato-font text-3xl font-bold">
                       {userPosts[0].content}
                     </div>
                     <div className="flex flex-wrap">
@@ -515,7 +523,7 @@ const PostPage: NextPage = () => {
                         </div>
                       ))}
                     </div>
-                    <div className="max-w-[700px] py-2 font-['Lato'] text-xl font-medium">
+                    <div className="max-w-[700px] py-2 lato-font text-xl font-medium">
                       {userPosts[0].content_post}
                     </div>
                   </div>

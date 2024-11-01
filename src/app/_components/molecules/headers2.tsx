@@ -13,7 +13,7 @@ const Headers2: React.FC<NewsAsProps> = ({ news }) => {
 
   return (
     <>
-      <div className="bg-placeholder self-end px-4 pb-2 font-['Lato']">
+      <div className="bg-placeholder self-end px-4 pb-2 lato-font">
         <h1 className="text-[28px] font-bold drop-shadow-lg">{title}</h1>
       </div>
     </>

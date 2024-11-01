@@ -5,6 +5,14 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 interface TagsnewsProps {
   time?: Date;
   userId?: UUID;
@@ -46,7 +54,7 @@ const UserPost: React.FC<TagsnewsProps> = ({
           <div
             className={`flex flex-col ${
               textStyle != null ? textStyle : "text-xs font-bold xl:text-xs"
-            } font-['Lato'] text-gray-900`}
+            } lato-font text-gray-900`}
           >
             {text && (
               <span
@@ -73,7 +81,7 @@ const UserPost: React.FC<TagsnewsProps> = ({
         <div
           className={`flex flex-col  ${dark ? "text-white" : "text-black"} ${
             textStyle != null ? textStyle : "text-xs font-bold xl:text-xs"
-          } font-['Lato'] text-gray-900`}
+          } lato-font text-gray-900`}
         >
           {text && (
             <span

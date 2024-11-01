@@ -18,6 +18,14 @@ interface TextAreaComentarioProps {
   dark: boolean;
 }
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 const getCurrentPosts = (): Posts[] => {
   const storedPosts = localStorage.getItem("userPosts");
   return storedPosts ? JSON.parse(storedPosts) : [];
@@ -252,9 +260,9 @@ const TextAreaPost = ({
             dark
               ? "bg-gray-950 text-slate-200 focus:text-white"
               : "bg-[#f5f7ff] text-slate-600 focus:text-black "
-          } h-auto max-h-full min-h-[48px] rounded-[20px] p-3 font-['Lato'] text-base font-bold text-slate-600 text-opacity-75 focus:font-normal focus:text-black`}
+          } h-auto max-h-full min-h-[48px] rounded-[20px] p-3 lato-font text-base font-bold text-slate-600 text-opacity-75 focus:font-normal focus:text-black`}
         >
-          <div className="font-['Lato']  text-base font-bold text-slate-600 text-opacity-75"></div>
+          <div className="lato-font  text-base font-bold text-slate-600 text-opacity-75"></div>
         </textarea>
         {postImage !== "" && (
           <div className="flex w-full justify-center p-3">
@@ -317,9 +325,9 @@ const TextAreaPost = ({
               dark
                 ? "bg-gray-950 text-slate-200 focus:text-white"
                 : "bg-[#f5f7ff] text-slate-600 focus:text-black "
-            }  h-auto max-h-full min-h-[96px] resize-none p-3 font-['Lato'] text-base font-bold text-opacity-75 focus:font-normal`}
+            }  h-auto max-h-full min-h-[96px] resize-none p-3 lato-font text-base font-bold text-opacity-75 focus:font-normal`}
           >
-            <div className="font-['Lato'] text-base font-bold text-opacity-75"></div>
+            <div className="lato-font text-base font-bold text-opacity-75"></div>
           </textarea>
         )}
         {active == "True" && item == 3 && (
@@ -333,7 +341,7 @@ const TextAreaPost = ({
                 dark
                   ? "bg-gray-950 text-slate-200 focus:text-white"
                   : "bg-[#f5f7ff] text-slate-600 focus:text-black "
-              } h-auto max-h-full min-h-[48px] rounded-[20px] p-3 font-['Lato'] text-base font-bold text-opacity-75 focus:font-normal`}
+              } h-auto max-h-full min-h-[48px] rounded-[20px] p-3 lato-font text-base font-bold text-opacity-75 focus:font-normal`}
             />
           </div>
         )}

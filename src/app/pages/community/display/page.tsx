@@ -13,6 +13,14 @@ import useDarkMode from "~/app/hooks/useDarkMode";
 
 dayjs.extend(relativeTime);
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 const CommunityDisplay: NextPage = () => {
   const topics = [undefined, "Rock:🎸", "Jazz:🎷", "Pop:🫧"];
 
@@ -39,7 +47,7 @@ const CommunityDisplay: NextPage = () => {
               dark
                 ? "bg-gray-900 text-white"
                 : "to-bg-white bg-gradient-to-b from-sp-tp-page"
-            } grid-rows-auto grid grid-cols-12 pt-5 font-['Lato']`}
+            } grid-rows-auto grid grid-cols-12 pt-5 lato-font`}
           >
             <div className="col-start-3 col-end-6 row-start-1 row-end-2">
               <h1 className="whitespace-nowrap text-3xl font-bold sm:text-4xl">

@@ -1,7 +1,15 @@
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 const Footer = () => {
   return (
     <>
-      <div className="mt-6 flex h-40 w-[100%] items-center justify-center bg-sp-purple p-20 font-['Lato'] text-xl font-bold">
+      <div className="mt-6 flex h-40 w-[100%] items-center justify-center bg-sp-purple p-20 lato-font text-xl font-bold">
         <h1 className=" text-white">Project by lntra &zwnj; </h1>
         <a href="https://github.com/lntra">
           <svg

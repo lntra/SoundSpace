@@ -11,6 +11,14 @@ import { type Posts } from "~/lib/definitions";
 
 dayjs.extend(relativeTime);
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 interface Blocked {
   userId: UUID;
   userName?: string;
@@ -162,7 +170,7 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
         <div
           className={`text-black ${
             optionalStyle ? "" : ""
-          } grid-rows-auto mb-5 grid grid-cols-12 font-['Lato']`}
+          } grid-rows-auto mb-5 grid grid-cols-12 lato-font`}
         >
           <div
             className={`row-span-1 ${
@@ -196,7 +204,7 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
                 <Link
                   prefetch={true}
                   href={`/pages/community/post/${post_id}`}
-                  className="mr-auto flex w-full flex-col font-['Lato'] text-base font-semibold"
+                  className="mr-auto flex w-full flex-col lato-font text-base font-semibold"
                 >
                   <Link
                     className="w-fit font-bold"
@@ -236,7 +244,7 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
                 href={`/pages/community/post/${post_id}`}
                 className="w-full"
               >
-                <div className="w-fit py-4 font-['Lato'] text-2xl font-bold">
+                <div className="w-fit py-4 lato-font text-2xl font-bold">
                   {title}
                 </div>
               </Link>

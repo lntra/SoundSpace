@@ -5,6 +5,14 @@ import { type UUID } from "crypto";
 import { type Comments } from "~/lib/definitions";
 import { useRouter } from "next/navigation";
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 interface TextAreaComentarioProps {
   //ROOT OR REPLY
   started: boolean;
@@ -125,9 +133,9 @@ const TextAreaComentario = ({
             dark
               ? "bg-gray-950 text-slate-200 focus:text-white"
               : "bg-none text-slate-600 focus:text-black "
-          } h-auto max-h-full min-h-[48px] rounded-[20px] p-3 font-['Lato']  text-base font-bold text-opacity-75 focus:font-normal`}
+          } h-auto max-h-full min-h-[48px] rounded-[20px] p-3 lato-font  text-base font-bold text-opacity-75 focus:font-normal`}
         >
-          <div className="font-['Lato'] text-base font-bold text-slate-600 text-opacity-75"></div>
+          <div className="lato-font text-base font-bold text-slate-600 text-opacity-75"></div>
         </textarea>
         {isFocused && (
           <div className="mt-2 flex w-full justify-end p-4 align-bottom">

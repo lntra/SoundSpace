@@ -82,7 +82,7 @@ const LoginPage = () => {
 
   return (
     <div
-      className={`grid h-[100vh] grid-cols-12 overflow-y-hidden ${lato.className} ${
+      className={`grid h-[100vh] grid-cols-12 overflow-y-hidden lato-font ${
         dark ? "bg-gray-900 text-white" : "bg-white text-black"
       }`}
     >

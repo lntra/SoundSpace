@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <RootLayout>
       <main className="bg-sp-greyish text-white">
-        <div className={`${lato.className} bg-white font-['Lato']`}>
+        <div className={`lato-font bg-white font-['Lato']`}>
           <LoginPage></LoginPage>
         </div>
       </main>

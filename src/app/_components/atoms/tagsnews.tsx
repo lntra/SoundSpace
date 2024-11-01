@@ -14,6 +14,14 @@ interface TagsnewsProps {
   userName: string | undefined;
 }
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 const Tagsnews: React.FC<TagsnewsProps> = ({
   time,
   tag,
@@ -25,7 +33,7 @@ const Tagsnews: React.FC<TagsnewsProps> = ({
     <>
       <div className="mb-2.5 flex items-center justify-start gap-1">
         <div
-          className={`font-['Lato'] text-xs font-bold ${
+          className={`lato-font text-xs font-bold ${
             dark ? "bg-[#a585cc] text-white" : "bg-sp-purple text-white"
           } rounded-full px-2 py-1`}
         >

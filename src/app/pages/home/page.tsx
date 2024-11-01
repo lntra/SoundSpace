@@ -11,6 +11,14 @@ import LogoHD from "~/app/_components/assets/RAIOHD.png";
 import { api } from "~/trpc/react";
 import useDarkMode from "~/app/hooks/useDarkMode";
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 interface Notifications {
   content: string;
   user?: string;
@@ -122,7 +130,7 @@ export default function HomePage() {
         }`}
       >
         <div
-          className={`font-['Lato'] ${
+          className={`lato-font ${
             dark ? "bg-gray-900 text-white" : "bg-sp-greyish text-white"
           }`}
         >

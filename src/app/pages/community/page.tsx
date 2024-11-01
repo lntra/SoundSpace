@@ -23,7 +23,7 @@ const CommunityPage = () => {
   return (
     <>
       <main className="text-white">
-        <div className="font-['Lato']">
+        <div className="lato-font">
           <NavigationBar dark={dark}></NavigationBar>
           <div
             className={`${

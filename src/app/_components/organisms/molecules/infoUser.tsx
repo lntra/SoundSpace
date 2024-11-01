@@ -122,7 +122,7 @@ const InfoUser = ({
 
   return (
     <>
-      <div className="bg-placeholder self-end overflow-x-hidden px-4 py-4 font-['Lato'] drop-shadow-2xl sm:px-8 sm:py-4">
+      <div className="bg-placeholder self-end overflow-x-hidden px-4 py-4 lato-fontadow-2xl sm:px-8 sm:py-4">
         <h1 className="mb-2 line-clamp-1 text-2xl font-bold sm:text-[2rem]">
           {name}
         </h1>

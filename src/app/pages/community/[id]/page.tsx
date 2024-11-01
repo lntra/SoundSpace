@@ -16,6 +16,14 @@ import TextAreaPost from "~/app/_components/atoms/textAreaPost";
 import useSessionData from "~/app/hooks/useSessionData";
 import useDarkMode from "~/app/hooks/useDarkMode";
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 const getFollowedCommunities = (): Communities[] => {
   const storedFollowedCommunities = localStorage.getItem("followedCommunities");
   return storedFollowedCommunities ? JSON.parse(storedFollowedCommunities) : [];
@@ -101,7 +109,7 @@ const CommunityPage: NextPage = () => {
   return (
     <>
       <main className="">
-        <div className="font-['Lato']">
+        <div className="lato-font">
           <NavigationBar dark={dark}></NavigationBar>
           <div
             className={`${

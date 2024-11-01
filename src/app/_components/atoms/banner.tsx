@@ -1,5 +1,12 @@
 import FollowButton from "../molecules/follow";
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
 interface CommunityBannerProps {
   background?: string;
   icon?: string;
@@ -49,7 +56,7 @@ const CommunityBanner: React.FC<CommunityBannerProps> = ({
               <div
                 className={`${
                   dark ? "text-white" : "text-black"
-                }  font-['Lato'] text-2xl font-bold sm:text-[28px]`}
+                }  lato-font text-2xl font-bold sm:text-[28px]`}
               >
                 {name}
               </div>
@@ -72,7 +79,7 @@ const CommunityBanner: React.FC<CommunityBannerProps> = ({
                   dark ? "text-white" : "text-sp-purple"
                 }`}
               >
-                <div className=" w-[100%] self-center whitespace-nowrap font-['Lato'] text-base font-bold">
+                <div className=" w-[100%] self-center whitespace-nowrap lato-font text-base font-bold">
                   {followings ? followings : 0} members
                 </div>
               </div>

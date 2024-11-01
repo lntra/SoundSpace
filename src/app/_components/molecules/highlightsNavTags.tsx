@@ -128,7 +128,7 @@ const HighlightsNav: React.FC<HighlightsNavProps> = ({
                 onChange={handleChange}
                 className={`max-h-12 w-[80%] resize-none overflow-y-hidden outline-none ${
                   dark ? " bg-gray-950" : " bg-white"
-                } min-h-[48px] rounded-[20px] p-3 font-['Lato'] text-base font-bold text-slate-600 text-opacity-75 focus:font-normal focus:text-black`}
+                } min-h-[48px] rounded-[20px] p-3 lato-font text-base font-bold text-slate-600 text-opacity-75 focus:font-normal focus:text-black`}
               ></textarea>
               <div className="flex h-[48px] items-center justify-center">
                 <svg

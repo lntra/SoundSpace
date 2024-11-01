@@ -4,6 +4,13 @@ import BarHeart from "./barHeart";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import { type UUID } from "crypto";
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Link from "next/link";
@@ -110,10 +117,10 @@ const CommentsView: React.FC<CommentsProps> = ({
           </div>
           <div className="col-start-2 col-end-3 row-start-1 row-end-1 flex items-center">
             <div>
-              <span className="font-['Lato'] text-base font-bold">
+              <span className="lato-font text-base font-bold">
                 {userName}
               </span>
-              <span className="font-['Lato'] text-base font-bold">
+              <span className="lato-font text-base font-bold">
                 {" "}
                 - {dayjs(createdAt).fromNow()}
               </span>
@@ -147,7 +154,7 @@ const CommentsView: React.FC<CommentsProps> = ({
             <div
               className={`w-full min-w-full max-w-fit ${
                 dark ? "text-black" : "text-black"
-              } font-['Lato'] text-lg font-normal`}
+              } lato-font text-lg font-normal`}
             >
               {content}
             </div>
@@ -178,10 +185,10 @@ const CommentsView: React.FC<CommentsProps> = ({
             className="col-start-2 col-end-3 row-start-1 row-end-1 flex items-center"
           >
             <div>
-              <span className="font-['Lato'] text-base font-bold">
+              <span className="lato-font text-base font-bold">
                 {userName}
               </span>
-              <span className="font-['Lato'] text-base font-semibold">
+              <span className="lato-font text-base font-semibold">
                 {" "}
                 - {dayjs(createdAt).fromNow()}
               </span>
@@ -213,7 +220,7 @@ const CommentsView: React.FC<CommentsProps> = ({
           )}
           <div className="col-start-2 col-end-3 row-start-2 row-end-2 flex items-center">
             <div
-              className={`w-full min-w-full max-w-fit font-['Lato'] text-lg font-normal`}
+              className={`w-full min-w-full max-w-fit lato-font text-lg font-normal`}
             >
               {content}
             </div>

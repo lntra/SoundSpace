@@ -6,6 +6,14 @@ import LoadingPage from "~/app/_components/organisms/loadingPage";
 import useSessionData from "~/app/hooks/useSessionData";
 import UserCheck from "~/app/_components/atoms/userCheck";
 
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+
 interface User {
   id: UUID;
   email: string;
@@ -48,7 +56,7 @@ const NewsPage = () => {
   const user: User = data.user as unknown as User;
 
   return (
-    <span className="h-screen bg-violet-900 font-['Lato']">
+    <span className="h-screen bg-violet-900 lato-font">
       {id && <UserCheck path={id} user={user} />}
     </span>
   );

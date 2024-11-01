@@ -57,7 +57,7 @@ const CommunityRightGuide: React.FC<CommunityRightGuideProps> = ({
                 {links?.map((link, index) => (
                   <div key={index} className="flex">
                     <div className=" mx-3 my-1 inline-flex min-h-fit w-full items-center justify-center gap-2.5  rounded-3xl bg-sp-purpleBright2 text-white hover:bg-sp-accent hover:text-black">
-                      <button className="p-1 font-['Lato'] text-[16px] font-bold">
+                      <button className="p-1 lato-font6px] font-bold">
                         {link.split(":")[0]}
                       </button>
                     </div>
