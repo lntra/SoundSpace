@@ -195,10 +195,8 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ( {post, userID 
                             
                         </div>
                         <div className="col-start-3 col-end-12 row-start-3 row-end-4 pb-4 row-span-1 col-span-full">
-                                <Avaliacao 
-                                likedState={isLiked} handleLiked={handleLiked} handleUnliked={handleUnliked}
-                                comments={comments} likes={postlikes} dark={dark}>    
-                                </Avaliacao>
+                                <Avaliacao likedState={isLiked} handleLiked={handleLiked} handleUnliked={handleUnliked}
+                                comments={comments} likes={postlikes} dark={dark}/>    
                         </div>
                 </div>   
             </div>
