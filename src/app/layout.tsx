@@ -25,7 +25,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`font-[Lato] ${lato}`}>
+      <body className={`font-[Lato] ${lato.className}`}>
         <TRPCReactProvider cookies={cookieHeader}>{children}</TRPCReactProvider>
       </body>
     </html>
