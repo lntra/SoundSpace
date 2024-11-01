@@ -19,10 +19,8 @@ const InfoUser = ({name, dark, description, isfollow, id, admin, numberLocalFoll
 
     console.log(admin)
 
-    const descriptionSet = localStorage.getItem("description")
-
     const [isOpen, setIsOpen] = useState(false);
-    const [text, setText] = useState(`${descriptionSet !== "null" ? descriptionSet : (description !== null ? description : "Insert bio here")}`); 
+    const [text, setText] = useState(`${description}`); 
     const [edit, setEdit] = useState('');
     const [followerNumber, setFollowerNumber] = useState(0);
     const [followingNumber, setFollowingNumber] = useState(0);

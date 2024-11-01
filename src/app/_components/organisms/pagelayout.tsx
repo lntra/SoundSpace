@@ -212,7 +212,7 @@ const PageLayout = ({user, session} : PageLayoutProps) => {
     const [search, setSearch] = useState(1);
 
     const savedRoute = api.user.getUserSaved.useInfiniteQuery(
-        { userId : user.id as string, cursor: undefined },
+        { userId : user.id as string },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
             enabled: search === 1,
@@ -220,7 +220,7 @@ const PageLayout = ({user, session} : PageLayoutProps) => {
     )
 
     const postsRoute = api.user.getUserPosts.useInfiniteQuery(
-        { userId : user.id as string, cursor: undefined },
+        { userId : user.id as string },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
             enabled: search === 2,
@@ -228,7 +228,7 @@ const PageLayout = ({user, session} : PageLayoutProps) => {
     )
 
     const likedRoute = api.user.getUserLikes.useInfiniteQuery(
-        { userId : user.id as string, cursor: undefined },
+        { userId : user.id as string },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
             enabled: search === 3,
@@ -236,7 +236,7 @@ const PageLayout = ({user, session} : PageLayoutProps) => {
     )
 
     const commentsRoute = api.user.getUserComments.useInfiniteQuery(
-        { userId : user.id as string, cursor: undefined },
+        { userId : user.id as string },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
             enabled: search === 4,
@@ -277,14 +277,13 @@ const PageLayout = ({user, session} : PageLayoutProps) => {
 
                 setCommentsFinal(organizedComments)
             }
-            else if(!isAdmin && data && data.pages[0]?.allPosts){
+            else if (!isAdmin && data && data.pages[0]?.allPosts) {
                 const allPosts = data.pages.flatMap(page => page.allPosts);
-                console.log(allPosts)
-
-                organizedComments = organizeComments(allPosts);
-                console.log(organizeComments)
-
-                setCommentsFinal(organizedComments)
+                console.log(allPosts);
+                
+                organizedComments = organizeComments(allPosts.filter(comment => !comment.parent_comment_id));
+                console.log(organizedComments);
+                setCommentsFinal(organizedComments);
             }
         }
     }, [comments, data, search]);
@@ -455,7 +454,7 @@ const PageLayout = ({user, session} : PageLayoutProps) => {
                     <div className="row-start-2 col-start-6 col-span-9 md:col-start-6 md:col-end-13 lg:col-end-12 sm:row-start-5 min-h-[170px] pt-3 rounded-[20px] ">
                         <div className="text-white bg-black bg-opacity-40 rounded-[20px] w-[100%] h-[100%] grid grid-cols-auto auto-rows-min content-center">
                             <div className="col-span-2 lg:row-start-2">
-                                <InfoUser dark={dark} numberLocalFollowing={followingsNumber}  admin={ownerPage} description={user.description === "null" ? "Insert bio" : user.description} id={user.id} name={user.name} isfollow={isFollowed}></InfoUser>
+                                <InfoUser dark={dark} numberLocalFollowing={followingsNumber} admin={ownerPage} description={user.description === null ? "Insert bio here" : user.description} id={user.id} name={user.name} isfollow={isFollowed}></InfoUser>
                             </div>
                             {ownerPage && (
                                 <div className="flex flex-row align-middle md:align-middle md:justify-center sm:flex md:flex sm:px-4 sm:py-4 sm:justify-start col-end-4 lg:row-start-2 lg:col-start-3 lg:justify-end lg:flex items-center justify-center">
@@ -739,14 +738,27 @@ const PageLayout = ({user, session} : PageLayoutProps) => {
                                 </div>
                             ) 
                         )} 
-                        {search === 4 && data && data.pages[0]?.allPosts.length > 0  && data?.pages.map((page, index) => (
+                        {search === 4 && data && data.pages[0]?.allPosts.length > 0 && data.pages.map((page, index) => (
                             <div key={index} className="h-full col-start-3 col-end-11 lg:col-start-3 lg:col-end-11 mt-4 row-start-2 pt-5">
-                                {commentsFinal.map((comments) => (
-                                    <CommentsItems userComments={[]} outsidePost={true} dark={true} likedComments={likedComments} setLikedCommments={setLikedComments} key={index} comment={comments}></CommentsItems>
-                                ))}
+                                {commentsFinal.length > 0 ? (
+                                    commentsFinal.map((comments) => (
+                                        <CommentsItems 
+                                            userComments={[]} 
+                                            outsidePost={true} 
+                                            dark={true} 
+                                            likedComments={likedComments} 
+                                            setLikedCommments={setLikedComments} 
+                                            key={comments.id}  
+                                            comment={comments} 
+                                        />
+                                    ))
+                                ) : (
+                                    <div className="h-[60vh] col-start-2 col-end-12 mt-4 row-start-2">
+                                        <NoResults dark={true}></NoResults>
+                                    </div>
+                                )}
                             </div>
-                        )) 
-                        }
+                        ))}
                         { search === 4 && isAdmin && comments && likedComments && (
                             commentsFinal.length > 0 
                             ? (

@@ -34,7 +34,6 @@ const CommunityDisplayQuery : NextPage  = () => {
     const name = pathname.split("/").pop() || "";
 
     const {data, isLoading, error} = api.community.getAllCommunitybyQuery.useInfiniteQuery({
-        cursor : undefined,
         search : name,
     })
 

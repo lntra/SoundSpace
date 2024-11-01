@@ -34,7 +34,7 @@ const FollowListSelect = ( {followUser, setIsOpen} : FollowListSelectProps ) =>{
     const [followedUsers, setFollowedUsers] = useState<User[]>(() => getFollowedUsers());
 
     const { data , isLoading, error } = api.user.getUserFollowing.useInfiniteQuery(
-        { userId: followUser as string, cursor: undefined },
+        { userId: followUser as string },
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
         }

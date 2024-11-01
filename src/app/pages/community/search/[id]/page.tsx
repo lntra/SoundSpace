@@ -53,7 +53,6 @@ const CommunityDisplaySearch : NextPage  = () => {
     const [blocked, setBlocked] = useState<Blocked[]>(getCurrentBlocked);
 
     const {data, isLoading, error} = api.posts.getPostsbyQueryInfinite.useInfiniteQuery({
-        cursor : undefined,
         search : name,
     })
 

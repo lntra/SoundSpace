@@ -31,8 +31,7 @@ const CommunityLeftGuide = ( {userId, forYouRoute, setForYou, dark} : CommunityL
     const[localRoute, setLocalRoute] = useState<boolean>(false)
 
     const {data, isLoading, error} = api.user.getUserFollowingCommunities.useInfiniteQuery({
-        cursor : undefined,
-        userId : userId,
+        userId : userId
     })
 
     const [localFollowing, setLocalFollowing] = useState<Communities[]>(() => getFollowedCommunities());

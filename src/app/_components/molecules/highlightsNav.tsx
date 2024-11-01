@@ -42,10 +42,10 @@ const HighlightsNav: React.FC<HighlightsNavProps> = ( {type , dark} ) =>{
 
     const fetchPosts = 
     api.posts.getAllPosts.useInfiniteQuery(
-        { cursor: undefined, tags: undefined, route: search, alternateLimit: 4 } ,
+        { tags: undefined, route: search, alternateLimit: 4 } ,
         {
             getNextPageParam: (lastPage) => lastPage.nextCursor,
-            queryKey: ['postsByIDInfinite', undefined, search]
+            queryKey: ['posts.getAllPosts', { route: search, tags: undefined, alternateLimit: 4 }]
         }
     );
 
