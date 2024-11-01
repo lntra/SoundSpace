@@ -10,8 +10,6 @@ const Headers2: React.FC<NewsAsProps> = ({ news }) => {
     }
 
     const title = news[0]?.title;
-
-    console.log(title)
     
     return <>
         <div className="px-4 pb-2 self-end font-['Lato'] bg-placeholder">

@@ -5,20 +5,22 @@ interface PlaceholderPropsProps {
     children?: React.ReactNode;
     className?: string;
     size?: string;
+    dark?: boolean;
 }
 
-const PlaceholderProps = ({ title, children, className, size, ...props }: PlaceholderPropsProps) => {
+const PlaceholderProps = ({dark, title, children, className, size, ...props }: PlaceholderPropsProps) => {
     
-    let defaultSizeStyle = "min-h-full"
+    let defaultSizeStyle = `min-h-full`
 
     if (size != null){
         defaultSizeStyle = size
     }
     
     return (
-        <div className={`${defaultSizeStyle} p-3 bg-white rounded-[20px] border-[1px] border-sp-purpleBright2 ${className}`} {...props}>
+        <div className={`${defaultSizeStyle} ${dark ? "text-white bg-gray-950" : "text-black bg-white"} p-3 rounded-[20px] border-[1px] border-sp-purpleBright2 ${className}`} {...props}>
             {title && (
-                <div className="flex-col p-3 justify-around align-middle text-gray-900 text-[24px] w-[100%] font-bold font-Lato border-solid border-b-[1px] border-sp-purpleBright2">
+                <div className={`flex-col p-3 justify-around align-middle ${dark ? "text-white bg-gray-950" : "text-black bg-white"}
+ text-[24px] w-[100%] font-bold font-Lato border-solid border-b-[1px] border-sp-purpleBright2`}>
                     {title}
                 </div>
             )}

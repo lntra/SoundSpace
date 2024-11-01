@@ -13,9 +13,9 @@ const TextArticle: React.FC<NewsAsProps> = ({ news }) => {
                 <React.Fragment key={e.id}>
                     {e.pagecontent.split("\n\n").map((paragraph, idx) => (
                         <>
-                            <span className="col-span-2"></span>
+                            <span key={idx} className="col-span-2"></span>
                                 <div key={idx} className="col-span-8 mb-3">
-                                    <p className=" text-gray-900 text-[20px] font-['Lato'] text-left">
+                                    <p className=" text-lg sm:text-[20px] font-['Lato'] text-left">
                                         {paragraph}
                                     </p>
                                 </div>

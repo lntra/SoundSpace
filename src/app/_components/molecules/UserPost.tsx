@@ -10,20 +10,44 @@ interface TagsnewsProps {
     userId? : UUID,
     style? : string,
     textStyle? : string,
-    text? : string
+    text? : string,
+    img? : string,
+    home? : boolean,
+    disableImg? : boolean
+    dark? : boolean
 }
 
-const UserPost: React.FC<TagsnewsProps> = ( { time, userId, style, textStyle, text }) => {
-    return <>
-            <div className={`${style != null ? style : "w-6 h-6 mr-1 rounded-full"} bg-gray-900`}>
-                <img src="" alt="" />
-            </div>
-            <div className={`${textStyle != null ? textStyle : "h-4 text-center font-bold xl:text-xs text-xs"} text-gray-900 font-['Lato']`}>@realtime 
-                {time && (
-                    <span className="text-[12px] text-center"> <span className="text-[9px]">🞄</span> {dayjs(time).fromNow()}</span>)
-                }
-            </div>
-    </> 
-}
+const UserPost: React.FC<TagsnewsProps> = ({ dark, disableImg, home, time, userId, style, textStyle, text, img }) => {
+    return (
+        <div className="flex items-center space-x-2">
+            {!disableImg && (
+                <>
+                    <div className={`${style != null ? style : "w-6 h-6"} ${dark ? "text-white" : "text-black"} rounded-full bg-gray-900 flex-shrink-0`}>
+                        <img src={img} className="w-full h-full rounded-full object-cover" alt="" />
+                    </div>
+                    <div className={`flex flex-col ${textStyle != null ? textStyle : "text-xs xl:text-xs font-bold"} text-gray-900 font-['Lato']`}>
+                        {text && <span className={`${dark ? "text-white" : "text-black"} whitespace-pre-wrap`}>{text}</span>}
+                        {time && (
+                            <span className={`text-[12px] text-start ${home ? (dark ? "text-gray-400" : "text-textNav" ) : ""}`}>
+                            {dayjs(time).fromNow()}
+                            </span>
+                        )}
+                    </div>
+                </>
+            )}
+            {!!disableImg && (
+                <div className={`flex flex-col  ${dark ? "text-white" : "text-black"} ${textStyle != null ? textStyle : "text-xs xl:text-xs font-bold"} text-gray-900 font-['Lato']`}>
+                    {text && <span className={`${dark ? "text-white" : "text-black"} whitespace-pre-wrap`}>{text}</span>}
+                    {time && (
+                        <span className={`text-[14px] text-start ${home ? "text-textNav" : ""}`}>
+                            {dayjs(time).fromNow()}
+                        </span>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};
+
 
 export default UserPost

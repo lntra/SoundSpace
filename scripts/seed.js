@@ -10,7 +10,8 @@ const {
   news,
   liked,
   likedComments,
-  savedMedia
+  savedMedia,
+  following_commmunity
 } = require('./placeholderData.js');
 const bcrypt = require('bcrypt');
 
@@ -42,6 +43,9 @@ const bcrypt = require('bcrypt');
       
       await client.sql`DROP TABLE IF EXISTS following CASCADE;`;
       console.log('Dropped table: following');
+
+      await client.sql`DROP TABLE IF EXISTS following_commmunity CASCADE;`;
+      console.log('Dropped table: following');
       
       await client.sql`DROP TABLE IF EXISTS users CASCADE;`;
       console.log('Dropped table: users');
@@ -58,7 +62,6 @@ const bcrypt = require('bcrypt');
     try {
       await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
 
-      // Create the "users" table if it doesn't exist
       const createTable = await client.sql`
         CREATE TABLE IF NOT EXISTS users (
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -66,7 +69,8 @@ const bcrypt = require('bcrypt');
           email TEXT NOT NULL UNIQUE,
           password TEXT NOT NULL,
           url_icon TEXT,
-          url_banner TEXT
+          url_banner TEXT,
+          description TEXT
         );
       `;
 
@@ -83,13 +87,12 @@ const bcrypt = require('bcrypt');
 
     console.log(`Created "user_configs" table`);
 
-      // Insert data into the "users" table
       const insertedUsers = await Promise.all(
         users.map(async (user) => {
           const hashedPassword = await bcrypt.hash(user.password, 10);
           return client.sql`
-            INSERT INTO users (id, name, email, password, url_icon, url_banner)
-            VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.url_icon}, ${user.url_banner})
+            INSERT INTO users (id, name, email, password, url_icon, url_banner, description)
+            VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.url_icon}, ${user.url_banner}, ${user.description})
             ON CONFLICT (id) DO NOTHING;
           `;
         }),
@@ -205,7 +208,7 @@ const bcrypt = require('bcrypt');
           description TEXT NOT NULL,
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           creator_id UUID NOT NULL,
-          tags TEXT[],
+          tags TEXT[] NOT NULL,
           links TEXT[],
           url_icon TEXT,
           url_banner TEXT,
@@ -241,6 +244,43 @@ const bcrypt = require('bcrypt');
     }
   }
 
+  async function seedFollowingCommunity(client, following_commmunity) {
+    try {
+      await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
+      const createTable = await client.sql`
+        CREATE TABLE IF NOT EXISTS following_commmunity (
+          id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+          user_id UUID NOT NULL,
+          community_id UUID NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (user_id) REFERENCES users(id),
+          FOREIGN KEY (community_id) REFERENCES communities(id)
+        );
+      `;
+
+      console.log(`Created "following" table`);
+
+      const insertedFollowings = await Promise.all(
+        following_commmunity.map((following) => client.sql`
+          INSERT INTO following_commmunity (user_id, community_id)
+          VALUES (${following.user_id}, ${following.community_id})
+          ON CONFLICT (id) DO NOTHING;
+        `)
+      );
+
+      console.log(`Seeded ${insertedFollowings.length} followings to communities`);
+
+      return {
+        createTable,
+        followings: insertedFollowings,
+      };
+    } catch (error) {
+      console.error('Error seeding followings:', error);
+      throw error;
+    }
+  }
+
   async function seedPosts(client, posts) {
     try {
       await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -252,6 +292,8 @@ const bcrypt = require('bcrypt');
           community_id UUID,
           content TEXT NOT NULL,
           content_post TEXT, 
+          tags TEXT[],
+          url_image TEXT,
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (user_id) REFERENCES users(id),
           FOREIGN KEY (community_id) REFERENCES communities(id)
@@ -262,8 +304,8 @@ const bcrypt = require('bcrypt');
 
       const insertedPosts = await Promise.all(
         posts.map((post) => client.sql`
-          INSERT INTO posts (id, user_id, community_id, content, content_post)
-          VALUES (${post.id}, ${post.user_id}, ${post.community_id}, ${post.content}, ${post.content_post})
+          INSERT INTO posts (id, user_id, community_id, content, content_post, tags, url_image)
+          VALUES (${post.id}, ${post.user_id}, ${post.community_id}, ${post.content}, ${post.content_post}, ${post.tags}, ${post.url_image})
           ON CONFLICT (id) DO NOTHING;
         `)
       );
@@ -329,6 +371,7 @@ const bcrypt = require('bcrypt');
           title VARCHAR(255) NOT NULL,
           tag TEXT NOT NULL,
           content TEXT NOT NULL,
+          clicks integer DEFAULT 0,
           pagecontent TEXT NOT NULL,
           url TEXT NOT NULL,
           description TEXT NOT NULL,
@@ -341,8 +384,8 @@ const bcrypt = require('bcrypt');
   
       const insertedNews = await Promise.all(
         news.map((newsItem) => client.sql`
-          INSERT INTO news (user_id, title, tag, content, pagecontent, url, description)
-          VALUES (${newsItem.user_id}, ${newsItem.title}, ${newsItem.tag}, ${newsItem.content}, ${newsItem.pagecontent}, ${newsItem.url}, ${newsItem.description})
+          INSERT INTO news (user_id, title, tag, content, clicks, pagecontent, url, description)
+          VALUES (${newsItem.user_id}, ${newsItem.title}, ${newsItem.tag}, ${newsItem.content}, ${newsItem.clicks} , ${newsItem.pagecontent}, ${newsItem.url}, ${newsItem.description})
           ON CONFLICT (id) DO NOTHING;
         `)
       );
@@ -369,6 +412,7 @@ const bcrypt = require('bcrypt');
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           user_id UUID NOT NULL,
           post_id UUID NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (user_id) REFERENCES users(id),
           FOREIGN KEY (post_id) REFERENCES posts(id)
         );
@@ -405,6 +449,7 @@ const bcrypt = require('bcrypt');
           id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           user_id UUID NOT NULL,
           comment_id UUID NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (user_id) REFERENCES users(id),
           FOREIGN KEY (comment_id) REFERENCES comments(id)
         );
@@ -439,6 +484,7 @@ const bcrypt = require('bcrypt');
           const createTable = await client.sql`
               CREATE TABLE IF NOT EXISTS savedMedia (
                   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+                  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                   user_id UUID NOT NULL,
                   post_id UUID NOT NULL,
                   FOREIGN KEY (user_id) REFERENCES users(id),
@@ -478,6 +524,7 @@ async function main() {
     await seedFollowing(client, followings);
     await seedFollowers(client, followers);
     await seedCommunities(client, communities);
+    await seedFollowingCommunity(client, following_commmunity)
     await seedPosts(client, posts);
     await seedComments(client, comments);
     await seedNews(client, news);

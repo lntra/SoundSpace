@@ -2,6 +2,7 @@ import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
+  darkMode: 'class',
   content: ["./src/**/*.tsx"],
   theme: {
     extend: {
@@ -32,6 +33,7 @@ export default {
         'nm': 'repeat(auto-fit, minmax(0px, 1fr))',
         'pr': '90px repeat(11, minmax(0px, 1fr))',
       }
+      
     },
   },
   plugins: [],

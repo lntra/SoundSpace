@@ -1,8 +1,79 @@
+import { UUID } from "crypto";
+import dayjs from "dayjs";
 import Link from "next/link"
+import { useEffect, useRef, useState } from "react";
 
-const DropdownMin = () => {
+interface DropdownMinProps {
+    link : string;
+}
+
+interface Notifications {
+    content: string;
+    user?: string;
+    postId?: UUID;
+    img?: string;
+    seen?: boolean;
+    created_at?: Date;
+}
+
+const getNotifications = () : Notifications[] => {
+    const storedNotificaitons = localStorage.getItem('userNotifications');
+    return storedNotificaitons ? JSON.parse(storedNotificaitons) : [];
+};
+
+
+const DropdownMin = ({link} : DropdownMinProps) => {
+
+
+    const [notifications, setNotifications] = useState<Notifications[]>(() => getNotifications())
+
+    const [hasUnseenNotifications, setHasUnseenNotifications] = useState(true)
+
+    useEffect(() => {
+        if(!notifications){
+            return;
+        }
+        setHasUnseenNotifications(notifications.some(notification => notification.seen === false));
+    },[notifications])
+
+    const handleClickNotification = () => {
+        setNavNotification(!navNotification)
+        
+        const updatedNotifications = notifications.map(notification => 
+            notification.seen ? notification : { ...notification, seen: true }
+        );
+
+        setNotifications(updatedNotifications);
+
+        localStorage.setItem('userNotifications', JSON.stringify(updatedNotifications));
+    }
+
+    const [navNotification, setNavNotification] = useState(false); 
+    const dropdownStateNotification = useRef<HTMLDivElement>(null);
+
     return <>
-            <span className="grid grid-rows-12 h-[100vh]">
+            <div 
+                ref={dropdownStateNotification}
+                className={
+                    navNotification
+                        ? "fixed hidden lg:block p-3 border-x-[1px] sm:rounded-l-none border-y-[1px] sm:border-y-[1px] px-3 sm:border-r-[1px] rounded-3xl sm:rounded-r-3xl top-[153px] left-[25vw] sm:left-[86px] w-[75%] sm:w-[300px] h-[660px] bg-sp-purple z-[100] duration-300  border-sp-accent border-l-[1px] border-l-sp-accent sm:border-l-[#432d65] overflow-hidden "
+                        : "fixed hidden lg:block top-[153px] left-[-100%] w-[300px] h-[660px] bg-sp-purple z-[200] duration-300"
+                }>
+                <div className="overflow-y-auto h-full pr-2">
+                {notifications && notifications.map((notification, index) => (
+                    <>
+                    <Link key={index} href={`/pages/community/display`} className="flex items-center gap-2 hover:bg-[#432d65] hover:cursor-pointer justify-center border-b-[1px] p-5 border-sp-accent">
+                        <img className="w-8 h-8" src={`${notification.img}`} alt="" />
+                        <div className="flex flex-col">
+                            <p className="text-sm text-white font-medium">{notification.content}</p>
+                            <p className="text-xs font-bold text-gray-300">{dayjs(notification.created_at).fromNow()}</p>
+                        </div>
+                    </Link>
+                    </>
+                ))}
+                </div>
+            </div>
+            <span className="hidden lg:grid grid-rows-12 h-[100vh]">
                     <span className="row-start-1 row-end-2 border-r-[3px] border-solid border-sp-purpleBright2"></span>
                     <span className="w-[100%] flex flex-wrap items-center justify-center row-start-2 row-end-3 
                     border-r-[3px] border-solid border-sp-purpleBright2
@@ -17,7 +88,7 @@ const DropdownMin = () => {
                             </div>
                         </Link>
                     </span>
-                    <span className="w-[100%] flex flex-wrap items-center justify-center row-start-3 row-end-4
+                    <span onClick={handleClickNotification} className="cursor-pointer w-[100%] flex flex-wrap items-center justify-center row-start-3 row-end-4
                     border-r-[3px] border-solid border-sp-purpleBright2
                     hover:border-r-[3px] hover:border-sp-accent
                     ">
@@ -45,7 +116,7 @@ const DropdownMin = () => {
                     border-r-[3px] border-solid border-sp-purpleBright2
                     hover:border-r-[3px] hover:border-sp-accent
                     w-[100%] flex flex-wrap items-center justify-center row-start-5 row-end-6">
-                        <Link className="w-[100%]" href="/pages/home" prefetch={false}>
+                        <Link className="w-[100%]" href={`/pages/profile/${link}/`}>
                             <div className="flex flex-wrap justify-center ">
                                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.9 4C6.3 4 9 11.3 9 11.3C9.6 12.3 10.4 12.1 10.4 12.8C10.4 13.4 9.7 13.6 9 13.7C7.9 13.7 6.9 13.5 5.9 15.3C5.3 16.4 5 20 5 20H18.7C18.7 20 18.4 16.4 17.9 15.3C16.9 13.4 15.9 13.7 14.8 13.6C14.1 13.5 13.4 13.3 13.4 12.7C13.4 12.1 14.2 12.3 14.8 11.2C14.8 11.3 17.5 4 11.9 4V4Z" fill="white"/>
@@ -53,19 +124,7 @@ const DropdownMin = () => {
                             </div>
                         </Link>
                     </span>
-                    <span className="
-                    border-r-[3px] border-solid border-sp-purpleBright2
-                    hover:border-r-[3px] hover:border-sp-accent
-                    w-[100%] flex flex-wrap items-center justify-center row-start-6 row-end-7">
-                        <Link className="w-[100%]" href="/pages/home" prefetch={false}>
-                            <div className="flex flex-wrap justify-center ">
-                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 4C7.6 4 4 7.6 4 12C4 16.4 7.6 20 12 20C16.4 20 20 16.4 20 12C20 7.6 16.4 4 12 4ZM13 17H11V10H13V17ZM13 9H11V7H13V9Z" fill="white"/>
-                                </svg>
-                            </div>
-                        </Link>
-                    </span>
-                    <span className="row-start-7 row-end-12 border-r-[3px] border-solid border-sp-purpleBright2"></span>
+                    <span className="row-start-6 row-end-12 border-r-[3px] border-solid border-sp-purpleBright2"></span>
                     <span className="
                     border-r-[3px] border-solid border-sp-purpleBright2
                     w-[100%] flex flex-wrap items-center justify-center">
@@ -77,7 +136,9 @@ const DropdownMin = () => {
                             </div>
                         </Link>
                     </span>
+                    
             </span>
+           
     </>
 }
 

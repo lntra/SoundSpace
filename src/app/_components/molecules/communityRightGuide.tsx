@@ -1,5 +1,4 @@
 import Button from "../atoms/button"
-import PlaceholderComunidade from "./placeholder"
 import PlaceholderProps from "./placeholderProps"
 
 interface CommunityRightGuideProps{
@@ -7,13 +6,14 @@ interface CommunityRightGuideProps{
    description?: string;
    rules?: string[];
    links?: string[];
+   dark : boolean
 }
 
-const CommunityRightGuide : React.FC<CommunityRightGuideProps> = ( {name, description, rules, links} ) => {
+const CommunityRightGuide : React.FC<CommunityRightGuideProps> = ( {dark, name, description, rules, links} ) => {
     return <>
-       <div className="w-[18vw] text-textNav max-h-[567px]">
-          <PlaceholderProps className="h-full flex flex-col" size="max-h-[567px] min-h-[567px]">
-            <div className="max-h-full text-black border-solid border-b-[1px] border-sp-purpleBright2">
+       <div className="hidden lg:block w-[18vw] text-textNav max-h-[567px]">
+          <PlaceholderProps dark={dark} className="h-full flex flex-col" size="max-h-[567px] min-h-[567px]">
+            <div className={`overflow-y-auto max-h-[194px] ${dark ? "text-white" : "text-black "} border-solid border-b-[1px] border-sp-purpleBright2`}>
                <h1 className="font-bold">{name}</h1>
                <p>
                   {description}
@@ -21,7 +21,7 @@ const CommunityRightGuide : React.FC<CommunityRightGuideProps> = ( {name, descri
             </div>
             <p className="mt-2 text-[14px] font-bold">RULES</p>
             <div className="min-h-min flex-grow overflow-y-auto border-solid border-b-[1px] border-sp-purpleBright2">
-               <div className="">
+               <div className="overflow-y-auto max-h-[194px]">
                   <ol>
                      {rules?.map((rule, index) => 
                         <div className="flex">
@@ -40,8 +40,8 @@ const CommunityRightGuide : React.FC<CommunityRightGuideProps> = ( {name, descri
                   <ol>
                      {links?.map((link, index) =>
                         <div className="flex">
-                           <div className=" w-full min-h-fit my-1  mx-3 bg-sp-purpleBright2  rounded-3xl justify-center items-center gap-2.5 inline-flex">
-                              <button className="text-white text-[16px] p-1 font-bold font-['Lato']">{link.split(":")[0]}</button>
+                           <div className=" w-full min-h-fit my-1 text-white mx-3 bg-sp-purpleBright2 hover:bg-sp-accent hover:text-black  rounded-3xl justify-center items-center gap-2.5 inline-flex">
+                              <button className="text-[16px] p-1 font-bold font-['Lato']">{link.split(":")[0]}</button>
                            </div> 
                         </div>
                      )}

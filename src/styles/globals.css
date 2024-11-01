@@ -59,28 +59,54 @@
 
   .dropdown {
     transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: translateY(-10px); /* Adjust for slide-up effect */
+    transform: translateY(-10px); 
     opacity: 0;
     position: absolute;
-    top: 63%; /* Position below the button */
-    left: 45vw; /* Align with the button */
-    z-index: 10; /* Ensure dropdown is above other elements */
+    top: 63%; 
+    z-index: 10; 
   }
 
   @media (max-width: 1599px) {
     .dropdown {
-        top: 60%; /* Position below the button */
+        top: 60%; 
     }
   }
 
   .dropdown-enter {
-      transform: translateY(0); /* Slide in */
-      opacity: 1; /* Fade in */
+      transform: translateY(0); 
+      opacity: 1;
   }
 
   .dropdown-exit {
-      transform: translateY(-10px); /* Slide out */
-      opacity: 0; /* Fade out */
+      transform: translateY(-10px);
+      opacity: 0; 
   }
 
-  
+  .ring-container {
+    position: relative;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    background-color: #A9FB1A;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.ringring {
+    border: 3px solid #A9FB1A;
+    border-radius: 30px;
+    height: 25px;
+    width: 25px;
+    position: relative;
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite; 
+    opacity: 0.0
+}
+
+@keyframes pulsate {
+    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}

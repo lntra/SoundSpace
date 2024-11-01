@@ -6,8 +6,12 @@ import MainBanner from "./mainbanner"
 
 import { api } from "~/trpc/react";
 
-export function NewsArea() {
-    const { data , isLoading } = api.home.getNews.useQuery({current : 0});
+interface NewsAreaProps {
+    dark : boolean
+}
+
+export function NewsArea( {dark} : NewsAreaProps ) {
+    const { data , isLoading } = api.home.getNewsDefault.useQuery();
     
     if(isLoading){
         return <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -17,12 +21,17 @@ export function NewsArea() {
     
     const headerNews = data?.newsArticles.slice(0, 3);
 
-    const downNews = data?.newsArticles.slice(3);
+    const headerNewsIds = new Set(headerNews?.map(article => article.id));
+
+    console.log(headerNewsIds)
+
+    const downNews = data?.newsArticles.filter(article => !headerNewsIds.has(article.id));
 
     return <>
-        <div className="bg-gradient-to-b from-sp-tp-page to-bg-white">
-            {headerNews && <MainBanner news={headerNews}></MainBanner>}
-            {downNews && <BottomPage news={downNews}></BottomPage>}
+        <div className={`overflow-x-hidden ${dark ? "text-white bg-gray-900" : "text-black bg-white bg-gradient-to-b from-sp-tp-page to-bg-white" }
+`}>
+            {headerNews && <MainBanner dark={dark} news={headerNews}></MainBanner>}
+            {downNews && <BottomPage dark={dark} disabledIds={headerNewsIds}></BottomPage>}
         </div>
     </>
 }

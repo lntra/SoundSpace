@@ -9,10 +9,26 @@ import NewsReadContent from "~/app/_components/organisms/news";
 import Footer from "~/app/_components/atoms/footer";
 import LoadingPage from "~/app/_components/organisms/loadingPage";
 import RejectedPage from "~/app/_components/organisms/rejectedPage";
+import { useEffect, useState } from "react";
+import useDarkMode from "~/app/hooks/useDarkMode";
+
 
 const NewsPage: NextPage = () => {
     const pathname = usePathname();
     const id = pathname.split("/").pop();
+
+    const [dark, setDarkMode] = useState<boolean>(false);
+
+    const { darkMode } = useDarkMode();
+
+    useEffect(() => {
+        if(darkMode){
+            setDarkMode(darkMode)
+
+            console.log(darkMode)
+        }
+        console.log(darkMode)
+    },[darkMode]) 
 
     const { data, isLoading, error } = api.home.getNewsByID.useQuery({
         newsId : id ?? "",
@@ -31,10 +47,10 @@ const NewsPage: NextPage = () => {
     }
 
     return <>
-        <main className="bg-sp-greyish text-white">
-            <div className=" bg-white font-['Lato']">
-                <NavigationBar></NavigationBar>
-                    {data && <NewsReadContent news={data.newsPage}></NewsReadContent>}
+        <main className={`${dark ? "bg-gray-900" : "bg-sp-greyish text-white"} font-[Lato]`}>
+            <div className={`${dark ? "bg-gray-900" : "bg-sp-greyish text-white"}`}>
+                <NavigationBar dark={dark}></NavigationBar>
+                    {data && <NewsReadContent dark={dark} news={data.newsPage}></NewsReadContent>}
                 <Footer></Footer>
             </div>
         </main>

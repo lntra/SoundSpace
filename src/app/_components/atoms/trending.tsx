@@ -1,30 +1,32 @@
 import * as React from "react";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import PlaceholderProps from "../molecules/placeholderProps";
 
-interface TrendingProps{
-    topics : string[];
+interface TrendingProps {
+    topics: string[];
+    position?: string;
+    search: string;
+    setSearch: Dispatch<SetStateAction<string>>;
+    dark : boolean;
 }
 
-const Trending : React.FC<TrendingProps> = ( { topics } ) => {
+const Trending: React.FC<TrendingProps> = ({ topics, position, setSearch, search, dark }) => {
     const [rotationAngle, setRotationAngle] = useState(0);
     const [trending, setTrending] = useState(false);
     const dropdownState = useRef<HTMLButtonElement>(null);
     const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
     const handleClick = () => {
-        if (!trending) {
-            setRotationAngle(-180)
-        } else {
-            setRotationAngle(0)
-        }
+        setRotationAngle(!trending ? -180 : 0);
         setTrending(!trending);
     };
 
     const handleClickOutside = (e: MouseEvent) => {
-        if (dropdownState.current && !dropdownState.current.contains(e.target as Node) 
-            && 
-            dropdownMenuRef.current && !dropdownMenuRef.current.contains(e.target as Node)
+        if (
+            dropdownState.current &&
+            !dropdownState.current.contains(e.target as Node) &&
+            dropdownMenuRef.current &&
+            !dropdownMenuRef.current.contains(e.target as Node)
         ) {
             setRotationAngle(0);
             setTrending(false);
@@ -32,68 +34,78 @@ const Trending : React.FC<TrendingProps> = ( { topics } ) => {
     };
 
     useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, []);
-
-    const handleAnimationEnd = () => {
-        
-    };
 
     const svgStyle = {
         transform: `rotate(${rotationAngle}deg)`,
-        transition: 'transform 0.15s linear',
+        transition: "transform 0.15s linear",
     };
-
-    const [list, setList] = useState("Recent");
 
     topics = topics.sort();
 
-    const visibleTopics = topics.filter(topic => topic !== list);
+    const visibleTopics = topics.filter((topic) => topic !== search);
 
-    const handleClickSelect = (e: any) => {
-        setList(e);
+    const handleClickSelect = (e: string) => {
+        setSearch(e);
         setTrending(false);
         setRotationAngle(0);
+        console.log(e)
+        console.log(search)
     };
 
     return (
-        <>
+        <div className="relative flex">
             <button className="p-2" onClick={handleClick} ref={dropdownState}>
                 <svg
                     style={svgStyle}
-                    onTransitionEnd={handleAnimationEnd}
                     width="21"
                     height="14"
                     viewBox="0 0 21 14"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                 >
-                    <path d="M9.54112 13.3064C10.2006 14.0744 11.2716 14.0744 11.931 13.3064L20.3722 3.47668C21.0316 2.70873 21.0316 1.46159 20.3722 0.693637C19.7127 -0.0743112 18.6417 -0.0743112 17.9823 0.693637L10.7334 9.13492L3.4846 0.69978C2.82513 -0.0681682 1.75416 -0.0681682 1.0947 0.69978C0.435232 1.46773 0.435232 2.71488 1.0947 3.48282L9.53584 13.3126L9.54112 13.3064Z" fill="#6232DA"/>
+                    <path
+                        d="M9.54112 13.3064C10.2006 14.0744 11.2716 14.0744 11.931 13.3064L20.3722 3.47668C21.0316 2.70873 21.0316 1.46159 20.3722 0.693637C19.7127 -0.0743112 18.6417 -0.0743112 17.9823 0.693637L10.7334 9.13492L3.4846 0.69978C2.82513 -0.0681682 1.75416 -0.0681682 1.0947 0.69978C0.435232 1.46773 0.435232 2.71488 1.0947 3.48282L9.53584 13.3126L9.54112 13.3064Z"
+                        fill={`#6232DA`}
+                    />
                 </svg>
             </button>
-            <h1 className="p-2 text-gray-900 text-[28px] font-bold">{list}</h1>
-            <div className={`dropdown ${trending ? 'dropdown-enter' : 'dropdown-exit'}`}>
-            {trending && 
-                <div ref={dropdownMenuRef} className="absolute mt-56 w-64 rounded-full shadow-lg text-black">
-                    <PlaceholderProps>
-                            <ul className=" text-lg">
-                                {visibleTopics.map((e, index) => {
-                                   if(e !== list) {
-                                    return (
-                                        <li key={index} onClick={() => handleClickSelect(e)} className={`px-4 py-2 ${index < visibleTopics.length - 1 ? "border-solid border-b-[1px] border-sp-purpleBright2" : ""} -[20px] hover:bg-gray-200 cursor-pointer`}>{e}</li>
-                                    )
-                                   }
-                                })}
-                            </ul>
+
+            <h1 className={`p-2 text-[28px] font-bold ${dark ? "text-white" : "text-black"}`}>{search}</h1>
+
+            <div className={`dropdown  ${trending ? 'dropdown-enter' : 'dropdown-exit'}`}>
+
+            {trending && (
+                <div
+                    ref={dropdownMenuRef}
+                    className={`absolute z-10 mt-2 left-[-10px] w-64 rounded-full shadow-lg ${dark ? "text-white bg-gray-900" : "text-black bg-white"} text-black`}
+                >
+                    <PlaceholderProps dark={dark}>
+                        <ul className={`text-lg ${dark ? "text-white bg-gray-950" : "text-black bg-white"} rounded-lg`}>
+                            {visibleTopics.map((e, index) => (
+                                <li
+                                    key={index}
+                                    onClick={() => handleClickSelect(e)}
+                                    className={`px-4 py-2 ${
+                                        index < visibleTopics.length - 1
+                                            ? "border-solid border-b-[1px] border-sp-purpleBright2"
+                                            : ""
+                                    } ${dark ? "hover:bg-gray-800" : "hover:bg-gray-200 "} cursor-pointer`}
+                                >
+                                    {e}
+                                </li>
+                            ))}
+                        </ul>
                     </PlaceholderProps>
                 </div>
-            }
+            )}
             </div>
-        </>
+        </div>
     );
-}
+};
 
 export default Trending;
