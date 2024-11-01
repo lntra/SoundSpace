@@ -28,7 +28,7 @@ const CommunityPage = () => {
             <div className="font-['Lato']">
                 <NavigationBar dark={dark}></NavigationBar>
                 <div className={`${dark ? "text-white bg-gradient-to-b bg-gray-900" : "text-black bg-sp-tp-page"}`}>
-                    <CommunityPostsSection dark={dark} type="home"></CommunityPostsSection>
+                    <CommunityPostsSection dark={dark} type="home"/>
                     <Footer></Footer>
                 </div>
             </div>

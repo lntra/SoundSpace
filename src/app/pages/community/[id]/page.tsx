@@ -124,8 +124,7 @@ const CommunityPage : NextPage = () => {
                                 rules={data.communityPage[0]?.rules}
                                 links={data.communityPage[0]?.links}
                                 type="community"
-                            >
-                            </CommunityPostsSection>   
+                            />
                         </>
                     }
                     <Footer></Footer>
