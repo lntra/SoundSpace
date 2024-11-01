@@ -154,11 +154,14 @@ const BarDotsBlack = ( {options, user_id ,post_id, isAuthor, handleClickSelect, 
                     </button>
                     <h2 className="text-xl font-bold mb-4 text-gray-500">Select an User</h2>
                     <div className="overflow-y-auto max-h-[380px]">
-                        <>
-                            {data && data.user.id && (
-                                <FollowListSelect setIsOpen={setIsOpen} followUser={data.user.id as UUID}/>
-                            )}
-                        </>
+                    
+                    {data && (
+                        <FollowListSelect 
+                            setIsOpen={setIsOpen} 
+                            followUser={data.user.id as UUID} 
+                        />
+                    )}
+                    
                     </div>
                     <div className="flex justify-end mt-4">
                     <button

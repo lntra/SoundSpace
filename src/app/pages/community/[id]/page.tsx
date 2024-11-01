@@ -100,8 +100,7 @@ const CommunityPage : NextPage = () => {
                                 isFollowed={isFollowed}
                                 handleFollow={handleFollow}
                                 handleUnfollow={handleUnfollow}
-                            >
-                            </CommunityBanner>
+                            />
                             {!!isFollowed && data.communityPage[0] && userData && (
                                 <div className="grid grid-rows-auto grid-cols-12 w-[100%]">
                                     <div className="col-start-2 col-end-12 sm:col-start-4 sm:col-span-6 xl:col-start-5 xl:col-end-9">

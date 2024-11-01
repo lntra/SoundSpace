@@ -110,7 +110,7 @@ const CommunityDisplayQuery : NextPage  = () => {
                                                             <div className={`${index === 0 ? `` : `pt-5`} col-span-7 row-start-${index + 1} row-end-${index + 2} grid grid-cols-7 grid-rows-2 gap-5 pb-5 border-solid border-b-[1px] border-sp-purpleBright2`}>
                                                             <img className="col-span-3 row-span-2 w-full min-h-[255px] max-h-[255px] h-full object-cover rounded-3xl border-gray-200" src={newsItem.url} alt="Imagem Notícia" />
                                                                 <div className="col-span-4 row-span-2 flex flex-wrap justify-start content-center items-center border-gray-200 p-5">
-                                                                    <Tagsnews dark={dark} time={newsItem.created_at} tag={newsItem.tag} userId={newsItem.user_id} />
+                                                                    <Tagsnews userName={undefined} dark={dark} time={newsItem.created_at} tag={newsItem.tag} userId={newsItem.user_id} />
                                                                     <TextNews dark={dark} title={newsItem.title} content={newsItem.content} />
                                                                 </div>
                                                             </div>
