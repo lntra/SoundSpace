@@ -112,8 +112,7 @@ const CommunityPage : NextPage = () => {
                                             user_name={userData?.user.name as string}
                                             user_icon={userData?.user.url_icon as string}
                                             dark={dark}
-                                        >
-                                        </TextAreaPost>
+                                        />
                                     </div>
                                 </div>
                             )}
