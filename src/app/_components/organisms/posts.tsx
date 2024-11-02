@@ -31,7 +31,7 @@ interface PostsProps {
   dark: boolean;
 }
 
-const getLikedPosts = (): string[] => {
+const getLikedPosts = (): PostsType[] => {
   const storedLikes = localStorage.getItem("likedPosts");
   return storedLikes ? JSON.parse(storedLikes) : [];
 };
@@ -65,7 +65,7 @@ const Posts: React.FC<PostsProps> = ({
   tagsState,
   dark,
 }) => {
-  const [likedPosts, setLikedPosts] = useState<string[]>(() => getLikedPosts());
+  const [likedPosts, setLikedPosts] = useState<PostsType[]>(() => getLikedPosts());
   const [blocked, setBlocked] = useState<Blocked[]>(getCurrentBlocked);
   const [saved, setSaved] = useState<PostsType[]>(getCurrentSaved);
   const [userPosts, setuserPosts] = useState<PostsType[]>(getCurrentPosts());

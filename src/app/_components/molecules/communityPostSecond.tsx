@@ -51,8 +51,8 @@ interface CommunityPostSecondProps {
   likes?: number;
   comments?: number;
   //likestate
-  likedPosts: string[];
-  setLikedPosts: Dispatch<SetStateAction<string[]>>;
+  likedPosts: Posts[];
+  setLikedPosts: Dispatch<SetStateAction<Posts[]>>;
   //blockstate
   blockedUsers: Blocked[];
   setBlockedUsers?: Dispatch<SetStateAction<Blocked[]>>;
@@ -100,7 +100,9 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
   dark,
 }) => {
   //Setting up if the post is already liked
-  const [isLiked, setIsLiked] = useState(likedPosts.includes(post_id));
+  const [isLiked, setIsLiked] = useState(
+    likedPosts.some((post) => post.id === post_id)
+  );  
   //Setting up likes number to be able to change state
   const [postlikes, setLikes] = useState<number>(
     isLiked ? Number(likes) + 1 : Number(likes || 0),
@@ -112,7 +114,7 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
 
   const handleLiked = () => {
     if (!isLiked) {
-      setLikedPosts((e) => [...e, post_id]);
+      setLikedPosts((e) => [...e, post]);
       setLikes((e) => e + 1);
       setIsLiked(true);
     }
@@ -158,7 +160,7 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
 
   const handleUnliked = () => {
     if (isLiked) {
-      setLikedPosts((e) => e.filter((likedPost) => likedPost !== post_id));
+      setLikedPosts((e) => e.filter((likedPost) => likedPost.id !== post_id));
       setLikes((e) => e - 1);
       setIsLiked(false);
     }

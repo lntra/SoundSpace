@@ -44,11 +44,7 @@ interface Blocked {
   userName?: string;
 }
 
-interface Saved {
-  postId: UUID;
-}
-
-const getLikedPosts = (): string[] => {
+const getLikedPosts = (): Posts[] => {
   const storedLikes = localStorage.getItem("likedPosts");
   return storedLikes ? JSON.parse(storedLikes) : [];
 };
@@ -84,7 +80,7 @@ const PostPage: NextPage = () => {
   const [userPosts, setuserPosts] = useState<Posts[]>(getCurrentPosts());
   const [Local, setLocal] = useState<boolean>(false);
 
-  const [likedPosts, setLikedPosts] = useState<string[]>(() => getLikedPosts());
+  const [likedPosts, setLikedPosts] = useState<Posts[]>(() => getLikedPosts());
   const [blocked, setBlocked] = useState<Blocked[]>(getCurrentBlocked);
   const [saved, setSaved] = useState<Posts[]>(getCurrentSaved);
 
@@ -125,9 +121,10 @@ const PostPage: NextPage = () => {
   const { data: UserData } = useSessionData();
 
   useEffect(() => {
-    if (data) {
-      if (data.postData) {
-        setIsLiked(likedPosts.includes(data.postData[0]?.id as string));
+    if (data && !Local) {
+      const postFetch = data.postData?.[0] 
+      if (data.postData && postFetch) {
+        setIsLiked(likedPosts.some((post) => post.id === postFetch.id as UUID ));
       }
     }
   }, [data]);
@@ -151,7 +148,7 @@ const PostPage: NextPage = () => {
   }, [UserData, id]);
 
   useEffect(() => {
-    if (data) {
+    if (id) {
       const localData = JSON.parse(localStorage.getItem("userPosts") || "[]");
       const existe = localData.filter((post: Posts) => post.id === id);
       if (existe) {
@@ -162,7 +159,13 @@ const PostPage: NextPage = () => {
         setLocal(false);
       }
     }
-  }, [data]);
+  }, [id]);
+
+  useEffect(() => {
+    if (!!Local && id) {
+        setIsLiked(likedPosts.some((post) => post.id === id as UUID ));
+    }
+  }, [Local, id]);
 
   useEffect(() => {
     localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
@@ -193,22 +196,47 @@ const PostPage: NextPage = () => {
   }
 
   const handleLiked = () => {
-    if ((data && data.postData && id) || (Local === true && id)) {
-      if (!isLiked) {
-        setLikedPosts((e) => [...e, id]);
+    if (!isLiked && !Local) {
+      if(data && data.postData && id) {
+        const postFetch = data.postData[0]
+        if(postFetch){
+          setLikedPosts((e) => [...e, postFetch as Posts]);
+          setIsLiked(true);    
+          console.log(likedPosts)
+        }     
+      }
+    }
+    if (!isLiked && !!Local) {
+      if(userPosts){
+        console.log(userPosts[0])
+        console.log(userPosts)
+        setLikedPosts((e) => [...e, userPosts[0] as Posts]);
         setIsLiked(true);
+        console.log(likedPosts)
       }
     }
   };
 
   const handleUnliked = () => {
-    if ((data && data.postData && id) || (Local === true && id)) {
-      if (isLiked) {
-        setLikedPosts((e) => e.filter((likedPost) => likedPost !== id));
+    if (!!isLiked && !Local) {
+      console.log(Local)
+      if(data && data.postData && id) {
+        const postFetch = data.postData[0]
+        if(postFetch){
+          setLikedPosts((e) => e.filter((likedPosts) => likedPosts.id !== id));
+          setIsLiked(false);    
+        }     
+      }
+    }
+    if (!!isLiked && !!Local) {
+      console.log(Local)
+      if(userPosts && id){
+        setLikedPosts((e) => e.filter((likedPosts) => likedPosts.id !== id));
         setIsLiked(false);
       }
     }
   };
+
 
   const handleClickSelect = (e: string) => {
     if ((data && data.postData && id) || (Local === true && id)) {

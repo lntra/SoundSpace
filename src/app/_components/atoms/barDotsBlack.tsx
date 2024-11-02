@@ -81,7 +81,7 @@ const BarDotsBlack = ({
 
   return (
     <>
-      <div className="relative flex">
+      <div className="relative z-40 flex">
         <button className="w-full" onClick={handleClick} ref={dropdownState}>
           <svg
             width="17"
@@ -204,7 +204,7 @@ const BarDotsBlack = ({
         </div>
       </div>
       {isOpen && (
-        <div className="fixed inset-0 left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-60 transition-opacity duration-1000 ease-in-out">
+        <div className="fixed inset-0 left-0 top-0 z-10 flex h-screen w-screen items-center justify-center bg-black bg-opacity-60 transition-opacity duration-1000 ease-in-out">
           <div className="relative w-80 rounded-lg bg-white p-6 opacity-100 transition-opacity duration-1000 ease-in-out">
             <button
               onClick={handlePopUp}

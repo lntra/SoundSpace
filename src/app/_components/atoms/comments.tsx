@@ -72,6 +72,8 @@ const CommentsView: React.FC<CommentsProps> = ({
 
   useEffect(() => {
     if (userImage !== "" && userImage !== undefined) {
+      console.log("OI")
+      console.log(userImage)
       if (userImage === "set") {
         const localUser = localStorage.getItem("profileImage");
         if (localUser) {
@@ -111,7 +113,8 @@ const CommentsView: React.FC<CommentsProps> = ({
           <div className="col-start-1 col-end-2 row-start-1 row-end-1 flex w-[40px] items-center">
             <img
               className="h-10 w-10 rounded-full border border-sp-purpleBright2 object-cover"
-              src={`${userImageURL}`}
+              src={`${userImageURL ? userImageURL
+                : "https://placehold.co/40x40/EEE/31343C?font=lato&text=40x40"}`}
               alt="User Avatar"
             />
           </div>
@@ -176,7 +179,8 @@ const CommentsView: React.FC<CommentsProps> = ({
           >
             <img
               className="h-10 w-10 rounded-full border border-sp-purpleBright2 object-cover"
-              src={`${userImageURL}`}
+              src={`${userImageURL ? userImageURL
+                : "https://placehold.co/40x40/EEE/31343C?font=lato&text=40x40"}`}
               alt="User Avatar"
             />
           </Link>
