@@ -38,9 +38,7 @@ const LoginPage = () => {
     console.log(darkMode);
   }, [darkMode]);
 
-  console.log(darkMode);
-
-  const background = {
+    const background = {
     background: "linear-gradient(90deg, #53337B 0%, #96429A 121.92%)",
   };
 

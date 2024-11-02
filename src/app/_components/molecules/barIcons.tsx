@@ -54,13 +54,9 @@ const BarComponents = ({
     }
   }, [value]);
 
-  console.log(bar, transition, value);
-
-  const shouldRender =
+    const shouldRender =
     (!bar && !transition) || (bar && value === "" && !transition);
-  console.log("Should Render:", shouldRender);
-
-  return (
+    return (
     <div
       className={`relative z-50 flex h-[80px] flex-row justify-between px-4 py-4 font-[Lato] ${
         dark ? "bg-gray-950 text-white" : "bg-white text-black"

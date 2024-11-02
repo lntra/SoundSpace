@@ -81,9 +81,7 @@ export default function HomePage() {
 
             const token = result.token;
 
-            console.log(token);
-
-            if (result.token) {
+                        if (result.token) {
               document.cookie = `auth_token=${token}; path=/`;
             }
           } catch (e) {

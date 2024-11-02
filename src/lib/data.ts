@@ -66,9 +66,7 @@ export async function fetchAllNewsTrending(cursor: any | null, limit: number) {
       ? { clicks: news[news.length - 1].clicks, id: news[news.length - 1].id }
       : null;
 
-    console.log(nextCursor, "prox");
-
-    const finalResults = hasNextPage ? news.slice(0, limits) : news;
+        const finalResults = hasNextPage ? news.slice(0, limits) : news;
 
     return {
       allNews: finalResults || [],
@@ -122,9 +120,7 @@ export async function fetchAllNewsRecent(cursor: any | null, limit: number) {
         }
       : null;
 
-    console.log(nextCursor + "prox");
-
-    const finalResults = hasNextPage ? news.slice(0, limit) : news;
+        const finalResults = hasNextPage ? news.slice(0, limit) : news;
 
     return {
       allNews: finalResults || [],
@@ -180,9 +176,7 @@ export async function fetchAllNewsArticles(cursor: any | null, limit: number) {
         }
       : null;
 
-    console.log(nextCursor + "prox");
-
-    const finalResults = hasNextPage ? news.slice(0, limit) : news;
+        const finalResults = hasNextPage ? news.slice(0, limit) : news;
 
     return {
       allNews: finalResults || [],
@@ -238,9 +232,7 @@ export async function fetchAllNewsNews(cursor: any | null, limit: number) {
         }
       : null;
 
-    console.log(nextCursor + "prox");
-
-    const finalResults = hasNextPage ? news.slice(0, limit) : news;
+        const finalResults = hasNextPage ? news.slice(0, limit) : news;
 
     return {
       allNews: finalResults || [],
@@ -308,9 +300,7 @@ export async function fetchNewsByQueryInfinite(
         }
       : null;
 
-    console.log(nextCursor + "prox");
-
-    const finalResults = hasNextPage ? news.slice(0, limit) : news;
+        const finalResults = hasNextPage ? news.slice(0, limit) : news;
 
     return {
       allNews: finalResults || [],

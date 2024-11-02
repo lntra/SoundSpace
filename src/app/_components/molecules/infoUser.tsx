@@ -22,11 +22,7 @@ const InfoUser = ({
   admin,
   numberLocalFollowing,
 }: InfoUserProps) => {
-  console.log(numberLocalFollowing);
-
-  console.log(admin);
-
-  const [isOpen, setIsOpen] = useState(false);
+      const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState(`${description}`);
   const [edit, setEdit] = useState("");
   const [followerNumber, setFollowerNumber] = useState(0);

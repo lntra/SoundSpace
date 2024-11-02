@@ -196,11 +196,7 @@ const Posts: React.FC<PostsProps> = ({
         if (blocked.length > 0) {
           const blockedUserIds = blocked.map((user: Blocked) => user.userId);
 
-          console.log(blockedUserIds);
-
-          console.log(mergedPosts);
-
-          mergedPosts = mergedPosts.filter(
+                              mergedPosts = mergedPosts.filter(
             (post: PostsType) => !blockedUserIds.includes(post.user_id),
           );
 
@@ -274,17 +270,11 @@ const Posts: React.FC<PostsProps> = ({
         if (blocked.length > 0) {
           const blockedUserIds = blocked.map((user: Blocked) => user.userId);
 
-          console.log(blockedUserIds);
-
-          console.log(mergedPosts);
-
-          mergedPosts = mergedPosts.filter(
+                              mergedPosts = mergedPosts.filter(
             (post: PostsType) => !blockedUserIds.includes(post.user_id),
           );
 
-          console.log(mergedPosts);
-
-          setuserPosts(mergedPosts);
+                    setuserPosts(mergedPosts);
         }
 
         if (forYouRoute) {
@@ -292,9 +282,7 @@ const Posts: React.FC<PostsProps> = ({
             (community: Communities) => community.id,
           );
 
-          console.log(followedCommunities);
-
-          mergedPosts = mergedPosts.filter((post: PostsType) =>
+                    mergedPosts = mergedPosts.filter((post: PostsType) =>
             followedCommunities.includes(post.community_id),
           );
 

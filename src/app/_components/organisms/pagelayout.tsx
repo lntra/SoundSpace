@@ -151,9 +151,7 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
     }
   };
 
-  console.log(session);
-
-  const [profileImage, setProfileImage] = useState(
+    const [profileImage, setProfileImage] = useState(
     user.url_icon === "unset"
       ? "https://placehold.co/400x400/DFE0F1/6232DA?font=lato&text=Icon"
       : user.url_icon,
@@ -164,9 +162,7 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
   const [ownerPage, setOwnerPage] = useState(false);
 
   console.log(user.url_icon);
-  console.log(user.url_banner);
-
-  const [dark, setDarkMode] = useState<boolean>(false);
+    const [dark, setDarkMode] = useState<boolean>(false);
 
   const { darkMode } = useDarkMode();
 
@@ -290,14 +286,10 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
       if (!!isAdmin) {
         console.log(comments);
         organizedComments = organizeComments(comments);
-        console.log(organizeComments);
-
-        setCommentsFinal(organizedComments);
+                setCommentsFinal(organizedComments);
       } else if (!isAdmin && data?.pages[0]?.allPosts) {
         const allPosts = data.pages.flatMap((page) => page.allPosts);
-        console.log(allPosts);
-
-        organizedComments = organizeComments(
+                organizedComments = organizeComments(
           allPosts.filter((comment) => !comment.parent_comment_id),
         );
         console.log(organizedComments);

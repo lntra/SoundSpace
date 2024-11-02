@@ -71,13 +71,7 @@ const TextAreaComentario = ({
   };
 
   const handleSubmit = () => {
-    console.log("Message sent:", text);
-
-    console.log(started);
-
-    console.log(parent_id);
-
-    if (setVisible) {
+                if (setVisible) {
       setVisible("visible");
     }
 

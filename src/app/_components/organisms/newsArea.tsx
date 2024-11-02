@@ -25,9 +25,7 @@ export function NewsArea({ dark }: NewsAreaProps) {
 
   const headerNewsIds = new Set(headerNews?.map((article) => article.id));
 
-  console.log(headerNewsIds);
-
-  const downNews = data?.newsArticles.filter(
+    const downNews = data?.newsArticles.filter(
     (article) => !headerNewsIds.has(article.id),
   );
 

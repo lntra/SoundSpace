@@ -152,9 +152,7 @@ const TextAreaPost = ({
 
   const handleSubmit = () => {
     if (text !== "") {
-      console.log("Message sent:", text);
-
-      const newPost: Posts = {
+            const newPost: Posts = {
         //post
         id: crypto.randomUUID() as UUID,
         user_id: user_id,

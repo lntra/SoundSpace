@@ -82,9 +82,7 @@ const Settings: NextPage = () => {
     localStorage.setItem("userSettings", JSON.stringify(formValues));
   }, [formValues]);
 
-  console.log(JSON.stringify(formValues));
-
-  useEffect(() => {
+    useEffect(() => {
     if (session && name) {
       setIsAdmin(session.user.id === name);
     }

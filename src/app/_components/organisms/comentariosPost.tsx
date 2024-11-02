@@ -45,9 +45,7 @@ export const organizeComments = (
     }
   });
 
-  console.log(rootComments);
-
-  return rootComments;
+    return rootComments;
 };
 
 const ComentariosPost = ({

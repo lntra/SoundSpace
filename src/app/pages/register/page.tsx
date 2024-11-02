@@ -39,9 +39,7 @@ const RegisterPage = () => {
     console.log(darkMode);
   }, [darkMode]);
 
-  console.log(darkMode);
-
-  const inputStyles = dark
+    const inputStyles = dark
     ? "pl-[40px] w-[100%] h-20 rounded-[20px] text-2xl font-medium text-white bg-gray-800"
     : "pl-[40px] w-[100%] h-20 rounded-[20px] text-2xl font-medium text-black bg-white";
 

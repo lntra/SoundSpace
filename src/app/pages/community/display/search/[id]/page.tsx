@@ -90,9 +90,7 @@ const CommunityDisplayQuery: NextPage = () => {
     );
   }
 
-  console.log(data.pages);
-
-  return (
+    return (
     <>
       <NavigationBar dark={dark}></NavigationBar>
       <div className={` ${dark ? "bg-gray-900" : "bg-indigo-50"} font-[Lato]`}>

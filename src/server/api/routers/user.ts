@@ -279,9 +279,7 @@ export const userRouter = createTRPCRouter({
       const email = input.email.toLowerCase();
       const password = input.password;
 
-      console.log("Login method called with:", { email, password });
-
-      try {
+            try {
         const data = await fetchUserAccount(email);
         const user = data !== null ? data[0] : null;
 
@@ -349,13 +347,7 @@ export const userRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const { id, name, email, url_icon, url_banner, description } = input;
 
-      console.log("Edit method called with:", {
-        url_icon,
-        url_banner,
-        description,
-      });
-
-      try {
+            try {
         const jwtSecret = process.env.JWT_SECRET;
 
         if (!jwtSecret) {
@@ -394,9 +386,7 @@ export const userRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const { email, password, name } = input;
 
-      console.log("Register method called with:", { email, password, name });
-
-      try {
+            try {
         const existingUser = await fetchUserAccount(email);
         const existingUserName = await fetchUserAccount(email, name);
 
@@ -420,9 +410,7 @@ export const userRouter = createTRPCRouter({
 
         const newUser = await createUserAccount(email, hashedPassword, name);
 
-        console.log("User registered successfully:", newUser);
-
-        if (!newUser) {
+                if (!newUser) {
           throw new Error("Criação de usuário falhou");
         }
 

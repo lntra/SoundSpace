@@ -102,8 +102,6 @@ const PostPage: NextPage = () => {
     console.log(darkMode);
   }, [darkMode]);
 
-  console.log(darkMode);
-
   const [isLiked, setIsLiked] = useState(false);
   const [visible, setVisible] = useState<"visible" | "hidden">("visible");
   const [likedComments, setLikedComments] = useState<string[]>(() =>
@@ -162,7 +160,7 @@ const PostPage: NextPage = () => {
   }, [id]);
 
   useEffect(() => {
-    if (!!Local && id) {
+    if (id) {
         setIsLiked(likedPosts.some((post) => post.id === id as UUID ));
     }
   }, [Local, id]);
@@ -208,7 +206,7 @@ const PostPage: NextPage = () => {
     }
     if (!isLiked && !!Local) {
       if(userPosts){
-        setLikedPosts((e) => [...e, userPosts[0]!]);
+        setLikedPosts((e) => [...e, userPosts[0] as Posts]);
         setIsLiked(true);
       }
     }
@@ -216,7 +214,7 @@ const PostPage: NextPage = () => {
 
   const handleUnliked = () => {
     if (!!isLiked && !Local) {
-      console.log(Local)
+      
       if(data && data.postData && id) {
         const postFetch = data.postData[0]
         if(postFetch){
@@ -226,7 +224,7 @@ const PostPage: NextPage = () => {
       }
     }
     if (!!isLiked && !!Local) {
-      console.log(Local)
+      
       if(userPosts && id){
         setLikedPosts((e) => e.filter((likedPosts) => likedPosts.id !== id));
         setIsLiked(false);

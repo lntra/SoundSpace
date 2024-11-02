@@ -64,9 +64,7 @@ const HighlightsNav: React.FC<HighlightsNavProps> = ({ type, dark }) => {
 
       let mergedPosts = [...userPosts, ...serverPosts];
 
-      console.log(mergedPosts);
-
-      if (mergedPosts.length < 1) {
+            if (mergedPosts.length < 1) {
         setSearch("Hot Topics");
         return;
       }

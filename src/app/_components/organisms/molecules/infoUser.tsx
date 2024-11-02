@@ -22,11 +22,7 @@ const InfoUser = ({
   admin,
   numberLocalFollowing,
 }: InfoUserProps) => {
-  console.log(numberLocalFollowing);
-
-  console.log(admin);
-
-  const descriptionSet = localStorage.getItem("description");
+      const descriptionSet = localStorage.getItem("description");
 
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState(
