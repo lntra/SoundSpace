@@ -96,10 +96,7 @@ const PostPage: NextPage = () => {
   useEffect(() => {
     if (darkMode) {
       setDarkMode(darkMode);
-
-      console.log(darkMode);
     }
-    console.log(darkMode);
   }, [darkMode]);
 
   const [isLiked, setIsLiked] = useState(false);
@@ -119,13 +116,17 @@ const PostPage: NextPage = () => {
   const { data: UserData } = useSessionData();
 
   useEffect(() => {
-    if (data && !Local) {
+    if (data) {
       const postFetch = data.postData?.[0] 
       if (data.postData && postFetch) {
         setIsLiked(likedPosts.some((post) => post.id === postFetch.id));
       }
     }
-  }, [data]);
+  }, [likedPosts, data]);
+
+  useEffect(() => {
+    localStorage.setItem("likedPosts", JSON.stringify(likedPosts));
+  }, [likedPosts]);
 
   useEffect(() => {
     if (id && UserData) {
@@ -133,15 +134,11 @@ const PostPage: NextPage = () => {
       const existe = localData.filter(
         (post: Posts) => post.id === (id as UUID),
       );
-      console.log(existe);
-      console.log(id);
       if (existe) {
         setIsAuthor(
           (existe[0]?.user_id as UUID) === (UserData?.user.id as UUID),
         );
       }
-      console.log(id);
-      console.log(UserData.user.id);
     }
   }, [UserData, id]);
 
@@ -152,7 +149,6 @@ const PostPage: NextPage = () => {
       if (existe) {
         setLocal(true);
         setuserPosts(existe);
-        console.log(existe);
       } else {
         setLocal(false);
       }
@@ -194,24 +190,24 @@ const PostPage: NextPage = () => {
   }
 
   const handleLiked = () => {
-    if (!isLiked && !Local) {
-      if(data && data.postData && id) {
-        const postFetch = data.postData[0]
-        if(postFetch){
-          setLikedPosts((e) => [...e, postFetch as Posts]);
-          setIsLiked(true);    
-          console.log(likedPosts)
-        }     
+
+    if (!isLiked ) {
+      if (data && data.postData && id) {
+        const postToAdds = data.postData[0]; 
+        setLikedPosts((e) => [...e, postToAdds as Posts]);
+        setIsLiked(true);
       }
     }
+  
     if (!isLiked && !!Local) {
-      if(userPosts){
-        setLikedPosts((e) => [...e, userPosts[0] as Posts]);
+      if (userPosts) {
+        const postToAdds = userPosts[0]; 
+        setLikedPosts((e) => [...e, postToAdds as Posts]);
         setIsLiked(true);
       }
     }
   };
-
+  
   const handleUnliked = () => {
     if (!!isLiked && !Local) {
       
@@ -276,7 +272,6 @@ const PostPage: NextPage = () => {
           break;
         }
         case "Share": {
-          console.log(3);
           break;
         }
       }
