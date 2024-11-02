@@ -26,7 +26,7 @@ interface Blocked {
   userName?: string;
 }
 
-const getLikedPosts = (): string[] => {
+const getLikedPosts = (): Posts[] => {
   const storedLikes = localStorage.getItem("likedPosts");
   return storedLikes ? JSON.parse(storedLikes) : [];
 };
@@ -47,7 +47,7 @@ const CommunityDisplaySearch: NextPage = () => {
   const name = pathname.split("/").pop() || "";
 
   const [saved, setSaved] = useState<Posts[]>(getCurrentSaved);
-  const [likedPosts, setLikedPosts] = useState<string[]>(() => getLikedPosts());
+  const [likedPosts, setLikedPosts] = useState<Posts[]>(() => getLikedPosts());
   const [blocked, setBlocked] = useState<Blocked[]>(getCurrentBlocked);
 
   const { data, isLoading, error } =

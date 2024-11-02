@@ -124,7 +124,7 @@ const PostPage: NextPage = () => {
     if (data && !Local) {
       const postFetch = data.postData?.[0] 
       if (data.postData && postFetch) {
-        setIsLiked(likedPosts.some((post) => post.id === postFetch.id as UUID ));
+        setIsLiked(likedPosts.some((post) => post.id === postFetch.id));
       }
     }
   }, [data]);
@@ -208,11 +208,8 @@ const PostPage: NextPage = () => {
     }
     if (!isLiked && !!Local) {
       if(userPosts){
-        console.log(userPosts[0])
-        console.log(userPosts)
-        setLikedPosts((e) => [...e, userPosts[0] as Posts]);
+        setLikedPosts((e) => [...e, userPosts[0]!]);
         setIsLiked(true);
-        console.log(likedPosts)
       }
     }
   };
