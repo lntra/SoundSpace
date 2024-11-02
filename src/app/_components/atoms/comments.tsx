@@ -65,7 +65,7 @@ const CommentsView: React.FC<CommentsProps> = ({
     likedState ? (dark ? "#53337B" : "#53337B") : "",
   );
   const [userImageURL, setUserImageURL] = useState(
-    "https://via.placeholder.com/32x32",
+    "https://placehold.co/40x40/EEE/31343C?font=lato&text=40x40"
   );
 
   const { data, isLoading, error } = useSessionData();
@@ -113,7 +113,7 @@ const CommentsView: React.FC<CommentsProps> = ({
           <div className="col-start-1 col-end-2 row-start-1 row-end-1 flex w-[40px] items-center">
             <img
               className="h-10 w-10 rounded-full border border-sp-purpleBright2 object-cover"
-              src={`${userImageURL ? userImageURL
+              src={`${userImage !== "unset" ? userImageURL
                 : "https://placehold.co/40x40/EEE/31343C?font=lato&text=40x40"}`}
               alt="User Avatar"
             />
@@ -179,7 +179,7 @@ const CommentsView: React.FC<CommentsProps> = ({
           >
             <img
               className="h-10 w-10 rounded-full border border-sp-purpleBright2 object-cover"
-              src={`${userImageURL ? userImageURL
+              src={`${userImage !== "unset" ? userImageURL
                 : "https://placehold.co/40x40/EEE/31343C?font=lato&text=40x40"}`}
               alt="User Avatar"
             />

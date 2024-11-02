@@ -59,7 +59,7 @@ const getFollowedUsers = (): User[] => {
   return storedFollowedUsers ? JSON.parse(storedFollowedUsers) : [];
 };
 
-const getLikedPosts = (): string[] => {
+const getLikedPosts = (): Posts[] => {
   const storedLikes = localStorage.getItem("likedPosts");
   return storedLikes ? JSON.parse(storedLikes) : [];
 };
@@ -95,7 +95,7 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
   const [saved, setSaved] = useState<Posts[]>(getCurrentSaved);
   const [blocked, setBlocked] = useState<Blocked[]>(getCurrentBlocked);
   const [userPosts, setuserPosts] = useState<Posts[]>(getCurrentPosts());
-  const [likedPosts, setLikedPosts] = useState<string[]>(() => getLikedPosts());
+  const [likedPosts, setLikedPosts] = useState<Posts[]>(() => getLikedPosts());
   const [comments, setComments] = useState<Comments[]>(getCurrentComments());
   const [commentsFinal, setCommentsFinal] = useState<CommentsWithReplies[]>([]);
   const [likedComments, setLikedComments] = useState<string[]>(() =>
