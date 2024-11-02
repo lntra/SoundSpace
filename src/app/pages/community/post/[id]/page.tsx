@@ -191,7 +191,7 @@ const PostPage: NextPage = () => {
 
   const handleLiked = () => {
     if (!isLiked) {
-      let postToAdds;
+      let postToAdds : any;
   
       if (data && data.postData && id) {
         postToAdds = data.postData[0]; 
