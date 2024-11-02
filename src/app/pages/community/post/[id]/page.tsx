@@ -190,23 +190,29 @@ const PostPage: NextPage = () => {
   }
 
   const handleLiked = () => {
-
-    if (!isLiked ) {
-      if (data && data.postData && id) {
-        const postToAdds = data.postData[0]; 
-        setLikedPosts((e) => [...e, postToAdds as Posts]);
-        setIsLiked(true);
-      }
-    }
+    if (!isLiked) {
+      let postToAdds;
   
-    if (!isLiked && !!Local) {
-      if (userPosts) {
-        const postToAdds = userPosts[0]; 
-        setLikedPosts((e) => [...e, postToAdds as Posts]);
+      if (data && data.postData && id) {
+        postToAdds = data.postData[0]; 
+      } else if (Local && userPosts) {
+        postToAdds = userPosts[0]; 
+      }
+  
+      if (postToAdds) {
+        setLikedPosts((e) => {
+          if (!e.some(post => post.id === postToAdds.id)) {
+            return [...e, postToAdds as Posts];
+          }
+          return e;
+        });
         setIsLiked(true);
+      } else {
+        console.warn('Attempted to like a post that does not exist:', postToAdds);
       }
     }
   };
+  
   
   const handleUnliked = () => {
     if (!!isLiked && !Local) {
