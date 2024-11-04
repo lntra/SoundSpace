@@ -63,12 +63,9 @@ const CommunityLeftGuide = ({
   }, []);
 
   return (
-      <PlaceholderProps
-        dark={dark}
-        className="flex w-full flex-grow items-center justify-between h-full flex-col z-0"
-      >
-       
-      </PlaceholderProps>
+      <div>
+        teste
+      </div>
   );
 };
 
