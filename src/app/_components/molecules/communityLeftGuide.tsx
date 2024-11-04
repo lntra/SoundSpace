@@ -67,19 +67,7 @@ const CommunityLeftGuide = ({
         dark={dark}
         className="flex w-full flex-grow items-center justify-between h-full flex-col z-0"
       >
-        <div className={`w-full flex-grow overflow-y-auto p-3`}>
-          <NavLeftGuide forYouRoute={forYouRoute} setForYou={setForYou} />
-          <div className="min-h-max w-full">
-            <p
-              className={`mt-2 text-[14px] ${
-                dark ? "text-white " : "text-textNav"
-              } font-bold`}
-            >
-              FOLLOWING
-            </p>
-           
-            </div>
-          </div>
+       
       </PlaceholderProps>
   );
 };
