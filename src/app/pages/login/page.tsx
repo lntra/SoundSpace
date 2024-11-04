@@ -33,9 +33,7 @@ const LoginPage = () => {
     if (darkMode) {
       setDarkMode(darkMode);
 
-      console.log(darkMode);
-    }
-    console.log(darkMode);
+      }
   }, [darkMode]);
 
     const background = {
@@ -46,12 +44,9 @@ const LoginPage = () => {
     e.preventDefault();
 
     if (email && password) {
-      console.log("Submitting login with email:", email);
-      console.log("Submitting login with password:", password);
       try {
         const result = await mutation.mutateAsync({ email, password });
 
-        console.log(result.token);
         const token = result.token;
 
         if (result.token) {

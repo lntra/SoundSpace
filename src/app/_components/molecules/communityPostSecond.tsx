@@ -125,7 +125,6 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
   const handleClickSelect = (e: string) => {
     switch (e) {
       case "Block": {
-        console.log(1);
         if (setBlockedUsers && setRefresh) {
           setBlockedUsers([
             ...blockedUsers,
@@ -136,7 +135,6 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
         break;
       }
       case "Save": {
-        console.log(2);
         if (!savedUsers.some((savedPost: Posts) => savedPost.id === post.id)) {
           setSavedUsers([...savedUsers, post]);
         }

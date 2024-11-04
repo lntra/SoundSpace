@@ -43,9 +43,7 @@ export default function HomePage() {
     if (darkMode) {
       setDarkMode(darkMode);
 
-      console.log(darkMode);
-    }
-    console.log(darkMode);
+      }
   }, [darkMode]);
 
   useEffect(() => {

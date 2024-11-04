@@ -35,9 +35,7 @@ const CommunityDisplayQuery: NextPage = () => {
     if (darkMode) {
       setDarkMode(darkMode);
 
-      console.log(darkMode);
-    }
-    console.log(darkMode);
+      }
   }, [darkMode]);
 
   const {
@@ -62,10 +60,7 @@ const CommunityDisplayQuery: NextPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log("oi" + hasNextPage);
-      console.log(hasNextPage);
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log("oi");
         handleFetchMore();
       }
     };

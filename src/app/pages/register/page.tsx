@@ -34,9 +34,7 @@ const RegisterPage = () => {
     if (darkMode) {
       setDarkMode(darkMode);
 
-      console.log(darkMode);
-    }
-    console.log(darkMode);
+      }
   }, [darkMode]);
 
     const inputStyles = dark
@@ -50,8 +48,6 @@ const RegisterPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if ((email && password && name) !== "") {
-      console.log("Submitting login with email:", email);
-      console.log("Submitting login with password:", password);
       try {
         const result = await mutation.mutateAsync({
           email: email.toLowerCase(),

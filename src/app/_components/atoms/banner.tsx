@@ -56,7 +56,7 @@ const CommunityBanner: React.FC<CommunityBannerProps> = ({
               <div
                 className={`${
                   dark ? "text-white" : "text-black"
-                }  lato-font text-2xl font-bold sm:text-[28px]`}
+                }  lato-font text-2xl font-bold pb-1 sm:text-[28px]`}
               >
                 {name}
               </div>

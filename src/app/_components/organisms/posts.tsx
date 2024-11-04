@@ -177,7 +177,6 @@ const Posts: React.FC<PostsProps> = ({
             setuserPosts(mergedPosts);
             break;
           case "Recent":
-            console.log(mergedPosts);
             mergedPosts.sort(
               (a: PostsType, b: PostsType) =>
                 new Date(b.created_at).getTime() -
@@ -200,7 +199,6 @@ const Posts: React.FC<PostsProps> = ({
             (post: PostsType) => !blockedUserIds.includes(post.user_id),
           );
 
-          console.log(mergedPosts);
         }
       } else {
         let mergedPosts = [...userPosts, ...serverPosts];
@@ -251,7 +249,6 @@ const Posts: React.FC<PostsProps> = ({
             setuserPosts(mergedPosts);
             break;
           case "Recent":
-            console.log(mergedPosts);
             mergedPosts.sort(
               (a: PostsType, b: PostsType) =>
                 new Date(b.created_at).getTime() -
@@ -323,7 +320,6 @@ const Posts: React.FC<PostsProps> = ({
   };
 
   const handleFetchMore = () => {
-    console.log(hasNextPage);
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
@@ -332,7 +328,6 @@ const Posts: React.FC<PostsProps> = ({
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log("oi");
         handleFetchMore();
       }
     };

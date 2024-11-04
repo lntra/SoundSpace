@@ -77,9 +77,7 @@ const BottomPage = ({ disabledIds, dark }: NewsAsProps) => {
     getCurrentQuery();
 
   const handleFetchMore = () => {
-    console.log(hasNextPage);
     if (hasNextPage && !isFetchingNextPage) {
-      console.log("oi2");
       fetchNextPage();
     }
   };
@@ -87,7 +85,6 @@ const BottomPage = ({ disabledIds, dark }: NewsAsProps) => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        console.log("oi");
         handleFetchMore();
       }
     };

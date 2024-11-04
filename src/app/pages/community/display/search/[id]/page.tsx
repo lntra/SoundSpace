@@ -43,10 +43,7 @@ const CommunityDisplayQuery: NextPage = () => {
   useEffect(() => {
     if (darkMode) {
       setDarkMode(darkMode);
-
-      console.log(darkMode);
     }
-    console.log(darkMode);
   }, [darkMode]);
 
   const [followedCommunities, setFollowedCommunities] = useState<Communities[]>(

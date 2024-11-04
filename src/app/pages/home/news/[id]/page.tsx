@@ -24,9 +24,7 @@ const NewsPage: NextPage = () => {
     if (darkMode) {
       setDarkMode(darkMode);
 
-      console.log(darkMode);
-    }
-    console.log(darkMode);
+      }
   }, [darkMode]);
 
   const { data, isLoading, error } = api.home.getNewsByID.useQuery({

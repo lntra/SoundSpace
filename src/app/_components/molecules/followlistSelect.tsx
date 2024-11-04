@@ -21,7 +21,6 @@ interface FollowListSelectProps {
 
 const getFollowedUsers = (): User[] => {
   const storedFollowedUsers = localStorage.getItem("followedUsers");
-  console.log(storedFollowedUsers);
   return storedFollowedUsers ? JSON.parse(storedFollowedUsers) : [];
 };
 
@@ -39,7 +38,6 @@ const FollowListSelect = ({ followUser, setIsOpen }: FollowListSelectProps) => {
 
   useEffect(() => {
     if (followedUsers && data) {
-      console.log(data.pages[0]?.allPosts.length);
       if (data.pages[0]?.allPosts.length > 0) {
         setFollowedUsers([]);
       }

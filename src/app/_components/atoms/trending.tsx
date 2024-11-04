@@ -65,8 +65,6 @@ const Trending: React.FC<TrendingProps> = ({
     setSearch(e);
     setTrending(false);
     setRotationAngle(0);
-    console.log(e);
-    console.log(search);
   };
 
   return (

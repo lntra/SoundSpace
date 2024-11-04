@@ -23,7 +23,7 @@ const InfoUser = ({
   numberLocalFollowing,
 }: InfoUserProps) => {
       const [isOpen, setIsOpen] = useState(false);
-  const [text, setText] = useState(`${description}`);
+  const [text, setText] = useState(`${description === "unset" ? "Insert your bio here" : description }`);
   const [edit, setEdit] = useState("");
   const [followerNumber, setFollowerNumber] = useState(0);
   const [followingNumber, setFollowingNumber] = useState(0);
@@ -37,7 +37,6 @@ const InfoUser = ({
     if (followersData) {
       if (admin) {
         const countNumber = Number(followersData.count);
-        console.log(countNumber + "numero estupido");
         setFollowerNumber(countNumber);
       } else {
         if (followersData.count) {

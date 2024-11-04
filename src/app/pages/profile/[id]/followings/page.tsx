@@ -24,7 +24,6 @@ interface User {
 
 const getFollowedUsers = (): User[] => {
   const storedFollowedUsers = localStorage.getItem("followedUsers");
-  console.log(storedFollowedUsers);
   return storedFollowedUsers ? JSON.parse(storedFollowedUsers) : [];
 };
 
@@ -57,9 +56,7 @@ const Follows = () => {
     if (darkMode) {
       setDarkMode(darkMode);
 
-      console.log(darkMode);
-    }
-    console.log(darkMode);
+      }
   }, [darkMode]);
 
   useEffect(() => {

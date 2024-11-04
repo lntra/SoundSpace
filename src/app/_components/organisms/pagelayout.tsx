@@ -135,7 +135,6 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
   const isAdmin = session.id === user.id;
 
   const handleFollow = () => {
-    console.log(followedUsers);
     if (!isFollowed) {
       setFollowedUsers([...followedUsers, user]);
       setIsFollowed(true);
@@ -161,28 +160,20 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
   );
   const [ownerPage, setOwnerPage] = useState(false);
 
-  console.log(user.url_icon);
-    const [dark, setDarkMode] = useState<boolean>(false);
+  const [dark, setDarkMode] = useState<boolean>(false);
 
   const { darkMode } = useDarkMode();
 
   useEffect(() => {
     if (darkMode) {
       setDarkMode(darkMode);
-
-      console.log(darkMode);
     }
-    console.log(darkMode);
   }, [darkMode]);
 
   useEffect(() => {
     if (user.id && session.id) {
-      console.log("yay");
-      console.log(user.description);
       if (!isAdmin) {
         {
-          console.log("rança");
-          console.log(user.url_icon);
           setProfileImage(user.url_icon);
           setBannerImage(user.url_banner);
           setOwnerPage(false);
@@ -190,10 +181,6 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
       } else if (isAdmin) {
         const itemIcon = localStorage.getItem("profileImage");
         const itemBanner = localStorage.getItem("bannerImage");
-        console.log(itemIcon === null);
-        console.log(profileImage);
-        console.log(profileImage === "unset");
-        console.log("rança");
         if (profileImage === "unset" && itemIcon !== null) {
           setProfileImage(itemIcon);
         }
@@ -281,10 +268,8 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
 
   useEffect(() => {
     if (comments) {
-      console.log(isAdmin);
       let organizedComments = [];
       if (!!isAdmin) {
-        console.log(comments);
         organizedComments = organizeComments(comments);
                 setCommentsFinal(organizedComments);
       } else if (!isAdmin && data?.pages[0]?.allPosts) {
@@ -292,7 +277,6 @@ const PageLayout = ({ user, session }: PageLayoutProps) => {
                 organizedComments = organizeComments(
           allPosts.filter((comment) => !comment.parent_comment_id),
         );
-        console.log(organizedComments);
         setCommentsFinal(organizedComments);
       }
     }

@@ -72,8 +72,6 @@ const CommentsView: React.FC<CommentsProps> = ({
 
   useEffect(() => {
     if (userImage !== "" && userImage !== undefined) {
-      console.log("OI")
-      console.log(userImage)
       if (userImage === "set") {
         const localUser = localStorage.getItem("profileImage");
         if (localUser) {

@@ -47,7 +47,6 @@ const InfoUser = ({
     if (followersData) {
       if (admin) {
         const countNumber = Number(followersData.count);
-        console.log(countNumber + "numero estupido");
         setFollowerNumber(countNumber);
       } else {
         if (followersData.count) {

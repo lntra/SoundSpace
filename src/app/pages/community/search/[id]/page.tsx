@@ -64,10 +64,7 @@ const CommunityDisplaySearch: NextPage = () => {
   useEffect(() => {
     if (darkMode) {
       setDarkMode(darkMode);
-
-      console.log(darkMode);
     }
-    console.log(darkMode);
   }, [darkMode]);
 
   if (isLoading) {
