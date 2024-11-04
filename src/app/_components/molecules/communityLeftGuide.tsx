@@ -79,7 +79,7 @@ const CommunityLeftGuide = ({
             </p>
             {!localRoute && (
               <>
-                {localFollowing.length > 0 ? (
+               
                   <>
                     <div className="min-h-max w-full flex-col gap-4 font-bold text-textNav">
                       {data?.pages.map((page, index) => (
@@ -122,110 +122,8 @@ const CommunityLeftGuide = ({
                         </div>
                       ))}
                     </div>
+                    
                   </>
-                ) : (
-                  <div className="flex flex-col gap-1 p-3">
-                    <h1 className="self-center font-bold">Recommendations</h1>
-                    <Link
-                      href={`/pages/community/97f4d418-eb4a-425d-97d0-83f6acbc435a`}
-                    >
-                      <div
-                        className={`${
-                          dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                        } flex items-center border-b-[1px] border-sp-purpleBright2 py-2 align-middle`}
-                      >
-                        <UserPost
-                          dark={dark}
-                          img="https://fastly.picsum.photos/id/446/3072/1728.jpg?hmac=62VykY0FNeXxvrUhPIGiucHvYI1qd_VzMTmk98U-D5Y"
-                          textStyle="text-base"
-                          style="w-8 h-8 mr-2 rounded-full"
-                          text="The Band, from Outer Space"
-                          userId="97f4d418-eb4a-425d-97d0-83f6acbc435a"
-                        />
-                        <div className="hidden xl:block">
-                          <Highlights text="HOT" />
-                        </div>
-                      </div>
-                    </Link>
-                    <Link
-                      href={`/pages/community/${"3edb55a2-a037-48a7-81af-d19c99b00dc1"}`}
-                    >
-                      <div
-                        className={` ${
-                          dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                        } flex items-center border-b-[1px] border-sp-purpleBright2 py-2 align-middle`}
-                      >
-                        <UserPost
-                          dark={dark}
-                          img={`https://fastly.picsum.photos/id/548/5000/3333.jpg?hmac=BdycqoDMwkZoSovCL9E2F8MAyqdhkHVj8yYkHvkkkVM`}
-                          textStyle="text-base"
-                          style="w-8 h-8 mr-2 rounded-full"
-                          text="SunDown"
-                          userId={"3edb55a2-a037-48a7-81af-d19c99b00dc1"}
-                        ></UserPost>
-                        <div className="hidden xl:block">
-                          <Highlights text="HOT"></Highlights>
-                        </div>
-                      </div>
-                    </Link>
-                    <Link
-                      href={`/pages/community/${"0a8d5e32-1e4f-4a9a-9f5d-1c1234567890"}`}
-                    >
-                      <div
-                        className={` ${
-                          dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                        } flex items-center border-b-[1px] border-sp-purpleBright2 py-2 align-middle`}
-                      >
-                        <UserPost
-                          dark={dark}
-                          img={`https://fastly.picsum.photos/id/672/5000/3333.jpg?hmac=u6anJjrup8TAGrJxZSY3u-9OmftJ1Dn4P_6vPqF7a7U`}
-                          textStyle="text-base"
-                          style="w-8 h-8 mr-2 rounded-full"
-                          text="Indie Harmony"
-                          userId={"0a8d5e32-1e4f-4a9a-9f5d-1c1234567890"}
-                        ></UserPost>
-                      </div>
-                    </Link>
-                    <Link
-                      href={`/pages/community/${"1b9e3c45-2d5a-4e6b-bc5a-2d1234567890"}`}
-                    >
-                      <div
-                        className={` ${
-                          dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                        } flex items-center border-b-[1px] border-sp-purpleBright2 py-2 align-middle`}
-                      >
-                        <UserPost
-                          dark={dark}
-                          img={`https://fastly.picsum.photos/id/815/2074/1383.jpg?hmac=z5kVymrNUTKCDBhKG3oays-sesL-_APZSoaWQJInU4s`}
-                          textStyle="text-base"
-                          style="w-8 h-8 mr-2 rounded-full"
-                          text="Pop Vibes"
-                          userId={"1b9e3c45-2d5a-4e6b-bc5a-2d1234567890"}
-                        ></UserPost>
-                      </div>
-                    </Link>
-                    <Link
-                      href={`/pages/community/${"2c0f4e56-3e7b-4f8b-cd6a-3e1234567890"}`}
-                    >
-                      <div
-                        className={` ${
-                          dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                        } flex items-center py-2 align-middle`}
-                      >
-                        <UserPost
-                          dark={dark}
-                          img={`https://fastly.picsum.photos/id/755/5000/3800.jpg?hmac=kHxjzz3TQ4ZQLtUF3fNgIiBMwHc04Kf9xg9jfYsabxM`}
-                          textStyle="text-base"
-                          style="w-8 h-8 mr-2 rounded-full"
-                          text="Jazz Lounge"
-                          userId={"2c0f4e56-3e7b-4f8b-cd6a-3e1234567890"}
-                        ></UserPost>
-                      </div>
-                    </Link>
-                  </div>
-                )}
-              </>
-            )}
             {!!localRoute && (
               <>
                 <div className="min-h-max w-full flex-col gap-4 font-bold text-textNav">
