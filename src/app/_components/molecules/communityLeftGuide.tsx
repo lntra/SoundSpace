@@ -78,8 +78,6 @@ const CommunityLeftGuide = ({
               FOLLOWING
             </p>
             {!localRoute && (
-              <>
-               
                   <>
                     <div className="min-h-max w-full flex-col gap-4 font-bold text-textNav">
                       {data?.pages.map((page, index) => (
@@ -122,8 +120,9 @@ const CommunityLeftGuide = ({
                         </div>
                       ))}
                     </div>
-                    
+
                   </>
+            )}
             {!!localRoute && (
               <>
                 <div className="min-h-max w-full flex-col gap-4 font-bold text-textNav">
@@ -158,8 +157,6 @@ const CommunityLeftGuide = ({
                 </div>
               </>
             )}
-          </div>
-        </div>
       </PlaceholderProps>
   );
 };
