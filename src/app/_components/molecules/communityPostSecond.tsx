@@ -179,20 +179,18 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
               optionalStyle ? "" : `${dark ? "bg-gray-900" : "bg-none"}`
             } grid-rows-auto col-span-full grid grid-cols-12`}
           >
-            <Link
-              prefetch={true}
-              href={`/pages/community/post/${post_id}`}
+            <div
               className={`col-start-2 col-end-12 row-start-2 row-end-4 py-5 ${
                 dark ? "bg-gray-950 text-white" : "bg-white text-black"
               } rounded-[20px] border border-sp-purpleBright2`}
-            ></Link>
+            ></div>
             <div
               className={`col-start-3 col-end-11 row-start-2 row-end-3 ${
                 dark ? "text-white" : "text-black"
               }`}
             >
               <div className="mt-4 flex items-center justify-between">
-                <Link prefetch={true} href={`/pages/community/${community_id}`}>
+                <Link href={`/pages/community/${community_id}`}>
                   <img
                     loading="lazy"
                     className="mr-3 h-10 w-10 rounded-full object-cover"
@@ -203,14 +201,11 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
                     }`}
                   />
                 </Link>
-                <Link
-                  prefetch={true}
-                  href={`/pages/community/post/${post_id}`}
+                <div
                   className="mr-auto flex w-full flex-col lato-font text-base font-semibold"
                 >
                   <Link
                     className="w-fit font-bold"
-                    prefetch={true}
                     href={`/pages/community/${community_id}`}
                   >
                     @{community_name}{" "}
@@ -219,12 +214,11 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
                   </Link>
                   <Link
                     className="w-fit"
-                    prefetch={true}
                     href={`/pages/profile/${user_id}`}
                   >
                     by {user_name}
                   </Link>
-                </Link>
+                </div>
                 <div className="origin-center self-center justify-self-center text-center">
                   <BarDotsBlack
                     handleClickSelect={handleClickSelect}
@@ -242,7 +236,6 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
                 </div>
               </div>
               <Link
-                prefetch={true}
                 href={`/pages/community/post/${post_id}`}
                 className="w-full"
               >
@@ -265,7 +258,6 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
               {url_image ? (
                 <div className="w-[100%] pb-4 pt-4">
                   <Link
-                    prefetch={true}
                     href={`/pages/community/post/${post_id}`}
                     className="mb-4 mt-4 w-[100%]"
                   >
@@ -291,7 +283,6 @@ const CommunityPostSecond: React.FC<CommunityPostSecondProps> = ({
                 </div>
               ) : (
                 <Link
-                  prefetch={true}
                   href={`/pages/community/post/${post_id}`}
                   className="mb-4 mt-4 w-[100%]"
                 >

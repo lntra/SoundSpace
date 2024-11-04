@@ -43,7 +43,7 @@ const CommunityPostsSection: React.FC<CommunityPostsSectionProps> = ({
   return (
     <>
       <div className="grid-rows-auto grid w-[100%] grid-cols-10">
-        <div className="grid-rows-auto z-20 col-start-3 col-end-9 row-start-1 row-end-1 grid grid-cols-12">
+        <div className="grid-rows-auto col-start-3 col-end-9 row-start-1 row-end-1 grid grid-cols-12">
           <div className="col-start-1 col-end-12 md:col-start-1 md:col-end-12 lg:col-start-2 lg:col-end-12">
             <DestaquesCommunity
               dark={dark}
