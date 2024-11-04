@@ -157,6 +157,8 @@ const CommunityLeftGuide = ({
                 </div>
               </>
             )}
+            </div>
+          </div>
       </PlaceholderProps>
   );
 };
