@@ -21,9 +21,15 @@ const CommunityPage = () => {
     <>
 
             <CommunityPostsSection dark={dark} type="home" />
-
     </>
   );
 };
 
 export default CommunityPage;
+
+/*
+      <main className="text-white">
+        <div className="lato-font">
+            <CommunityPostsSection dark={dark} type="home" />
+          </div>
+      </main> */
