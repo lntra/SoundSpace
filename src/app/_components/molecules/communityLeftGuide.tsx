@@ -64,14 +64,10 @@ const CommunityLeftGuide = ({
 
   return (
     <div className="min-h-[567px] w-full lg:w-[18vw]">
-      <PlaceholderProps
-        dark={dark}
-        className="flex h-full flex-col z-0"
-        size="max-h-[567px] min-h-[567px]"
-      >
-        <div className={`w-full flex-grow overflow-y-auto p-3`}>
+    
+        <div className={`w-full overflow-y-auto p-3`}>
           <NavLeftGuide forYouRoute={forYouRoute} setForYou={setForYou} />
-          <div className="min-h-max w-full flex-grow">
+          <div className="min-h-max w-full">
             <p
               className={`mt-2 text-[14px] ${
                 dark ? "text-white " : "text-textNav"
@@ -264,7 +260,6 @@ const CommunityLeftGuide = ({
             )}
           </div>
         </div>
-      </PlaceholderProps>
     </div>
   );
 };
