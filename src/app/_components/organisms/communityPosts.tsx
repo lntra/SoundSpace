@@ -55,14 +55,7 @@ const CommunityPostsSection: React.FC<CommunityPostsSectionProps> = ({
         </div>
         <div className="col-start-3 row-start-1 row-end-1"></div>
         <div className="col-span-10 row-start-2 row-end-2 grid grid-cols-10 grid-rows-1">
-          <div className="sticky top-[20%] col-start-1 col-end-4 mb-3 hidden justify-center self-start lg:col-start-1 lg:col-end-3 lg:flex">
-            <CommunityLeftGuide
-              dark={dark}
-              forYouRoute={forYouRoute}
-              setForYou={setForYouRoute}
-              userId={data?.user.id as UUID}
-            ></CommunityLeftGuide>
-          </div>
+         
           <div className="col-start-1 col-end-12 sm:col-start-1 sm:col-end-12 md:col-start-2 md:col-end-10 lg:col-start-3 lg:col-end-9">
             <Posts
               dark={dark}
@@ -74,7 +67,26 @@ const CommunityPostsSection: React.FC<CommunityPostsSectionProps> = ({
               tagsState={handleFilterTagClick}
             ></Posts>
           </div>
-          
+          <div className="sticky top-[20%] col-start-9 col-end-11 mb-3 flex justify-center self-start">
+            {type == "home" ? (
+              <div className="hidden max-h-[567px] min-h-[567px] w-[18vw] text-textNav lg:block">
+                <HighlightsNavTags
+                  dark={dark}
+                  tags={tags}
+                  type={type}
+                  tagsState={handleFilterTagClick}
+                />
+              </div>
+            ) : (
+              <CommunityRightGuide
+                name={name}
+                description={description}
+                rules={rules}
+                links={links}
+                dark={dark}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>
