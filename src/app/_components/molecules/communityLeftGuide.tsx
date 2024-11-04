@@ -1,14 +1,7 @@
 import { type UUID } from "crypto";
-import NavLeftGuide from "../atoms/navLeftGuide";
-import PlaceholderProps from "./placeholderProps";
-import UserPost from "./UserPost";
 import { api } from "~/trpc/react";
-import Image from "next/image";
-import placeholder from "../../_components/assets/placeholder.png";
 import { type Communities, type Following_commmunity } from "~/lib/definitions";
-import Link from "next/link";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
-import Highlights from "../atoms/highlight";
 
 interface CommunityLeftGuideProps {
   userId: UUID;
@@ -35,32 +28,19 @@ const CommunityLeftGuide = ({
       userId: userId,
     });
 
-  const [reload, setReload] = useState(false);
-
-  const [localFollowing, setLocalFollowing] = useState<Communities[]>(() =>
-    getFollowedCommunities(),
-  );
+  const [localFollowing, setLocalFollowing] = useState<Communities[]>(getFollowedCommunities);
 
   useEffect(() => {
-    if (!data || !localFollowing) {
-      return;
-    }
-
     if (localFollowing.length > 0) {
       setLocalRoute(true);
-    } else {
-      setReload(!reload);
-    }
-  }, [data, localFollowing, reload]);
+    } 
+  }, [localFollowing]);
 
   useEffect(() => {
-    const storedFollowedCommunities = localStorage.getItem(
-      "followedCommunities",
-    );
-    setLocalFollowing(
-      storedFollowedCommunities ? JSON.parse(storedFollowedCommunities) : [],
-    );
-  }, []);
+    if (localFollowing) {
+      localStorage.setItem("followedUsers", JSON.stringify(localFollowing));
+    }
+  }, [localFollowing]);
 
   return (
       <div>
