@@ -77,52 +77,6 @@ const CommunityLeftGuide = ({
             >
               FOLLOWING
             </p>
-            {!localRoute && (
-                  <>
-                    <div className="min-h-max w-full flex-col gap-4 font-bold text-textNav">
-                      {data?.pages.map((page, index) => (
-                        <div
-                          key={index}
-                          className={`${
-                            dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                          } `}
-                        >
-                          {page.allCommunities.map(
-                            (community: Following_commmunity) => (
-                              <Link
-                              key={community.community_id}  
-                              href={`/pages/community/${community.community_id}`}
-                                className={`${
-                                  dark
-                                    ? "hover:bg-gray-800"
-                                    : "hover:bg-gray-200"
-                                }  flex items-center border-b-[1px] border-solid border-sp-purpleBright2 p-2`}
-                              >
-                                <div className="mr-2 h-[36px] min-h-[36px] w-[36px] min-w-[36px] overflow-hidden rounded-full border-[1px] border-solid border-sp-purpleBright2">
-                                  <Image
-                                    src={`${
-                                      community.community_icon || placeholder
-                                    }`}
-                                    alt="Community Image Placeholder"
-                                    width={36}
-                                    height={36}
-                                    className="h-full w-full object-cover"
-                                  />
-                                </div>
-                                <div>
-                                  <p className="font-normal">
-                                    {community.community_name}
-                                  </p>
-                                </div>
-                              </Link>
-                            ),
-                          )}
-                        </div>
-                      ))}
-                    </div>
-
-                  </>
-            )}
            
             </div>
           </div>
