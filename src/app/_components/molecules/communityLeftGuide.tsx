@@ -63,10 +63,10 @@ const CommunityLeftGuide = ({
   }, []);
 
   return (
-    <div className="h-[vh] min-h-[567px] w-full lg:w-[18vw]">
+    <div className="min-h-[567px] w-full lg:w-[18vw]">
       <PlaceholderProps
         dark={dark}
-        className="flex h-full flex-col"
+        className="flex h-full flex-col z-0"
         size="max-h-[567px] min-h-[567px]"
       >
         <div className={`w-full flex-grow overflow-y-auto p-3`}>
