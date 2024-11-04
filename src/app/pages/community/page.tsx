@@ -19,21 +19,9 @@ const CommunityPage = () => {
 
   return (
     <>
-      <main className="text-white">
-        <div className="lato-font">
-          <NavigationBar dark={dark}></NavigationBar>
-          <div
-            className={`${
-              dark
-                ? "bg-gray-900 bg-gradient-to-b text-white"
-                : "bg-sp-tp-page text-black"
-            }`}
-          >
+
             <CommunityPostsSection dark={dark} type="home" />
-            <Footer></Footer>
-          </div>
-        </div>
-      </main>
+
     </>
   );
 };
