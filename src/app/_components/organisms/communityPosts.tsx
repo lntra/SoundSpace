@@ -44,7 +44,14 @@ const CommunityPostsSection: React.FC<CommunityPostsSectionProps> = ({
     <>
       <div className="grid-rows-auto grid w-[100%] grid-cols-10">
         <div className="grid-rows-auto col-start-3 col-end-9 row-start-1 row-end-1 grid grid-cols-12">
-          
+          <div className="col-start-1 col-end-12 md:col-start-1 md:col-end-12 lg:col-start-2 lg:col-end-12">
+            <DestaquesCommunity
+              dark={dark}
+              search={search}
+              setSearch={setSearch}
+              position="mt-1"
+            ></DestaquesCommunity>
+          </div>
         </div>
         <div className="col-start-3 row-start-1 row-end-1"></div>
         <div className="col-span-10 row-start-2 row-end-2 grid grid-cols-10 grid-rows-1">
@@ -68,24 +75,7 @@ const CommunityPostsSection: React.FC<CommunityPostsSectionProps> = ({
             ></Posts>
           </div>
           <div className="sticky top-[20%] col-start-9 col-end-11 mb-3 flex justify-center self-start">
-            {type == "home" ? (
-              <div className="hidden max-h-[567px] min-h-[567px] w-[18vw] text-textNav lg:block">
-                <HighlightsNavTags
-                  dark={dark}
-                  tags={tags}
-                  type={type}
-                  tagsState={handleFilterTagClick}
-                />
-              </div>
-            ) : (
-              <CommunityRightGuide
-                name={name}
-                description={description}
-                rules={rules}
-                links={links}
-                dark={dark}
-              />
-            )}
+            
           </div>
         </div>
       </div>
