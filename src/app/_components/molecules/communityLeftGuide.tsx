@@ -133,6 +133,45 @@ const CommunityLeftGuide = ({
                           </div>
                         </div>
                       </Link>
+                      <Link
+                      href={`/pages/community/${"3edb55a2-a037-48a7-81af-d19c99b00dc1"}`}
+                    >
+                      <div
+                        className={` ${
+                          dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                        } flex items-center border-b-[1px] border-sp-purpleBright2 py-2 align-middle`}
+                      >
+                        <UserPost
+                          dark={dark}
+                          img="https://fastly.picsum.photos/id/548/5000/3333.jpg?hmac=BdycqoDMwkZoSovCL9E2F8MAyqdhkHVj8yYkHvkkkVM"
+                          textStyle="text-base"
+                          style="w-8 h-8 mr-2 rounded-full"
+                          text="SunDown"
+                          userId="3edb55a2-a037-48a7-81af-d19c99b00dc1"
+                        ></UserPost>
+                        <div className="hidden xl:block">
+                          <Highlights text="HOT"></Highlights>
+                        </div>
+                      </div>
+                    </Link>
+                    <Link
+                      href={`/pages/community/${"0a8d5e32-1e4f-4a9a-9f5d-1c1234567890"}`}
+                    >
+                      <div
+                        className={` ${
+                          dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                        } flex items-center border-b-[1px] border-sp-purpleBright2 py-2 align-middle`}
+                      >
+                        <UserPost
+                          dark={dark}
+                          img="https://fastly.picsum.photos/id/672/5000/3333.jpg?hmac=u6anJjrup8TAGrJxZSY3u-9OmftJ1Dn4P_6vPqF7a7U"
+                          textStyle="text-base"
+                          style="w-8 h-8 mr-2 rounded-full"
+                          text="Indie Harmony"
+                          userId="0a8d5e32-1e4f-4a9a-9f5d-1c1234567890"
+                        ></UserPost>
+                      </div>
+                    </Link>
                   </div>
                 )}
               </>
