@@ -1,28 +1,23 @@
-# Create T3 App
+# Soundspace
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+![GitHub primary language](https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![GitHub primary language](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![GitHub primary language](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
-## What's next? How do I make an app with this?
+![Alt text](https://i.imgur.com/HJIpWTY.png)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+> O projeto foi criado em Next.js e tem como objetivo a criação de uma rede social com tema musical, criação de posts, usuários, comentários, likes.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## 💽 Tecnologias utilizandas
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+O projeto foi criado com integração de Trpc em conjunto com Next.js e um banco de dados Postgres criado e hospedado no vercel.
 
-## Learn More
+Trpc é uma tecnologia que permite a criação de APIs com o uso de Typescript que fazem a conexão da parte do código cliente com o servidor sem definição de rotas REST. 
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+O uso do Typescript garante que a comunicação de dados entre o cliente e o servidor é da mesma tipagem, permitindo uma comunicação mais simplificada e intuitiva.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+A escolha do **Next.js** tem o objetivo de tornar mais fácil o roteamento entre os componentes e um carregamento dinâmico.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## ⭐ Usando o Soundspace
 
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+O projeto possui uma hospedagem no vercel, todas as funcionalidades são restritas à funcionalidade local do próprio usuário, considerando que é uma demonstração para o portifólio.
