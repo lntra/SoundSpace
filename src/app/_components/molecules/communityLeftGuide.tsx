@@ -5,6 +5,8 @@ import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import NavLeftGuide from "../atoms/navLeftGuide";
 import PlaceholderProps from "./placeholderProps";
 import Link from "next/link";
+import UserPost from "./UserPost";
+import Highlights from "../atoms/highlight";
 
 interface CommunityLeftGuideProps {
   userId: UUID;
@@ -110,7 +112,27 @@ const CommunityLeftGuide = ({
                 ) : (
                   <div className="flex flex-col gap-1 p-3">
                     <h1 className="self-center font-bold">Recommendations</h1>
-                    
+                      <Link
+                        href={`/pages/community/97f4d418-eb4a-425d-97d0-83f6acbc435a`}
+                      >
+                        <div
+                          className={`${
+                            dark ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                          } flex items-center border-b-[1px] border-sp-purpleBright2 py-2 align-middle`}
+                        >
+                          <UserPost
+                            dark={dark}
+                            img="https://fastly.picsum.photos/id/446/3072/1728.jpg?hmac=62VykY0FNeXxvrUhPIGiucHvYI1qd_VzMTmk98U-D5Y"
+                            textStyle="text-base"
+                            style="w-8 h-8 mr-2 rounded-full"
+                            text="The Band, from Outer Space"
+                            userId="97f4d418-eb4a-425d-97d0-83f6acbc435a"
+                          />
+                          <div className="hidden xl:block">
+                            <Highlights text="HOT" />
+                          </div>
+                        </div>
+                      </Link>
                   </div>
                 )}
               </>
