@@ -50,7 +50,7 @@ const CommunityPostsSection: React.FC<CommunityPostsSectionProps> = ({
               search={search}
               setSearch={setSearch}
               position="mt-1"
-            ></DestaquesCommunity>
+            />
           </div>
         </div>
         <div className="col-start-3 row-start-1 row-end-1"></div>
