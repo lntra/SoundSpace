@@ -7,9 +7,11 @@
  * need to use are documented accordingly near the end.
  */
 import { initTRPC } from "@trpc/server";
-import { type NextRequest } from "next/server";
+import { type NextResponse, type NextRequest } from "next/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
+const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 
 /**
  * 1. CONTEXT
@@ -21,6 +23,9 @@ import { ZodError } from "zod";
 
 interface CreateContextOptions {
   headers: Headers;
+  user?: any;
+  req?: NextRequest;
+  res?: NextResponse;
 }
 
 /**
@@ -36,20 +41,25 @@ interface CreateContextOptions {
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     headers: opts.headers,
+    req: opts.req,
+    res: opts.res,
   };
 };
-
 /**
  * This is the actual context you will use in your router. It will be used to process every request
  * that goes through your tRPC endpoint.
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (opts: { req: NextRequest }) => {
+export const createTRPCContext = (opts: {
+  req: NextRequest;
+  res: NextResponse;
+}) => {
   // Fetch stuff that depends on the request
-
   return createInnerTRPCContext({
     headers: opts.req.headers,
+    req: opts.req,
+    res: opts.res,
   });
 };
 

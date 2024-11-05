@@ -1,15 +1,29 @@
-import TextArticle from "../atoms/textArticle"
-import ContentNews from "../molecules/contentnews"
-import HeaderNews from "../molecules/headernews"
+import { type News } from "~/lib/definitions";
+import TextArticle from "../atoms/textArticle";
+import ContentNews from "../molecules/contentnews";
+import HeaderNews from "../molecules/headernews";
 
-const NewsReadContent = () => {
-    return <>
-        <div className="bg-gradient-to-b from-sp-tp-page to-bg-indigo-50">
-            <HeaderNews></HeaderNews>
-            <ContentNews></ContentNews>
-            <TextArticle></TextArticle>
-        </div>
-    </>
+interface NewsAsProps {
+  news: News[];
+  dark: boolean;
 }
 
-export default NewsReadContent
+const NewsReadContent: React.FC<NewsAsProps> = ({ news, dark }) => {
+  return (
+    <>
+      <div
+        className={`${
+          dark
+            ? "bg-gray-900 text-white"
+            : "to-bg-white bg-gradient-to-b from-sp-tp-page text-black"
+        }`}
+      >
+        {news && <HeaderNews dark={dark} news={news}></HeaderNews>}
+        {news && <ContentNews news={news}></ContentNews>}
+        {news && <TextArticle news={news}></TextArticle>}
+      </div>
+    </>
+  );
+};
+
+export default NewsReadContent;

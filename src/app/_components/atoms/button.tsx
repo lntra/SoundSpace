@@ -1,9 +1,17 @@
-const Button = () => {
-    return <>
-        <div className="w-[168px] h-[34px] self-center m-3 px-5 py-2.5 bg-fuchsia-700 rounded-3xl justify-center items-center gap-2.5 inline-flex">
-                <button className="text-white text-xs font-bold font-['Lato']">Encontrar Comunidades</button>
-        </div>  
-    </>
+interface ButtonProps {
+  text?: string;
 }
 
-export default Button
+const Button = ({ text, ...props }: ButtonProps) => {
+  return (
+    <>
+      <div className="inline-flex h-min min-h-fit w-[100%] items-center justify-center  self-center rounded-3xl bg-sp-purpleBright2 hover:bg-sp-accent buttonAdjust:py-2.5 lg:px-1 xl:px-3">
+        <button className="p-1 font-['Lato'] text-[16px] font-bold text-white transition-colors duration-200 hover:text-black">
+          {text}
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default Button;

@@ -1,19 +1,88 @@
-import BarComments from "../atoms/barComments"
-import BarHeart from "../atoms/barheart"
+import { useEffect, useState } from "react";
+import BarComments from "../atoms/barComments";
+import BarHeart from "../atoms/barHeart";
 
-const Avaliacao = () => {
-    return <>
-        <div className="flex items-center mt-3">
-            <div className="self-center justify-self-center text-center">
-                <BarHeart color="black"></BarHeart>
-            </div>
-            <p className=" h-[32px] text-center text-base font-semibold">34.4K</p>
-            <div className="ml-3 self-center justify-self-center text-center">
-                <BarComments color="black"></BarComments>
-            </div>
-            <p className="h-[32px] text-center text-base font-semibold">303</p>
-        </div>
-    </>
+interface AvaliacaoProps {
+  likes?: number;
+  comments?: number;
+  likedState: boolean;
+  handleLiked: () => void;
+  handleUnliked: () => void;
+  dark: boolean;
 }
 
-export default Avaliacao
+const Avaliacao = ({
+  likes,
+  comments,
+  likedState,
+  handleLiked,
+  handleUnliked,
+  dark,
+}: AvaliacaoProps) => {
+  const [stateHeart, setStateHeart] = useState(
+    likedState ? (dark ? "#a585cc" : "#53337B") : "",
+  );
+
+  useEffect(() => {
+    setStateHeart(likedState ? (dark ? "#a585cc" : "#53337B") : "");
+  }, [likedState]);
+
+  return (
+    <>
+      {!likedState && (
+        <>
+          <div className={`flex ${dark ? "text-white " : "text-black "}`}>
+            <div className="flex items-center ">
+              <div
+                onClick={handleLiked}
+                className="flex items-center justify-center align-middle"
+              >
+                <BarHeart
+                  pressed={stateHeart}
+                  color={stateHeart != "" ? "" : dark ? "white" : "black"}
+                ></BarHeart>
+              </div>
+              <p className="text-base font-semibold">{likes}</p>
+            </div>
+            <div className="mx-2 flex items-center">
+              <div className="flex items-center justify-center align-middle">
+                <BarComments
+                  color={`${dark ? "white" : "black"}`}
+                ></BarComments>
+              </div>
+              <p className="text-base font-semibold">{comments}</p>
+            </div>
+          </div>
+        </>
+      )}
+      {!!likedState && (
+        <>
+          <div className={`flex ${dark ? "text-white " : "text-black "}`}>
+            <div className="flex items-center ">
+              <div
+                onClick={handleUnliked}
+                className="flex items-center justify-center align-middle"
+              >
+                <BarHeart
+                  pressed={stateHeart}
+                  color={stateHeart != "white" ? "" : dark ? "white" : "black"}
+                ></BarHeart>
+              </div>
+              <p className="text-base font-semibold">{likes}</p>
+            </div>
+            <div className="mx-2 flex items-center">
+              <div className="flex items-center justify-center align-middle">
+                <BarComments
+                  color={`${dark ? "white" : "black"}`}
+                ></BarComments>
+              </div>
+              <p className="text-base font-semibold">{comments}</p>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
+};
+
+export default Avaliacao;

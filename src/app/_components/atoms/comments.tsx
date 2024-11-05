@@ -1,33 +1,264 @@
-import BarComments from "./barComments"
-import BarHeart from "./barheart"
+import BarComments from "./barComments";
+import BarInvisible from "./barInvisible";
+import BarHeart from "./barHeart";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import { type UUID } from "crypto";
 
-const Comments = () => {
-    return <>
-        <div className="w-[100%] py-3 px-5 rounded-[20px] border border-fuchsia-700 grid grid-cols-auto grid-rows-auto my-3">
-            <div className="row-start-1 row-end-1 col-start-1 col-end-3 flex items-center">
-                <img className="w-10 h-10 rounded-full border border-fuchsia-700" src="https://via.placeholder.com/32x32" />
-                <div className="ml-3">
-                    <span className="text-base font-bold font-['Lato']">user2022</span>
-                    <span className="text-base font-semibold font-['Lato']"> - há 2 horas atrás</span>
-                </div>
-            </div>
-            <div className="row-start-2 row-end-2 col-start-1 col-end-1 flex flex-wrap justify-center w-[40px]">
-                <BarHeart color="black"></BarHeart>
-                <p className="text-sm font-semibold">13.4K</p>
-            </div>
-            <div className="row-start-2 row-end-2 col-start-2 col-end-2 ml-3 pt-[4px]">
-                <div className="w-[100%] text-gray-900 text-base font-normal font-['Lato']">Comentário: Que foto incrível! Capturou perfeitamente
-                a vibe única do show do TBOS. 📸🎶 Aquele solo de guitarra foi simplesmente épico. Quem mais sente saudades desse momento?
-                </div>
-            </div>
-            <div className="row-start-3 row-end-3 col-start-2 col-end-2 flex items-center mt-1">
-                <BarComments color="#6C7871"></BarComments>
-                <p className="text-sm text-stone-500 font-semibold">Responder</p>
-                <BarComments color="#6C7871"></BarComments>
-                <p className="text-sm text-stone-500 font-semibold">Esconder</p>
-            </div>
-        </div>
-    </>
+import { Lato } from '@next/font/google';
+
+const lato = Lato({
+  subsets: ['latin'],
+  weight: ["100","300","400","700","900"]
+});
+
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import Link from "next/link";
+import TextAreaComentario from "./textAreaComentario";
+import useSessionData from "~/app/hooks/useSessionData";
+import { type Comments } from "~/lib/definitions";
+
+dayjs.extend(relativeTime);
+
+interface CommentsProps {
+  commentID: UUID;
+  userID: UUID;
+  postId: UUID;
+  createdAt: Date;
+  content: string;
+  hidden?: string;
+  onHide?: () => void;
+  alternateStyle?: boolean;
+  userImage?: string;
+  userName?: string;
+  outsidePost?: boolean;
+  likes?: number;
+  likedState: boolean;
+  handleLiked: () => void;
+  handleUnliked: () => void;
+  dark: boolean;
+  userComments: Comments[];
+  setUserComments?: Dispatch<SetStateAction<Comments[]>>;
 }
 
-export default Comments
+const CommentsView: React.FC<CommentsProps> = ({
+  userComments,
+  setUserComments,
+  dark,
+  commentID,
+  likedState,
+  handleLiked,
+  handleUnliked,
+  postId,
+  likes,
+  outsidePost,
+  userName,
+  userImage,
+  userID,
+  createdAt,
+  content,
+  hidden,
+  onHide,
+  alternateStyle,
+}) => {
+  const [stateHeart, setStateHeart] = useState(
+    likedState ? (dark ? "#53337B" : "#53337B") : "",
+  );
+  const [userImageURL, setUserImageURL] = useState(
+    "https://placehold.co/40x40/EEE/31343C?font=lato&text=40x40"
+  );
+
+  const { data, isLoading, error } = useSessionData();
+
+  useEffect(() => {
+    if (userImage !== "" && userImage !== undefined) {
+      if (userImage === "set") {
+        const localUser = localStorage.getItem("profileImage");
+        if (localUser) {
+          setUserImageURL(localUser);
+        }
+        return;
+      }
+      setUserImageURL(userImage);
+    }
+  }, [userImage]);
+
+  useEffect(() => {
+    setStateHeart(likedState ? (dark ? "#53337B" : "#53337B") : "");
+  }, [likedState]);
+
+  const [started, setStarted] = useState(false);
+  const [parent_id, setParent_id] = useState(commentID);
+
+  const handleReply = () => {
+    setStarted(!started);
+  };
+
+  return (
+    <>
+      {outsidePost && (
+        <Link
+          href={`/pages/community/post/${postId}`}
+          style={{ display: hidden }}
+          className={`${
+            dark ? "bg-white text-black" : "bg-white text-black"
+          } w-full rounded-[20px] border border-sp-purpleBright2 px-5 py-3 ${
+            alternateStyle
+              ? "mt-5 bg-white text-black"
+              : "mt-5 bg-white text-black"
+          } grid-rows-auto my-2 grid grid-cols-[40px_1fr] gap-x-3`}
+        >
+          <div className="col-start-1 col-end-2 row-start-1 row-end-1 flex w-[40px] items-center">
+            <img
+              className="h-10 w-10 rounded-full border border-sp-purpleBright2 object-cover"
+              src={`${userImage !== "unset" ? userImageURL
+                : "https://placehold.co/40x40/EEE/31343C?font=lato&text=40x40"}`}
+              alt="User Avatar"
+            />
+          </div>
+          <div className="col-start-2 col-end-3 row-start-1 row-end-1 flex items-center">
+            <div>
+              <span className="lato-font text-base font-bold">
+                {userName}
+              </span>
+              <span className="lato-font text-base font-bold">
+                {" "}
+                - {dayjs(createdAt).fromNow()}
+              </span>
+            </div>
+          </div>
+          {!likedState && (
+            <div
+              onClick={handleLiked}
+              className="col-start-1 col-end-2 row-start-2 row-end-2 flex w-[40px] flex-col flex-wrap items-center justify-center"
+            >
+              <BarHeart
+                pressed={stateHeart}
+                color={stateHeart != "" ? "" : "#53337B"}
+              />
+              <p className="text-sm font-semibold">{likes}</p>
+            </div>
+          )}
+          {!!likedState && (
+            <div
+              onClick={handleUnliked}
+              className="col-start-1 col-end-2 row-start-2 row-end-2 flex w-[40px] flex-col flex-wrap items-center justify-center"
+            >
+              <BarHeart
+                pressed={stateHeart}
+                color={stateHeart != "" ? "" : "#53337B"}
+              />
+              <p className="text-sm font-semibold">{Number(likes) + 1}</p>
+            </div>
+          )}
+          <div className="col-start-2 col-end-3 row-start-2 row-end-2 flex items-center">
+            <div
+              className={`w-full min-w-full max-w-fit ${
+                dark ? "text-black" : "text-black"
+              } lato-font text-lg font-normal`}
+            >
+              {content}
+            </div>
+          </div>
+        </Link>
+      )}
+      {!outsidePost && (
+        <div
+          style={{ display: hidden }}
+          className={`w-full rounded-[20px] border border-sp-purpleBright2 px-5 py-3 ${
+            alternateStyle
+              ? "mt-5 bg-white text-black"
+              : "mt-5 bg-white text-black"
+          } grid-rows-auto my-2 grid grid-cols-[40px_1fr] gap-x-3`}
+        >
+          <Link
+            href={`/pages/profile/${userID}`}
+            className="col-start-1 col-end-2 row-start-1 row-end-1 flex w-[40px] items-center"
+          >
+            <img
+              className="h-10 w-10 rounded-full border border-sp-purpleBright2 object-cover"
+              src={`${userImage !== "unset" ? userImageURL
+                : "https://placehold.co/40x40/EEE/31343C?font=lato&text=40x40"}`}
+              alt="User Avatar"
+            />
+          </Link>
+          <Link
+            href={`/pages/profile/${userID}`}
+            className="col-start-2 col-end-3 row-start-1 row-end-1 flex items-center"
+          >
+            <div>
+              <span className="lato-font text-base font-bold">
+                {userName}
+              </span>
+              <span className="lato-font text-base font-semibold">
+                {" "}
+                - {dayjs(createdAt).fromNow()}
+              </span>
+            </div>
+          </Link>
+          {!likedState && (
+            <div
+              onClick={handleLiked}
+              className="col-start-1 col-end-2 row-start-2 row-end-2 flex w-[40px] flex-col flex-wrap items-center justify-center"
+            >
+              <BarHeart
+                pressed={stateHeart}
+                color={stateHeart != "" ? "" : "#53337B"}
+              />
+              <p className="text-sm font-semibold">{likes}</p>
+            </div>
+          )}
+          {!!likedState && (
+            <div
+              onClick={handleUnliked}
+              className="col-start-1 col-end-2 row-start-2 row-end-2 flex w-[40px] flex-col flex-wrap items-center justify-center"
+            >
+              <BarHeart
+                pressed={stateHeart}
+                color={stateHeart != "" ? "" : "#53337B"}
+              />
+              <p className="text-sm font-semibold">{Number(likes) + 1}</p>
+            </div>
+          )}
+          <div className="col-start-2 col-end-3 row-start-2 row-end-2 flex items-center">
+            <div
+              className={`w-full min-w-full max-w-fit lato-font text-lg font-normal`}
+            >
+              {content}
+            </div>
+          </div>
+          {!alternateStyle && (
+            <div className="col-start-2 col-end-3 row-start-3 row-end-3 mt-1 flex items-center">
+              <div onClick={handleReply} className="mx-1 flex items-center">
+                <BarComments color="#6C7871" />
+                <p className="text-sm font-semibold text-stone-500">Reply</p>
+              </div>
+              <div onClick={onHide} className="mx-1 flex items-center">
+                <BarInvisible color="#6C7871" />
+                <p className="text-sm font-semibold text-stone-500">Hide</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      {started && data && (
+        <div>
+          <TextAreaComentario
+            userComments={userComments}
+            setUserComments={setUserComments}
+            dark={dark}
+            setStarted={setStarted}
+            started={started}
+            parent_id={parent_id}
+            post_id={postId}
+            user_id={data.user.id as UUID}
+            user_name={data.user.name as string}
+            user_icon={data.user.url_icon as string}
+          ></TextAreaComentario>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default CommentsView;

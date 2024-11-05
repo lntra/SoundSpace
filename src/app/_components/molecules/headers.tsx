@@ -1,10 +1,16 @@
-const Headers = () =>{
-    return <>
-        <div brightness-100 className="h-[100%] px-4 pb-2 flex flex-wrap justify-center content-end items-end drop-shadow-2xl font-['Lato']">
-            <h1 className="text-[32px] font-bold" >São Paulo para por 1 hora no show de On the Big time, com o maior número de espectadores simultâneos</h1>
-            <p className="text-base">A banda de 2002 é febre entre a população mais jovem até nos dias de hoje, uma entrevista revela seus segredos.</p>
-        </div>
-    </>
+import { type News } from "../../../lib/definitions";
+
+interface NewsAsProps {
+  news: News[];
 }
 
-export default Headers
+const Headers: React.FC<NewsAsProps> = ({ news }) => {
+  return (
+    <div className="flex h-[100%] flex-wrap content-end items-end justify-center px-4 pb-2 lato-font drop-shadow-2xl">
+      <h1 className="text-[40px] font-bold drop-shadow-lg">{news[0]?.title}</h1>
+      <p className="text-[20px] drop-shadow-lg">{news[0]?.content}</p>
+    </div>
+  );
+};
+
+export default Headers;

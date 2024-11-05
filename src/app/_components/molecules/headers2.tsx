@@ -1,12 +1,23 @@
-const Headers2 = () =>{
-    return <>
-        <div className=" drop-shadow-2xl px-4 pb-2 self-end font-['Lato'] bg-placeholder">
-            <h1 className="text-[24px] font-bold" >
-                Banda Mantequilla é alvo de denúncias de fãs sobre o 
-                tratamento inapropriado dos membros
-            </h1>
-        </div>
-    </>
+import { type News } from "../../../lib/definitions";
+
+interface NewsAsProps {
+  news: News[];
 }
 
-export default Headers2
+const Headers2: React.FC<NewsAsProps> = ({ news }) => {
+  if (!news.length) {
+    return null;
+  }
+
+  const title = news[0]?.title;
+
+  return (
+    <>
+      <div className="bg-placeholder self-end px-4 pb-2 lato-font">
+        <h1 className="text-[28px] font-bold drop-shadow-lg">{title}</h1>
+      </div>
+    </>
+  );
+};
+
+export default Headers2;
