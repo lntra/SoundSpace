@@ -3,6 +3,7 @@ import { api } from "~/trpc/react";
 import { type Communities, type Following_commmunity } from "~/lib/definitions";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import NavLeftGuide from "../atoms/navLeftGuide";
+import PlaceholderProps from "./placeholderProps";
 
 interface CommunityLeftGuideProps {
   userId: UUID;
@@ -44,8 +45,14 @@ const CommunityLeftGuide = ({
   }, [localFollowing]);
 
   return (
-      <div>
-        <NavLeftGuide forYouRoute={forYouRoute} setForYou={setForYou}/>
+      <div className="min-h-[567px] w-full lg:w-[18vw]">
+        <PlaceholderProps
+          dark={dark}
+          className="flex h-full flex-col z-0"
+          size="max-h-[567px] min-h-[567px]"
+        >
+          <NavLeftGuide forYouRoute={forYouRoute} setForYou={setForYou}/>
+        </PlaceholderProps>
       </div>
   );
 };
