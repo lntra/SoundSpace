@@ -55,7 +55,7 @@ const CommunityPostsSection: React.FC<CommunityPostsSectionProps> = ({
         </div>
         <div className="col-start-3 row-start-1 row-end-1"></div>
         <div className="col-span-10 row-start-2 row-end-2 grid grid-cols-10 grid-rows-1">
-          <div className="sticky top-[20%] col-start-1 col-end-4 mb-3 justify-center self-start lg:col-start-1 lg:col-end-3 flex">
+          <div className="sticky top-[20%] hidden col-start-1 col-end-4 mb-3 justify-center self-start lg:col-start-1 lg:col-end-3 lg:flex">
               <CommunityLeftGuide
                 dark={dark}
                 forYouRoute={forYouRoute}
