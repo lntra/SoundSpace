@@ -4,6 +4,7 @@ import { type Communities, type Following_commmunity } from "~/lib/definitions";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import NavLeftGuide from "../atoms/navLeftGuide";
 import PlaceholderProps from "./placeholderProps";
+import Link from "next/link";
 
 interface CommunityLeftGuideProps {
   userId: UUID;
@@ -52,6 +53,40 @@ const CommunityLeftGuide = ({
           size="max-h-[567px] min-h-[567px]"
         >
           <NavLeftGuide forYouRoute={forYouRoute} setForYou={setForYou}/>
+          <div className="min-h-max w-full flex-grow">
+          {!!localRoute && (
+  <>
+    <div className="min-h-max w-full flex-col gap-4 font-bold text-textNav">
+                      {localFollowing.map((page, index) => (
+                        <div
+                          key={index}
+                          className={`${
+                            dark ? "text-white hover:bg-gray-800" : "hover:bg-gray-200"
+                          } `}
+                        >
+                          <Link
+                            href={`/pages/community/${page.id}`}
+                            className="flex items-center border-b-[1px] border-solid border-sp-purpleBright2 p-2"
+                          >
+                            <div className="mr-2 h-[36px] min-h-[36px] w-[36px] min-w-[36px] overflow-hidden rounded-full border-[1px] border-solid border-sp-purpleBright2">
+                              <img
+                                src={page.url_icon}
+                                alt="Community Image Placeholder"
+                                width={36}
+                                height={36}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <div>
+                              <p className="font-normal">{page.name}</p>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+
         </PlaceholderProps>
       </div>
   );
