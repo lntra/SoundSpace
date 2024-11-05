@@ -2,6 +2,7 @@ import { type UUID } from "crypto";
 import { api } from "~/trpc/react";
 import { type Communities, type Following_commmunity } from "~/lib/definitions";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import NavLeftGuide from "../atoms/navLeftGuide";
 
 interface CommunityLeftGuideProps {
   userId: UUID;
@@ -44,7 +45,7 @@ const CommunityLeftGuide = ({
 
   return (
       <div>
-        teste
+        <NavLeftGuide forYouRoute={forYouRoute} setForYou={setForYou}/>
       </div>
   );
 };
